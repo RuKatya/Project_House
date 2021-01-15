@@ -54,11 +54,11 @@ app.post('/login', (req, res) => {
     let isUserExist = true
     let role = 'denied'
 
-    const indexUser = users.findIndex(user => user.username === username && user.password === password);
-    if (indexUser > -1) { //-1 = if not found
-        isUserExist = true
-        role = users[indexUser].role
-    }
+    // const indexUser = users.findIndex(user => user.username === username && user.password === password);
+    // if (indexUser > -1) { //-1 = if not found
+    //     isUserExist = true
+    //     role = users[indexUser].role
+    // }
 
     res.send({ login: 'in' })
 })
