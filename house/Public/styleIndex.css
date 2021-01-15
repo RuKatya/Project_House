@@ -80,12 +80,12 @@ form>input {
     place-self: center;
 }
 
-#weather>p {
-    justify-self: start;
-}
-
 img {
     width: 40%;
+}
+
+#weather>p {
+    justify-self: start;
 }
 
 .mainWeather__form {
@@ -105,4 +105,169 @@ footer {
     margin: auto;
     text-align: center;
     font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 1600px) {
+    .main {
+        background-position: center;
+        height: 100vh;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .main {
+        height: 125vh;
+    }
+    .mainHeader>h1 {
+        font-size: 3.5em;
+        padding: 2% 0 1% 0;
+    }
+    .mainHeader>h2 {
+        font-size: 2.5em;
+    }
+    form>input {
+        margin: 1%;
+        padding: 3%;
+        font-size: 1.6rem;
+    }
+    #weather {
+        width: 100%;
+        margin-left: -5%;
+        font-size: 1.5rem;
+    }
+    .mainWeather__form--input {
+        padding: 3% 0% 3% 5%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .main {
+        height: 110vh;
+    }
+    .mainHeader {
+        margin-bottom: 7%;
+    }
+    .mainHeader>h1 {
+        font-size: 2.5em;
+    }
+    .mainHeader>h2 {
+        font-size: 1.5em;
+    }
+    .mainForm {
+        margin-bottom: 7%;
+    }
+    form>input {
+        padding: 2.5%;
+        font-size: 1.2rem;
+    }
+    #mainWeather {
+        border-radius: 25px;
+    }
+    #weather {
+        width: 110%;
+        margin-left: -10%;
+        font-size: 1.2rem;
+    }
+    .mainWeather__form--input {
+        padding: 3% 0% 3% 5%;
+    }
+}
+
+@media only screen and (max-width: 730px) {
+    .mainHeader {
+        margin-bottom: 7%;
+    }
+    .mainHeader>h1 {
+        font-size: 2.5em;
+    }
+    .mainHeader>h2 {
+        font-size: 1.5em;
+    }
+    .mainForm {
+        margin-bottom: 7%;
+    }
+    form>input {
+        padding: 2.5%;
+        font-size: 1.2rem;
+    }
+    #mainWeather {
+        margin-left: 10%;
+        width: 80%;
+        border-radius: 25px;
+    }
+    #weather {
+        width: 110%;
+        margin-left: -10%;
+        font-size: 1.2rem;
+    }
+    .mainWeather__form--input {
+        padding: 3% 0% 3% 5%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .mainHeader {
+        margin-bottom: 7%;
+    }
+    .mainHeader>h1 {
+        font-size: 1.8em;
+        padding: 2% 0 1% 0;
+    }
+    .mainHeader>h2 {
+        font-size: 1.3em;
+    }
+    .mainForm {
+        margin-bottom: 5%;
+    }
+    form>input {
+        margin: 1%;
+        padding: 2% 0 2% 5%;
+        font-size: 1rem;
+    }
+    .mainWeather__form {
+        width: 90%;
+    }
+    #weather {
+        width: 100%;
+        font-size: 1rem;
+    }
+    .mainWeather__form--input {
+        padding: 2% 0% 2% 5%;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .mainHeader {
+        margin-bottom: 7%;
+    }
+    .mainHeader>h1 {
+        font-size: 1.8em;
+        padding: 2% 0 1% 0;
+    }
+    .mainHeader>h2 {
+        font-size: 1.3em;
+    }
+    .mainForm {
+        margin-bottom: 5%;
+    }
+    form>input {
+        margin: 1%;
+        padding: 2% 0 2% 5%;
+        font-size: 1rem;
+    }
+    #mainWeather {
+        margin-left: 5%;
+        width: 90%;
+    }
+    .mainWeather__form {
+        width: 90%;
+    }
+    #weather {
+        width: 110%;
+        margin-left: -12%;
+        font-size: 1rem;
+    }
+    .mainWeather__form--input {
+        padding: 1.5% 0% 1.5% 5%;
+    }
 }
