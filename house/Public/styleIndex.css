@@ -1,0 +1,108 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    background: url('img/index/house.jpg') no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.mainHeader {
+    background-color: rgba(223, 221, 221, 0.246);
+    text-align: center;
+    color: white;
+    text-shadow: 0px 0px 7px black;
+    margin-bottom: 5%;
+}
+
+.mainHeader>h1 {
+    padding: 0.5% 0 0.5% 0;
+    margin: 0;
+    text-shadow: 1px 1px 7px black;
+}
+
+.mainHeader>h2 {
+    padding: 0 0 1% 0%;
+    text-shadow: 1px 1px 7px black;
+}
+
+.mainForm {
+    width: 70%;
+    padding: 5%;
+    margin: auto;
+    background-color: rgba(223, 221, 221, 0.246);
+    border-radius: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column
+}
+
+form>input {
+    border-radius: 20px;
+    margin: 0.5%;
+    padding: 2%;
+    font-size: 1.3rem;
+}
+
+#mainWeather {
+    margin: 3% 0% 0% 25%;
+    margin-bottom: 5%;
+    width: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.192);
+    background-color: rgba(223, 221, 221, 0.246);
+    border-radius: 50px;
+    color: white;
+    text-shadow: 0px 0px 7px black;
+    font-weight: bold;
+    text-align: center;
+}
+
+#weather {
+    width: 50%;
+    margin-top: 3%;
+    margin-left: 25%;
+    font-size: 1.1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.img {
+    grid-column: 1/2;
+    grid-row: 1/4;
+    justify-items: center;
+    align-items: center;
+    place-self: center;
+}
+
+#weather>p {
+    justify-self: start;
+}
+
+img {
+    width: 40%;
+}
+
+.mainWeather__form {
+    width: 90%;
+    margin: auto;
+    padding-bottom: 3%;
+}
+
+.mainWeather__form--input {
+    padding: 0.50% 0% 0.50% 2%;
+}
+
+footer {
+    padding: 2%;
+    color: white;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    font-size: 1.2rem;
+}

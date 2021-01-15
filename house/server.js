@@ -51,8 +51,8 @@ app.post('/login', (req, res) => {
 
     console.log(username, password) //for check
 
-    let isUserExist = true
-    let role = 'denied'
+    // let isUserExist = true
+    // let role = 'denied'
 
     // const indexUser = users.findIndex(user => user.username === username && user.password === password);
     // if (indexUser > -1) { //-1 = if not found

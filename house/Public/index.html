@@ -5,101 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .main {
-            background: url('img/index/house.jpg') no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-        }
-        
-        .mainHeader {
-            background-color: rgba(223, 221, 221, 0.246);
-            text-align: center;
-            color: white;
-            text-shadow: 0px 0px 7px black;
-            margin-bottom: 5%;
-        }
-        
-        .mainHeader>h1 {
-            padding: 0.5% 0 0.5% 0;
-            margin: 0;
-            text-shadow: 1px 1px 7px black;
-        }
-        
-        .mainHeader>h2 {
-            padding: 0 0 1% 0%;
-            text-shadow: 1px 1px 7px black;
-        }
-        
-        .mainForm {
-            width: 70%;
-            padding: 5%;
-            margin: auto;
-            background-color: rgba(223, 221, 221, 0.246);
-            border-radius: 50px;
-        }
-        
-        form {
-            display: flex;
-            flex-direction: column
-        }
-        
-        form>input {
-            border-radius: 20px;
-            margin: 0.5%;
-            padding: 2%;
-            font-size: 1.3rem;
-        }
-        
-        .mainWeather {
-            margin: 3% 0% 0% 25%;
-            margin-bottom: 5%;
-            width: 50%;
-            border: 1px dashed rgba(255, 255, 255, 0.192);
-            background-color: rgba(223, 221, 221, 0.246);
-            border-radius: 50px;
-            color: white;
-            text-shadow: 0px 0px 7px black;
-            font-weight: bold;
-            text-align: center;
-        }
-        
-        .icons {
-            display: flex;
-            flex-direction: column;
-            /* align-items: center;
-            justify-content: center; */
-        }
-        
-        .mainWeather__form {
-            width: 90%;
-            margin: auto;
-            padding-bottom: 3%;
-        }
-        
-        .mainWeather__form--input {
-            padding: 0.50% 0% 0.50% 2%;
-        }
-        
-        img {
-            width: 10%;
-        }
-        
-        footer {
-            padding: 2%;
-            color: white;
-            width: 40%;
-            margin: auto;
-            text-align: center;
-            font-size: 1.2rem;
-        }
-    </style>
+    <link rel="stylesheet" href="styleIndex.css">
 </head>
 
 <body>
@@ -118,9 +24,8 @@
         </div>
 
 
-        <div class="mainWeather">
-            <div class="icons">
-                <p id='weather'>WEATHER</p>
+        <div id="mainWeather">
+            <div id="weather">
             </div>
             <form onsubmit="hendleSubmitWeater(event)" class="mainWeather__form">
                 <input type="text" name="city" placeholder="Choose youre city" class="mainWeather__form--input">
@@ -133,79 +38,7 @@
         </footer>
     </div>
 
-    <script>
-        function hendleSubmitUsers(e) {
-            e.preventDefault(); //for not restart the page
-
-            const username = e.target.children.username.value; //username value
-            const password = e.target.children.password.value; //password value
-
-            console.log(username, password) //for check
-
-            fetch('/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        username,
-                        password
-                    })
-                }).then(r => r.json())
-                .then(data => {
-                    console.log(data)
-                })
-
-        }
-
-        function hendleSubmitWeater(e) {
-            e.preventDefault();
-
-            const city = e.target.children.city.value;
-
-            console.log(city)
-
-            fetch('/weather', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        city
-                    })
-                }).then(r => r.json())
-                .then(data => {
-                    console.log(data)
-
-                    if ((data.weather.main.temp - 273.15) < 0) {
-                        document.getElementById('weather').innerHTML = `<p><img src="cold.svg" class="sizeOfIcons"></p>
-                        <p>The temperature is ${Math.round(data.weather.main.temp-273.15)} &#8451 </p>
-                        <p>It's feels like ${Math.round(data.weather.main.feels_like-273.15)} &#8451</p>
-                        <p>The wind speed is ${data.weather.wind.speed}</p>`;
-                    } else if (0 < (data.weather.main.temp - 273.15) < 20) {
-                        document.getElementById('weather').innerHTML = `<p><img src="cool.svg" class="sizeOfIcons"></p>
-                        <p>The temperature is ${Math.round(data.weather.main.temp-273.15)} &#8451 </p>
-                        <p>It's feels like ${Math.round(data.weather.main.feels_like-273.15)} &#8451</p>
-                        <p>The wind speed is ${data.weather.wind.speed}</p>`;
-                    } else {
-                        document.getElementById('weather').innerHTML = `<p><img src="hot.svg" class="sizeOfIcons"></p>
-                        <p>The temperature is ${Math.round(data.weather.main.temp-273.15)} &#8451 </p>
-                        <p>It's feels like ${Math.round(data.weather.main.feels_like-273.15)} &#8451</p>
-                        <p>The wind speed is ${data.weather.wind.speed}</p>`;
-                    }
-
-
-
-
-
-                    //     `<p>The temperature is ${Math.round(data.weather.main.temp-273.15)} &#8451 </p>
-                    //     <p>It's feels like ${Math.round(data.weather.main.feels_like-273.15)} &#8451</p>
-                    //     <p>The wind speed is ${data.weather.wind.speed}</p>`;
-                })
-
-
-        }
-    </script>
+    <script src="jsIndex.js"></script>
 </body>
 
 </html>
