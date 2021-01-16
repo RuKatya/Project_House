@@ -5,9 +5,7 @@ body {
 }
 
 .main {
-    background: url('img/index/house.jpg') no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+    background: url('img/index/house.jpg') no-repeat fixed center / cover;
 }
 
 .mainHeader {
