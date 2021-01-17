@@ -1,10 +1,10 @@
 function hendleSubmitUsers(e) {
     e.preventDefault();
 
-    const username = e.target.children.username.value;
+    const userName = e.target.children.userName.value;
     const password = e.target.children.password.value;
 
-    console.log(username, password)
+    console.log(userName, password)
 
     fetch('/login', {
             method: 'POST',
@@ -12,12 +12,20 @@ function hendleSubmitUsers(e) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username,
+                userName,
                 password
             })
         }).then(r => r.json())
         .then(data => {
             console.log(data)
+            if (data.validation == true){
+                window.open("rooms.html")
+
+            }
+            else{
+                alert("go-out-of-here!!!!!!")
+
+            }
         })
 }
 
