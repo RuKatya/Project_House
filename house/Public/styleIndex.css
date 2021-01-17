@@ -2,6 +2,7 @@ html,
 body {
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 .main {
@@ -45,6 +46,7 @@ form>input {
     margin: 0.5%;
     padding: 2%;
     font-size: 1.3rem;
+    outline: none;
 }
 
 #mainWeather {
@@ -94,6 +96,7 @@ img {
 
 .mainWeather__form--input {
     padding: 0.50% 0% 0.50% 2%;
+    outline: none;
 }
 
 footer {
