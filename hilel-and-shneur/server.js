@@ -5,17 +5,18 @@ app.use(bodyParser.json());
 app.use(express.static('public'))
 
 const mongoose = require('mongoose');
-const url = "mongodb+srv://hillel:Aa25802580@cluster0.z35go.mongodb.net/test";
-var list
+const url = "mongodb+srv://myUser:gNRiLkhrwsFcHut6@cluster0.gt18p.mongodb.net/test";
+
+let list
 let mongooseOK = false;
 try {
     mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
         if (err==null) {
-            list = mongoose.model('item', {
-                name: String,
-                catgory: String,
+            list = mongoose.model('room', {
+                memo: String,
+                room: String,
                 status: String,
-                number: Number
+              
             })
             mongooseOK = true
         }
@@ -25,11 +26,8 @@ try {
 }
 
 
-
-
-
 app.post('/checkIf', async (req, res) => {
-    const { dataid } = req.body
+    const { dataID } = req.body
 
     if (req.body.checkBox == true) {
         checkIf = true
@@ -37,7 +35,7 @@ app.post('/checkIf', async (req, res) => {
         checkIf = false
     }
 
-    await list.findByIdAndUpdate(dataid, { status: checkIf })
+    await list.findByIdAndUpdate(dataID, { status: checkIf })
 
     const data = await list.find({})
     res.send({ data })
@@ -49,26 +47,25 @@ app.get('/onPageLoad', async (req, res) => {
     res.send({ data })
 })
 
-app.post('/deleteItem', async (req, res) => {
-    const { dataid } = req.body
-    await list.findByIdAndDelete(dataid)
+app.post('/deleteroom', async (req, res) => {
+    const { dataID } = req.body
+    await list.findByIdAndDelete(dataID)
     const data = await list.find({})
     res.send({ data })
 })
 
-app.post('/sendItem', async (req, res) => {
-    // await new Promise(r => setTimeout(r, 2000));
+app.post('/sendRoom', async (req, res) => {
     
     if (mongooseOK == false) {
         res.send({ Result: 'Error', Message: 'Mongoose not connected' })
         return false;
     }
-    const { name, catgory, number } = req.body
+    const { memo, room, } = req.body
 
 
-    if (name.length > 0) {
-        const newItem = new list({ name, catgory, number, status: 'false' })
-        await newItem.save()
+    if (memo.length > 0) {
+        const newRoom = new list({ memo, room, status: 'false' })
+        await newRoom.save()
             .then(doc => {
             })
             .catch(e => {

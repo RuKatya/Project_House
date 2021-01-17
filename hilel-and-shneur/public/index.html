@@ -11,33 +11,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body dir="rtl">
-    <div class="container">
-        <div class="formContainer">
-            <form onsubmit="mysubmit(event)">
-                <input type="text" name="name" placeholder="שם המוצר:" autocomplete=off>
-                <!-- <input type="text" name="catgory" placeholder="קטגוריה:" autocomplete=off> -->
-                <select id="country" name="country">
-                    <option value="b">מוצרי חלב</option>
-                    <option value="c">פירות וירקות</option>
-                    <option value="d">חד פעמי</option>
-                    <option value="e">קפואים</option>
-                </select>
-                <input type="text" name="number" placeholder="כמות" autocomplete=off>
-                <button type="submit">אישור</button>
-            </form>
-        </div>
-        <div class="root">
-            <div class="listtu">מוצרי חלב</div>
-            <div class="item1"></div>
-            <div class="listtu">פירות וירקות</div>
-            <div class="item2"></div>
-            <div class="listtu">חד פעמי</div>
-            <div class="item3"></div>
-            <div class="listtu">קפואים</div>
-            <div class="item4"></div>
-        </div>
+<body>
+
+    <div class="formContainer">
+        <form onsubmit="mysubmit(event)">
+            <input type="text" name="memo" placeholder="הוסף תזכורת:" autocomplete=off>
+            <select id="roomList" name="roomList">
+                <option style="display: none;">בחר חדר</option>
+                <option value="b">חדר הורים</option>
+                <option value="c">חדר ילדים</option>
+                <option value="d">סלון</option>
+                <option value="e">מטבח</option>
+            </select>
+            <button type="submit">אישור</button>
+        </form>
     </div>
+    <div class="root">
+        <div class="roomTitle">חדר הורים</div>
+        <div class="room1"></div>
+        <div class="roomTitle">חדר ילדים</div>
+        <div class="room2"></div>
+        <div class="roomTitle">סלון</div>
+        <div class="room3"></div>
+        <div class="roomTitle">מטבח</div>
+        <div class="room4"></div>
+    </div>
+    <div class="addRoom">+</div>
+    
+
     <script src="js.js"></script>
 
 </body>

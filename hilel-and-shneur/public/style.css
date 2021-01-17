@@ -1,58 +1,52 @@
 body {
-    background-color: rgba(218, 216, 201, 0.74);
+    background-color: rgba(206, 206, 206, 0.74);
+    font-family: 'Rubik', sans-serif;
+    direction: rtl;
+   
 }
 
-.container {
-    background-color: rgba(158, 168, 168, 0.548);
-    text-align: center;
-    width: 80%;
-    max-width: 1200px;
-    margin: auto;
-    font-family: 'Rubik', sans-serif;
-    border-radius: 20px;
-    border: 5px solid rgba(119, 119, 119, 0.931);
-    min-width: 350px;
-}
 
 .formContainer {
-    background-color: rgba(180, 190, 190, 0.692);
+    background-color: rgb(255, 255, 255);
     text-align: center;
-    width: 100%;
     margin: auto;
-    font-family: 'Rubik', sans-serif;
-    padding-bottom: 20px;
-    padding-top: 10px;
-    box-sizing: border-box;
-    border-radius: 15px 15px 0px 0px;
+    padding: 10px;
+    border-radius: 15px 15px;
+    box-shadow: 6px 3px 15px rgb(70, 70, 70);
 }
 
 input[type=text],
-#country {
-    width: 200px;
+#roomList {
+    
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid gray;
+    border: 1.3px solid blueviolet;
     font-size: 20px;
     outline: none;
     background: (124, 182, 182, 0.931);
     margin-top: 10px;
-
+    transition: all 250ms;
+    color: gray;
 }
 
 option {
     background-color: rgba(143, 182, 182, 0.37);
+    color:black;
+
 }
 
 button {
     width: 100px;
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid gray;
-    background:rgba(128, 128, 128, 0.363);
+    background: blueviolet;
     color: white;
     font-size: 20px;
     outline: none;
     margin-top: 10px;
+    border: none;
+    transition: all 250ms;
+
 }
 
 button:active {
@@ -70,39 +64,43 @@ button:hover {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    padding-top: 10px;
-
 }
 
-.item1,
-.item2,
-.item3,
-.item4 {
+.room1,
+.room2,
+.room3,
+.room4 {
     margin: 10px;
-    width: 100%;
-    min-width: 300px;
-    background-color: rgb(240, 237, 232);
-    padding: 10px;
+    margin-top: 0px;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
     padding-bottom: 0;
-    min-height: 300px;
-    border-radius: 5px;
+    min-height: 50px;
+    border-radius: 20px;
+    box-shadow: 6px 3px 15px rgb(70, 70, 70);
+    max-width: 95%;
 }
 
 .lists {
-    background-color: rgba(194, 212, 207, 0.801);
+    background: rgb(154, 90, 214);
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    padding: 0px 10px;
-border-radius: 5px;
-
+    padding: 10px;
+    border-radius: 15px;
+    transition: all 250ms;
+}
+.lists:hover {
+    background: rgba(154, 90, 214, 0.384);
 }
 
 .list {
     padding: 10px;
     font-size: 20px;
     width: 130px;
+    transition: all 250ms;
 }
 
 img {
@@ -114,15 +112,30 @@ img {
         width: 80%;
     }
 
-    #country {
+    #roomList {
         width: 85%;
     }
 }
 
-.listtu {
+.roomTitle {
+    margin-top: 7px;
     width: 100%;
-    padding: 15px;
-    background: rgba(128, 128, 128, 0.363);
-    font-size: 20px;
-    color: rgb(56, 36, 36);
+    padding: 5px;
+    text-align: start;
+    font-size: 1.5rem;
+}
+.addRoom{
+    background-color: blueviolet;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 6px 3px 15px rgb(70, 70, 70);
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    color: white;
+    text-align: center;
+    
+    
+
 }
