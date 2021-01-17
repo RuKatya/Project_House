@@ -6,6 +6,7 @@ function hendleSubmitUsers(e) {
 
     console.log(userName, password)
 
+    //-----LOGIN----//
     fetch('/login', {
             method: 'POST',
             headers: {
@@ -18,17 +19,15 @@ function hendleSubmitUsers(e) {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if (data.validation == true){
+            if (data.validation == true) {
                 window.open("rooms.html")
-
-            }
-            else{
+            } else {
                 alert("go-out-of-here!!!!!!")
-
             }
         })
 }
 
+//-----WEATHER------//
 function hendleSubmitWeater(e) {
     e.preventDefault();
 
