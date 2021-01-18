@@ -94,20 +94,17 @@ app.post("/login", (req, res) => {
         name: userName,
         password: password
 
-      }, function (err, docs) {
-        if (err) {
-          console.log(err);
+      }, function (docs) {
+        console.log("docs: ", docs);
+        console.log(docs[0].name);
+        if (docs[0].name == userName && docs[0].password == password) {
+          validation = true
         } else {
-          console.log("First function call : ", docs);
-          console.log(docs[0].name);
-          if (docs[0].name == userName && docs[0].password == password) {
-            validation = true
-          } else {
-            validation = false
-            console.log(`Sorry ${e.userName} doesn't exist`);
-          }
-          console.log(validation)
+          validation = false
+          console.log(`Sorry ${e.userName} doesn't exist`);
         }
+        console.log(validation)
+
       })) {}
   });
 
