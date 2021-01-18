@@ -73,13 +73,6 @@ app.post('/weather', (req, res) => {
     })
 })
 
-// user validation
-// let users = [{
-//   userName: "ori",
-//   password: "1111"
-// }]
-// let saveduserName;
-
 app.post("/login", async (req, res) => {
   let { userName } = req.body;
   let { password } = req.body;
