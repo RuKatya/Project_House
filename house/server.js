@@ -20,7 +20,7 @@ const User = mongoose.model('user', { //collection
   name: String, //with big letter !!!
   password: Number,
   role: String,
-  assignRoom: String
+  assignRooms:[String]
 });
 
 
@@ -28,7 +28,7 @@ const Shneor = new User({
   name: "Shneor",
   password: "123",
   role: "admin",
-  assignRoom: "assignRoom1"
+  assignRooms: ["assignRoom1"]
 })
 // Shneor.save().then(doc => console.log(doc)).catch(e => {
 //     console.log(e)
@@ -38,19 +38,19 @@ const Dudi = new User({
   name: "Dudi",
   password: "456",
   role: "child",
-  assignRoom: "assignRoom1"
+  assignRooms: ["assignRoom1", "assignRoom2"]
 })
 const Lior = new User({
   name: "Lior",
   password: "789",
   role: "child",
-  assignRoom: "assignRoom1"
+  assignRooms: ["assignRoom1"]
 })
 const Katya = new User({
   name: "Katya",
   password: "159",
   role: "guest",
-  assignRoom: "assignRoom1"
+  assignRooms: ["assignRoom1"]
 })
 
 
@@ -80,33 +80,23 @@ app.post('/weather', (req, res) => {
 // }]
 // let saveduserName;
 
-app.post("/login", (req, res) => {
-  let {
-    userName
-  } = req.body;
-  let {
-    password
-  } = req.body;
+app.post("/login", async (req, res) => {
+  let { userName } = req.body;
+  let { password } = req.body;
   let validation = false;
 
-  users.forEach((e) => {
-    if (user.find({
-        name: userName,
-        password: password
 
-      }, function (docs) {
-        console.log("docs: ", docs);
-        console.log(docs[0].name);
-        if (docs[0].name == userName && docs[0].password == password) {
-          validation = true
-        } else {
-          validation = false
-          console.log(`Sorry ${e.userName} doesn't exist`);
-        }
-        console.log(validation)
-
-      })) {}
-  });
+  const doc = await User.findOne({ name: userName });
+  
+  
+  console.log(doc);
+  if (doc.name == userName && doc.password == password) {
+    validation = true
+  } else {
+    validation = false
+    console.log(`Sorry ${e.userName} doesn't exist`);
+  }
+  console.log(validation)
 
   if (validation) {
     res.cookie("User validated", userName, {
