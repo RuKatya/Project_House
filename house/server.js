@@ -16,7 +16,7 @@ mongoose.connect(url, {
   useUnifiedTopology: true
 }); //connectin to the db
 
-const user = mongoose.model('user', { //collection
+const User = mongoose.model('user', { //collection
   name: String, //with big letter !!!
   password: Number,
   role: String,
@@ -24,7 +24,7 @@ const user = mongoose.model('user', { //collection
 });
 
 
-const Shneor = new user({
+const Shneor = new User({
   name: "Shneor",
   password: "123",
   role: "admin",
@@ -34,19 +34,19 @@ const Shneor = new user({
 //     console.log(e)
 // })
 
-const Dudi = new user({
+const Dudi = new User({
   name: "Dudi",
   password: "456",
   role: "child",
   assignRoom: "assignRoom1"
 })
-const Lior = new user({
+const Lior = new User({
   name: "Lior",
   password: "789",
   role: "child",
   assignRoom: "assignRoom1"
 })
-const Katya = new user({
+const Katya = new User({
   name: "Katya",
   password: "159",
   role: "guest",
@@ -74,11 +74,11 @@ app.post('/weather', (req, res) => {
 })
 
 // user validation
-let users = [{
-  userName: "ori",
-  password: "1111"
-}]
-let saveduserName;
+// let users = [{
+//   userName: "ori",
+//   password: "1111"
+// }]
+// let saveduserName;
 
 app.post("/login", (req, res) => {
   let {
