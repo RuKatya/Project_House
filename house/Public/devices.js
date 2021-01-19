@@ -16,6 +16,17 @@ locationTracker - מעקב GPS
 carLocationTracker - מעקב לרכב GPS
 securityCamra - מצלמת אבטחה
 
+sensors{
+    on: string
+    powerLevel: [string],
+    mode: string,
+    timeToStart: Number,
+    timeToEnd: Number,
+    
+
+
+}
+
 
 
 // devices - מכשירים
@@ -29,6 +40,19 @@ kettle - קומקום
 oven - תנור
 alarm - אזעקה
 car - רכב
+fan - מאוורר
+
+devices{
+    on: string
+    powerLevel: [string],
+    mode: string,
+    timeToStart: Number,
+    timeToEnd: Number,
+
+
+
+}
+
 
 
 
