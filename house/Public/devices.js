@@ -23,8 +23,6 @@ sensors{
     timeToStart: Number,
     timeToEnd: Number,
     
-
-
 }
 
 
@@ -48,8 +46,6 @@ devices{
     mode: string,
     timeToStart: Number,
     timeToEnd: Number,
-
-
 
 }
 
