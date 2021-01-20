@@ -20,7 +20,15 @@ const User = mongoose.model('user', { //collection
   name: String, //with big letter !!!
   password: Number,
   role: String,
-  assignRooms:[String]
+  assignRooms: [String]
+});
+const Rooms = mongoose.model('rooms', { //collection
+  roomName: String,
+  assignUser: [String],
+  size: Number,
+  assignHouse: String,
+  lastClean: Date,
+
 });
 
 
@@ -74,14 +82,20 @@ app.post('/weather', (req, res) => {
 })
 
 app.post("/login", async (req, res) => {
-  let { userName } = req.body;
-  let { password } = req.body;
+  let {
+    userName
+  } = req.body;
+  let {
+    password
+  } = req.body;
   let validation = false;
 
 
-  const doc = await User.findOne({ name: userName });
-  
-  
+  const doc = await User.findOne({
+    name: userName
+  });
+
+
   console.log(doc);
   if (doc.name == userName && doc.password == password) {
     validation = true
@@ -116,6 +130,85 @@ app.post("/login", async (req, res) => {
 //   }
 //   res.send({ validation });
 // });
+
+
+// rooms
+// new room
+
+
+// room info
+// delete room
+// update room
+
+
+app.post('/checkIf', async (req, res) => {
+  const {
+    dataID
+  } = req.body
+  let status = req.body.checkBox
+  console.log(status)
+
+  if (req.body.checkBox == true) {
+    checkIf = true
+  } else {
+    checkIf = false
+  }
+
+  await MemoList.findByIdAndUpdate(dataID, {
+    status: checkIf
+  })
+
+  const data = await MemoList.find({})
+  res.send({
+    data
+  })
+})
+
+
+app.get('/onPageLoad', async (req, res) => {
+  const data = await MemoList.find({})
+  res.send({
+    data
+  })
+})
+
+app.post('/deleteroom', async (req, res) => {
+  const {
+    dataID
+  } = req.body
+  await MemoList.findByIdAndDelete(dataID)
+  const data = await MemoList.find({})
+  res.send({
+    data
+  })
+})
+app.post("/creatRoom", async (req, res) => {
+
+  let data = req.body
+
+  let {
+    roomName,
+    assignUser,
+    size,
+    assignHouse,
+    lastClean
+  } = data
+
+  const newRoom = await new room({
+    roomName: roomName,
+    assignUser: [assignUser],
+    size: size,
+    assignHouse: assignHouse,
+    lastClean: lastClean,
+  })
+  newRoom.save().then(doc => console.log(doc)).catch(e => {
+    console.log(e)
+  })
+  
+
+
+})
+
 
 
 

@@ -5,7 +5,7 @@ function mysubmit(event) {
     const memo = event.target.children.memo.value
     const room = document.querySelector('#roomList').value
     
-    fetch("/sendRoom", {
+    fetch("/createRoom", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json',

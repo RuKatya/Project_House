@@ -56,29 +56,6 @@ app.post('/deleteroom', async (req, res) => {
     res.send({ data })
 })
 
-app.post('/sendRoom', async (req, res) => {
-    
-    if (mongooseOK == false) {
-        res.send({ Result: 'Error', Message: 'Mongoose not connected' })
-        return false;
-    }
-    const { memo, room, } = req.body
-
-
-    if (memo.length > 0) {
-        const newRoom = new MemoList({ memo, room, status: 'false' })
-        await newRoom.save()
-            .then(doc => {
-            })
-            .catch(e => {
-                console.log('ER:' + e)
-            })
-        const data = await MemoList.find({})
-        res.send({ data })
-    }
-    else {
-    }
-})
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log('server MemoListen on port ', port))
