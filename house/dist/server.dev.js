@@ -69,44 +69,37 @@ var Katya = new User({
 }); //----------LOGIN-------------//
 
 app.post("/login", function _callee(req, res) {
-  var userName, password, validation, doc;
+  var _req$body, userName, password, validation, doc;
+
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          userName = req.body.userName;
-          password = req.body.password;
+          _req$body = req.body, userName = _req$body.userName, password = _req$body.password;
           validation = false;
-          _context.next = 5;
+          _context.next = 4;
           return regeneratorRuntime.awrap(User.findOne({
             name: userName
           }));
 
-        case 5:
+        case 4:
           doc = _context.sent;
-          console.log(doc);
 
           if (doc.name == userName && doc.password == password) {
             validation = true;
-          } else {
-            validation = false;
-            console.log("Sorry ".concat(e.userName, " doesn't exist"));
-          }
-
-          console.log(validation);
-
-          if (validation) {
             res.cookie("User validated", userName, {
               maxAge: 30000,
               httpOnly: true
             });
+          } else {
+            alert("Sorry ".concat(e.userName, " doesn't exist"));
           }
 
           res.send({
             validation: validation
           });
 
-        case 11:
+        case 7:
         case "end":
           return _context.stop();
       }
@@ -128,13 +121,13 @@ app.get("/check-valid", function (req, res) {
 //-------------CREATE ROOM--------------//
 
 app.post("/createRoom", function _callee2(req, res) {
-  var _req$body, roomName, assignUser, assignHouse, newRoom;
+  var _req$body2, roomName, assignUser, assignHouse, newRoom;
 
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _req$body = req.body, roomName = _req$body.roomName, assignUser = _req$body.assignUser, assignHouse = _req$body.assignHouse;
+          _req$body2 = req.body, roomName = _req$body2.roomName, assignUser = _req$body2.assignUser, assignHouse = _req$body2.assignHouse;
           _context2.next = 3;
           return regeneratorRuntime.awrap(new Room({
             roomName: roomName,
