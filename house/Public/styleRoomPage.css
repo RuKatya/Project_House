@@ -15,7 +15,6 @@ a {
     background-position: top;
     background-repeat: no-repeat;
     background-position: center;
-    /* height: 170vh; */
 }
 
 .back {
@@ -137,140 +136,16 @@ footer {
 
 /* MEDIA */
 
-@media only screen and (max-width: 1600px) {
-    .formCreating {
-        width: 75%;
-        margin: 1% 0% 1% 13%;
-    }
-    .rooms>div>a>img {
-        width: 90%;
-        border-radius: 40px;
-    }
-}
+@media only screen and (max-width: 1600px) {}
 
-@media only screen and (max-width: 1200px) {
-    .main {
-        height: 150vh;
-    }
-    .back {
-        margin-bottom: 2%;
-    }
-    .back>a>img {
-        margin: 2% 0 0% 3%;
-        width: 6%;
-    }
-    .formCreating {
-        padding: 0;
-        width: 95%;
-        margin: 1% 0% 1% 2.5%;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 10%;
-        margin-bottom: 5%;
-    }
-    .formCreating>input {
-        padding: 3%;
-        font-size: 1.2em;
-    }
-    .formCreating>button {
-        font-size: 1.2em;
-    }
-    .rooms {
-        height: 100vh;
-        border-radius: 25px;
-    }
-    .rooms>div>a>img {
-        width: 95%;
-        border-radius: 25px;
-    }
-    .roomsParag {
-        font-size: 3em;
-        margin-left: 25%;
-        top: -50%;
-    }
-}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width: 1100px) {
-    .main {
-        height: 100vh;
-    }
-    .rooms {
-        height: 65vh;
-    }
-}
+@media only screen and (max-width: 1100px) {}
 
-@media only screen and (max-width: 800px) {
-    .main {
-        height: 115vh;
-    }
-    .back>a>img {
-        margin: 3% 0 0% 3%;
-        width: 10%;
-    }
-    .rooms {
-        height: 75vh;
-    }
-    .roomsParag {
-        font-size: 2.5em;
-        top: -45%;
-    }
-}
+@media only screen and (max-width: 800px) {}
 
-@media only screen and (max-width: 730px) {
-    .rooms {
-        height: 250vh;
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: repeat(6, 1fr);
-        background-color: rgba(223, 221, 221, 0.246);
-    }
-}
+@media only screen and (max-width: 730px) {}
 
-@media only screen and (max-width: 450px) {
-    .main {
-        height: 290vh;
-    }
-    .formCreating {
-        padding: 0;
-        width: 85%;
-        margin: 1% 0% 0% 2.5%;
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        row-gap: 5%;
-        margin-bottom: 5%;
-    }
-    .formCreating>button {
-        padding: 3%;
-        font-size: 1.2em;
-        margin-bottom: 25%;
-    }
-    .rooms {
-        width: 80%;
-        height: 180vh;
-        /* margin-left: 3%; */
-        padding: 1.5%;
-        background-color: rgba(223, 221, 221, 0.246);
-        border-radius: 30px;
-    }
-    /* .formCreating {
-        width: 70%;
-        margin: 1% 0% 1% 25%;
-        display: flex;
-        column-gap: 1.5%; */
-}
+@media only screen and (max-width: 450px) {}
 
-
-/*@media only screen and (max-width: 380px) {} */
-
-
-/* 
-.main {
-    height: 110vh;
-}
-.rooms {
-    height: 72vh;
-}
-.roomsParag {
-    font-size: 2.5em;
-    margin-left: 27%;
-    top: -45%;
-} */
+@media only screen and (max-width: 380px) {}
