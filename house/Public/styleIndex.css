@@ -5,13 +5,16 @@ body {
     user-select: none;
 }
 
+body {
+    background: url('img/index/house.jpg') no-repeat fixed center / cover;
+}
+
 input {
     text-align: center;
 }
 
-.main {
-    background: url('img/index/house.jpg') no-repeat fixed center / cover;
-}
+
+/* HEADER */
 
 .mainHeader {
     background-color: rgba(223, 221, 221, 0.246);
@@ -28,7 +31,10 @@ input {
     text-shadow: 1px 1px 7px black;
 }
 
-.mainLogin {
+
+/* LOGIN */
+
+.mainForm {
     width: 50%;
     padding: 5%;
     margin: auto;
@@ -60,6 +66,9 @@ input {
     font-weight: bold;
     text-align: center;
 }
+
+
+/* WEATER */
 
 #weather {
     width: 50%;
@@ -102,6 +111,9 @@ img {
     outline: none;
 }
 
+
+/* FOOTER */
+
 footer {
     padding: 2%;
     color: white;
@@ -111,6 +123,8 @@ footer {
     font-size: 1.2rem;
 }
 
+
+/* 
 @media only screen and (max-width: 1600px) {
     .mainHeader {
         margin-bottom: 8%;
@@ -210,4 +224,4 @@ footer {
     }
 }
 
-@media only screen and (max-width: 500px) {}
+@media only screen and (max-width: 500px) {} */
