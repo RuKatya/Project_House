@@ -13,51 +13,53 @@
     <div class="main">
         <div class="back">
             <a href="index.html"><img src="icons/back.svg"></a>
-            <a href="#" class="edit"><img src="icons/edit.svg"></a>
         </div>
 
-        <form onsubmit="createRoom(event)">
+        <form onsubmit="createRoom(event)" class="formCreating">
             <input type="text" placeholder="roomName" name="roomName">
             <input type="text" placeholder="assignUser" name="assignUser">
             <input type="number" placeholder="size" name="size">
             <input type="text" placeholder="assignHouse" name="assignHouse">
             <input type="date" placeholder="lastClean" name="lastClean">
-            <button type="submit">צור חדר</button>
-
+            <button type="submit">Create</button>
         </form>
 
         <div class="rooms">
-            <div class="img1">
-                <a href="rooms/livingRoom.html"><img src="img/rooms/small/livingRoom.jpg" class="img">
-                    <p class="roomsParag">Living room</p>
+            <div class="roomsSmall">
+                <a href="rooms/livingRoom.html"><img src="img/roomsSmall/livingRoom.jpg" class="roomsSmall__img">
+                    <p class="roomsParag roomsSmall__livingRoom">Living room</p>
                 </a>
             </div>
-            <div class="img2">
-                <a href="rooms/kitchenRoom.html"><img src="img/rooms/small/kitchenRoom.jpg">
-                    <p class="roomsParag">Kitchen</p>
+            <div>
+                <a href="rooms/kitchenRoom.html"><img src="img/roomsSmall/kitchenRoom.jpg" class="roomsSmall__img">
+                    <p class="roomsParag roomsSmall__kitchenRoom">Kitchen</p>
                 </a>
             </div>
-            <div class="img3">
-                <a href="rooms/restRoom.html"><img src="img/rooms/small/restRoom.jpg">
-                    <p class="roomsParag">Rest room</p>
+            <div>
+                <a href="rooms/restRoom.html"><img src="img/roomsSmall/restRoom.jpg" class="roomsSmall__img">
+                    <p class="roomsParag roomsSmall__restRoom">Rest room</p>
                 </a>
             </div>
-            <div class="img4">
-                <a href="rooms/bedRoom.html"><img src="img/rooms/small/bedRoom.jpg">
-                    <p class="roomsParag">Bed room</p>
+            <div>
+                <a href="rooms/bedRoom.html"><img src="img/roomsSmall/bedRoom.jpg" class="roomsSmall__img">
+                    <p class="roomsParag roomsSmall__bedRoom">Bed room</p>
                 </a>
             </div>
-            <div class="img5">
-                <a href="rooms/teenRoom.html"><img src="img/rooms/small/teenRoom.jpg">
-                    <p class="roomsParag">Teen room</p>
+            <div>
+                <a href="rooms/teenRoom.html"><img src="img/roomsSmall/teenRoom.jpg" class="roomsSmall__img">
+                    <p class="roomsParag roomsSmall__teenRoom">Teen room</p>
                 </a>
             </div>
-            <div class="img6">
-                <a href="rooms/childRoom.html"><img src="img/rooms/small/childRoom.jpg">
-                    <p class="roomsParag">Child room</p>
+            <div>
+                <a href="rooms/childRoom.html"><img src="img/roomsSmall/childRoom.jpg" class="roomsSmall__img">
+                    <p class="roomsParag roomsSmall__childRoom">Child room</p>
                 </a>
             </div>
         </div>
+
+        <footer>
+            THANK YOU
+        </footer>
     </div>
     <script>
         function createRoom(e) {

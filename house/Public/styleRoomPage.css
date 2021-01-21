@@ -15,7 +15,6 @@ a {
     background-position: top;
     background-repeat: no-repeat;
     background-position: center;
-    height: 170vh;
 }
 
 .back {
@@ -29,25 +28,39 @@ a {
     width: 4%;
 }
 
-.edit {
-    margin-left: 85%;
+.formCreating {
+    width: 70%;
+    margin: 1% 0% 1% 25%;
+    display: flex;
+    column-gap: 1.5%;
+}
+
+.formCreating>input {
+    padding: 0.5%;
+    border-radius: 10px;
+}
+
+.formCreating>button {
+    padding: 0.5%;
+    border-radius: 10px;
 }
 
 .rooms {
-    width: 90%;
-    height: 130vh;
-    margin-left: 3%;
-    padding: 2%;
+    position: relative;
+    margin: 0 0 5% 3%;
+    padding: 5%;
+    width: 85%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    gap: 2%;
     text-align: center;
     background-color: rgba(223, 221, 221, 0.246);
     border-radius: 50px;
 }
 
-.rooms>div>a>img {
-    width: 80%;
+.roomsSmall__img {
+    width: 100%;
+    height: 100%;
     border-radius: 50px;
     box-shadow: 1px 1px 7px black;
 }
@@ -58,14 +71,81 @@ a {
     border-radius: 15px;
     color: white;
     font-size: 4em;
-    width: 60%;
-    margin: -15% 0 0 25%;
-    padding: 0;
-    position: relative;
-    top: -50%;
 }
 
-.rooms>div>img:hover {
-    box-shadow: 5px 5px 5px black;
-    /* color: rgb(11, 224, 243); */
+
+/* first row */
+
+.roomsSmall__livingRoom {
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    width: 30%;
 }
+
+.roomsSmall__kitchenRoom {
+    position: absolute;
+    top: 5%;
+    left: 62%;
+    width: 30%;
+}
+
+
+/* second row */
+
+.roomsSmall__restRoom {
+    position: absolute;
+    top: 36%;
+    left: 15%;
+    width: 30%;
+}
+
+.roomsSmall__bedRoom {
+    position: absolute;
+    top: 36%;
+    left: 62%;
+    width: 30%;
+}
+
+
+/* third row */
+
+.roomsSmall__teenRoom {
+    position: absolute;
+    top: 67%;
+    left: 15%;
+    width: 30%;
+}
+
+.roomsSmall__childRoom {
+    position: absolute;
+    top: 67%;
+    left: 65%;
+    width: 30%;
+}
+
+footer {
+    padding: 2%;
+    color: white;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+
+/* MEDIA */
+
+@media only screen and (max-width: 1600px) {}
+
+@media only screen and (max-width: 1200px) {}
+
+@media only screen and (max-width: 1100px) {}
+
+@media only screen and (max-width: 800px) {}
+
+@media only screen and (max-width: 730px) {}
+
+@media only screen and (max-width: 450px) {}
+
+@media only screen and (max-width: 380px) {}
