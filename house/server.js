@@ -189,9 +189,7 @@ app.post("/creatRoom", async (req, res) => {
   let {
     roomName,
     assignUser,
-    size,
-    assignHouse,
-    lastClean
+    assignHouse
   } = data
 
   const newRoom = await new room({

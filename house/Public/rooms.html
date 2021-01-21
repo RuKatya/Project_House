@@ -65,9 +65,7 @@
 
             let roomName = e.target.children.roomName.value
             let assignUser = e.target.children.assignUser.value
-            let size = e.target.children.size.value
             let assignHouse = e.target.children.assignHouse.value
-            let lastClean = e.target.children.lastClean.value
 
             fetch('/createRoom', {
                     method: 'POST',
@@ -77,9 +75,7 @@
                     body: JSON.stringify({
                         roomName,
                         assignUser,
-                        size,
-                        assignHouse,
-                        lastClean
+                        assignHouse
                     })
                 }).then(r => r.json())
                 .then(data => {
