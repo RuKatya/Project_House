@@ -16,7 +16,6 @@ try {
                 memo: String,
                 room: String,
                 status: String,
-              
             })
             mongooseOK = true
         }
