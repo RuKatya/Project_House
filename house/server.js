@@ -136,12 +136,8 @@ app.post('/deleteroom', async(req, res) => {
 //-------------WEATHER-----------//
 
 app.post('/weather', (req, res) => {
-    const {
-        city
-    } = req.body;
-
+    const {city} = req.body;
     console.log(city)
-
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=84dda819f36a2f81e3babdb748579c85`)
         .then(r => r.json())
         .then(weather => {
