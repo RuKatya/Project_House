@@ -154,51 +154,21 @@ app.post('/deleteroom', async(req, res) => {
         data
     })
 })
-<<<<<<< HEAD
-app.post("/creatRoom", async (req, res) => {
-
-  let data = req.body
-
-  let {
-    roomName,
-    assignUser,
-    assignHouse
-  } = data
-
-  const newRoom = await new room({
-    roomName: roomName,
-    assignUser: [assignUser],
-    size: size,
-    assignHouse: assignHouse,
-    lastClean: lastClean,
-  })
-  newRoom.save().then(doc => console.log(doc)).catch(e => {
-    console.log(e)
-  })
-  
-=======
 
 
 //-------------CREATE ROOM--------------//
 app.post("/creatRoom", async(req, res) => {
 
-    let data = req.body
-
-    let { roomName, assignUser, size, assignHouse, lastClean } = data
+    let {roomName, assignUser, assignHouse} = data
 
     const newRoom = await new room({
         roomName: roomName,
         assignUser: [assignUser],
-        size: size,
-        assignHouse: assignHouse,
-        lastClean: lastClean,
+        assignHouse: assignHouse
     })
-    newRoom.save().then(doc => console.log(doc)).catch(e => {
+    newRoom.save().then(docs => console.log(docs)).catch(e => {
         console.log(e)
     })
-
->>>>>>> main
-
 
 })
 

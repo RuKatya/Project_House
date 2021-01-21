@@ -18,9 +18,7 @@
         <form onsubmit="createRoom(event)" class="formCreating">
             <input type="text" placeholder="roomName" name="roomName">
             <input type="text" placeholder="assignUser" name="assignUser">
-            <input type="number" placeholder="size" name="size">
             <input type="text" placeholder="assignHouse" name="assignHouse">
-            <input type="date" placeholder="lastClean" name="lastClean">
             <button type="submit">Create</button>
         </form>
 
@@ -82,11 +80,7 @@
                 }).then(r => r.json())
                 .then(data => {
                     console.log(data)
-                    if (data.validation == true) {
-                        window.open("rooms.html")
-                    } else {
-                        alert("go-out-of-here!!!!!!")
-                    }
+                
                 })
         }
     </script>
