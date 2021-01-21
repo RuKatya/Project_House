@@ -178,9 +178,8 @@ app.post('/deleteroom', function _callee3(req, res) {
     }
   });
 }); //-------------UPDATE ROOM--------------//
-//------------- ROOM INFO--------------//
 
-app.post('/deleteroom', function _callee4(req, res) {
+app.post('/updateRoom', function _callee4(req, res) {
   var dataID, data;
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
@@ -203,6 +202,34 @@ app.post('/deleteroom', function _callee4(req, res) {
         case 7:
         case "end":
           return _context4.stop();
+      }
+    }
+  });
+}); //------------- ROOM INFO--------------//
+
+app.post('/roomIinfo', function _callee5(req, res) {
+  var dataID, data;
+  return regeneratorRuntime.async(function _callee5$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          dataID = req.body.dataID;
+          _context5.next = 3;
+          return regeneratorRuntime.awrap(Room.findByIdfindByIdAndUpdate(dataID));
+
+        case 3:
+          _context5.next = 5;
+          return regeneratorRuntime.awrap(Room.find({}));
+
+        case 5:
+          data = _context5.sent;
+          res.send({
+            data: data
+          });
+
+        case 7:
+        case "end":
+          return _context5.stop();
       }
     }
   });

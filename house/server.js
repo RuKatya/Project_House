@@ -107,11 +107,17 @@ app.post('/deleteroom', async(req, res) => {
 })
 
 //-------------UPDATE ROOM--------------//
-
-//------------- ROOM INFO--------------//
-app.post('/deleteroom', async(req, res) => {
+app.post('/updateRoom', async(req, res) => {
     const {dataID} = req.body
     await Room.findById(dataID)
+    const data = await Room.find({})
+    res.send({data})
+})
+
+//------------- ROOM INFO--------------//
+app.post('/roomIinfo', async(req, res) => {
+    const {dataID} = req.body
+    await Room.findByIdfindByIdAndUpdate(dataID)
     const data = await Room.find({})
     res.send({data})
 })

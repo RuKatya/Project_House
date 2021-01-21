@@ -12,16 +12,13 @@ hendleCreatePage = (e) => {
 
 }
 
-
 //---------LOGIN---------//
 hendleSubmitUsers = (e) => {
     e.preventDefault();
 
     const userName = e.target.children.userName.value;
     const password = e.target.children.password.value;
-
     console.log(userName, password)
-
 
     fetch('/login', {
             method: 'POST',
