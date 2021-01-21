@@ -1,5 +1,20 @@
+//---------LANDING PAGE---------//
+hendleLoginPage = (e) => {
+    e.preventDefault();
+    document.getElementById("Login").style.display = "block"
+    document.getElementById("CreateAccount").style.display = "none"
+    
+}
+hendleCreatePage = (e) => {
+    e.preventDefault();
+    document.getElementById("Login").style.display = "none"
+    document.getElementById("CreateAccount").style.display = "block"
+
+}
+
+
 //---------LOGIN---------//
-function hendleSubmitUsers(e) {
+hendleSubmitUsers = (e) => {
     e.preventDefault();
 
     const userName = e.target.children.userName.value;

@@ -1,7 +1,20 @@
 "use strict";
 
-//---------LOGIN---------//
-function hendleSubmitUsers(e) {
+//---------LANDING PAGE---------//
+hendleLoginPage = function hendleLoginPage(e) {
+  e.preventDefault();
+  document.getElementById("Login").style.display = "block";
+  document.getElementById("CreateAccount").style.display = "none";
+};
+
+hendleCreatePage = function hendleCreatePage(e) {
+  e.preventDefault();
+  document.getElementById("Login").style.display = "none";
+  document.getElementById("CreateAccount").style.display = "block";
+}; //---------LOGIN---------//
+
+
+hendleSubmitUsers = function hendleSubmitUsers(e) {
   e.preventDefault();
   var userName = e.target.children.userName.value;
   var password = e.target.children.password.value;
@@ -26,7 +39,7 @@ function hendleSubmitUsers(e) {
       alert("go-out-of-here!!!!!!");
     }
   });
-} //-----WEATHER------//
+}; //-----WEATHER------//
 
 
 function hendleSubmitWeater(e) {

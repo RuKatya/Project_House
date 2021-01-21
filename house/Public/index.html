@@ -15,19 +15,19 @@
         </div>
 
         <div class="loginCreate">
-            <label class="tab active" for="tab1" id="tab1" onclick="hendleLogin(event)">Login</label>
-            <label class="tab" for="tab2" id="tab2" onclick="hendleCreate(event)">Create user</label>
+            <div class="LoginPage" for="LoginPage" id="LoginPage" onclick="hendleLoginPage(event)">Login</div>
+            <div class="createPage" for="createPage" id="createPage" onclick="hendleCreatePage(event)">Create user</div>
 
-            <div class="mainForm mainLogin">
-                <form onsubmit="hendleSubmitUsers(event)" class="mainLogin__form">
+            <div class="mainForm mainLogin" id="Login">
+                <form onsubmit="hendleSubmitUsers(event)" class="mainLogin__form" >
                     <input type="text" name="userName" placeholder="username">
                     <input type="password" name="password" placeholder="password">
                     <input type="submit" value="Login">
                 </form>
             </div>
 
-            <div class="mainForm mainCreateAccount">
-                <form class="mainLogin__form">
+            <div class="mainForm mainCreateAccount" id="CreateAccount" style="display: none;">
+                <form class="mainLogin__form" >
                     <input class="input" type="text" placeholder="Name">
                     <input class="input" type="text" placeholder="Last naem">
                     <input class="input" type="password" placeholder="Password">
