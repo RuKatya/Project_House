@@ -23,7 +23,7 @@ const User = mongoose.model('user', { //collection
     assignRooms: [String]
 });
 
-const Rooms = mongoose.model('rooms', { //collection
+const Room = mongoose.model('Room', { //collection
     roomName: String,
     assignUser: [String],
     size: Number,
@@ -157,16 +157,17 @@ app.post('/deleteroom', async(req, res) => {
 
 
 //-------------CREATE ROOM--------------//
-app.post("/creatRoom", async(req, res) => {
+app.post("/createRoom", async(req, res) => {
 
-    let {roomName, assignUser, assignHouse} = data
 
-    const newRoom = await new room({
+    let {roomName, assignUser, assignHouse} = req.body;
+
+    const newRoom = await new Room({
         roomName: roomName,
         assignUser: [assignUser],
         assignHouse: assignHouse
     })
-    newRoom.save().then(docs => console.log(docs)).catch(e => {
+    newRoom.save().then(doc => console.log(doc)).catch(e => {
         console.log(e)
     })
 
