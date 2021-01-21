@@ -68,3 +68,36 @@ function hendleSubmitWeater(e) {
             }
         })
 }
+
+
+
+function createRoom(e) {
+  
+    let roomName = e.target.children.roomName.value
+    let assignUser = e.target.children.assignUser.value
+    let size = e.target.children.size.value
+    let assignHouse = e.target.children.assignHouse.value
+    let lastClean = e.target.children.lastClean.value
+
+    fetch('/createRoom', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                roomName,
+                assignUser,
+                size,
+                assignHouse,
+                lastClean
+            })
+        }).then(r => r.json())
+        .then(data => {
+            console.log(data)
+            if (data.validation == true) {
+                window.open("rooms.html")
+            } else {
+                alert("go-out-of-here!!!!!!")
+            }
+        })
+}

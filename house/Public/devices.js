@@ -1,5 +1,5 @@
 
-
+/*
 // trigers - כפתורים
 doorBell - פעמון דלת
 alarmClock - שעון מעורר
@@ -26,28 +26,28 @@ sensors{
 }
 
 
-
+/*
 // devices - מכשירים
-air-condishiner - מזגן
-light - תאורה
-vacumeRobot - שואב אבק רובוטי
-breadBaker - אופה לחם
-doorLock - מנעול דלת
-garageDoor - דלת חניה
-kettle - קומקום 
-oven - תנור
-alarm - אזעקה
-car - רכב
-fan - מאוורר
+// air-condishiner - מזגן
+// light - תאורה
+// vacumeRobot - שואב אבק רובוטי
+// breadBaker - אופה לחם
+// doorLock - מנעול דלת
+// garageDoor - דלת חניה
+// kettle - קומקום 
+// oven - תנור
+// alarm - אזעקה
+// car - רכב
+// fan - מאוורר
+*/
+// devices{
+//     on: string
+//     powerLevel: [string],
+//     mode: string,
+//     timeToStart: Number,
+//     timeToEnd: Number,
 
-devices{
-    on: string
-    powerLevel: [string],
-    mode: string,
-    timeToStart: Number,
-    timeToEnd: Number,
-
-}
+// }
 
 
 

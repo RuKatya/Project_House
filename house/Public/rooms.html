@@ -16,6 +16,16 @@
             <a href="#" class="edit"><img src="icons/edit.svg"></a>
         </div>
 
+        <form onsubmit="createRoom(event)">
+            <input type="text" placeholder="roomName" name="roomName">
+            <input type="text" placeholder="assignUser" name="assignUser">
+            <input type="number" placeholder="size" name="size">
+            <input type="text" placeholder="assignHouse" name="assignHouse">
+            <input type="date" placeholder="lastClean" name="lastClean">
+            <button type="submit">צור חדר</button>
+
+        </form>
+
         <div class="rooms">
             <div class="img1">
                 <a href="rooms/livingRoom.html"><img src="img/rooms/small/livingRoom.jpg" class="img">
@@ -49,6 +59,39 @@
             </div>
         </div>
     </div>
+    <script>
+        function createRoom(e) {
+            e.preventDefault()
+
+            let roomName = e.target.children.roomName.value
+            let assignUser = e.target.children.assignUser.value
+            let size = e.target.children.size.value
+            let assignHouse = e.target.children.assignHouse.value
+            let lastClean = e.target.children.lastClean.value
+
+            fetch('/createRoom', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        roomName,
+                        assignUser,
+                        size,
+                        assignHouse,
+                        lastClean
+                    })
+                }).then(r => r.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.validation == true) {
+                        window.open("rooms.html")
+                    } else {
+                        alert("go-out-of-here!!!!!!")
+                    }
+                })
+        }
+    </script>
 </body>
 
 </html>
