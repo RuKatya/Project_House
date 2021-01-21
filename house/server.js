@@ -92,91 +92,46 @@ app.post("/login", async(req, res) => {
     });
 });
 
-// app.get("/get-userName", (req, res) => {
-//   res.send({ saveduserName });
-// });
-
-// app.get("/check-valid", (req, res) => {
-//   let validation = true;
-//   const checkCookie = req.cookies.validated;
-//   if (checkCookie == false) {
-//     validation = false;
-//   }
-//   res.send({ validation });
-// });
+app.get("/check-valid", (req, res) => {
+  let validation = true;
+  const checkCookie = req.cookies.validated;
+  if (checkCookie == false) {
+    validation = false;
+  }
+  res.send({ validation });
+});
 
 
-// rooms
-// new room
-
-
-// room info
-// delete room
-// update room
-
-
-app.post('/checkIf', async(req, res) => {
-    const { dataID } = req.body
-    let status = req.body.checkBox
-    console.log(status)
-
-    if (req.body.checkBox == true) {
-        checkIf = true
-    } else {
-        checkIf = false
-    }
-
-    await MemoList.findByIdAndUpdate(dataID, {
-        status: checkIf
-    })
-
-    const data = await MemoList.find({})
-    res.send({
-        data
-    })
-})
-
-
-app.get('/onPageLoad', async(req, res) => {
-    const data = await MemoList.find({})
-    res.send({
-        data
-    })
-})
-
-app.post('/deleteroom', async(req, res) => {
-    const {
-        dataID
-    } = req.body
-    await MemoList.findByIdAndDelete(dataID)
-    const data = await MemoList.find({})
-    res.send({
-        data
-    })
-})
-
+//----------ROOM FUNCTIONS-------------//
 
 //-------------CREATE ROOM--------------//
 app.post("/createRoom", async(req, res) => {
-
-
     let {roomName, assignUser, assignHouse} = req.body;
-
     const newRoom = await new Room({
-        roomName: roomName,
-        assignUser: [assignUser],
-        assignHouse: assignHouse
-    })
-    newRoom.save().then(doc => console.log(doc)).catch(e => {
-        console.log(e)
-    })
+        roomName,
+        assignUser,
+        assignHouse
+    });
+    newRoom.save().then(doc => console.log(doc)).catch(e => console.log(e));
+});
 
+//-------------DELETE ROOM--------------//
+app.post('/deleteroom', async(req, res) => {
+    const {dataID} = req.body
+    await Room.findByIdAndDelete(dataID)
+    const data = await Room.find({})
+    res.send({data})
 })
 
+//-------------UPDATE ROOM--------------//
 
-
-
-
+//------------- ROOM INFO--------------//
+app.post('/deleteroom', async(req, res) => {
+    const {dataID} = req.body
+    await Room.findById(dataID)
+    const data = await Room.find({})
+    res.send({data})
+})
 
 //-------------WEATHER-----------//
 
