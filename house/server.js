@@ -64,32 +64,16 @@ const Katya = new User({
 
 //----------LOGIN-------------//
 app.post("/login", async(req, res) => {
-    let { userName } = req.body;
-    let { password } = req.body;
+    let { userName,password } = req.body;
     let validation = false;
-
     const doc = await User.findOne({ name: userName });
-
-    console.log(doc);
     if (doc.name == userName && doc.password == password) {
-        validation = true
+        validation = true;
+        res.cookie("User validated", userName, {maxAge: 30000,httpOnly: true})
     } else {
-        validation = false
-        console.log(`Sorry ${e.userName} doesn't exist`);
+        alert(`Sorry ${e.userName} doesn't exist`);
     }
-    console.log(validation)
-
-    if (validation) {
-        res.cookie("User validated", userName, {
-            maxAge: 30000,
-            httpOnly: true
-        });
-
-    }
-
-    res.send({
-        validation
-    });
+    res.send({validation});
 });
 
 app.get("/check-valid", (req, res) => {
@@ -100,7 +84,6 @@ app.get("/check-valid", (req, res) => {
   }
   res.send({ validation });
 });
-
 
 //----------ROOM FUNCTIONS-------------//
 
