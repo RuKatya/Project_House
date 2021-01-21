@@ -15,38 +15,40 @@
     <div class="wrapper">
         <div class="formsContainer">
 
-            <label class="tab active" for="tab1" id="tab1" onclick="showPageSignIn(event)">SignIn</label>
-            <label class="tab" for="tab2" id="tab2" onclick="showPageSignUp(event)">SignUp</label>
+            <label class="tab active" for="tab1" id="tab1" onclick="showPageSignIn(event)">כניסה לאתר</label>
+            <label class="tab" for="tab2" id="tab2" onclick="showPageSignUp(event)">הרשמה לאתר</label>
 
             <form id="form1" class="tab--form active">
-                <input class="input" type="email" placeholder="Email">
-                <input class="input" type="password" placeholder="Password">
-                <button href="#" class="button">LogIn</button>
-                <!-- <ul class="social">
+                <input class="input" type="email" placeholder="דואר אלקטרוני">
+                <input class="input" type="password" placeholder="סיסמה">
+                <a href="#" class="button">כניסה</a>
+                <ul class="social">
                     <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
                     <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                     <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-                </ul> -->
-                <a id="reset" onclick="showPageReset(event)" href="#">Forgot password?</a>
+                </ul>
+                <a id="forgotPassword" onclick="showPageReset(event)" href="#">?שכחתם סיסמה</a>
             </form>
             <form id="form2" class="tab--form">
-                <input class="input" type="text" placeholder="Username">
-                <input class="input" type="email" placeholder="Email">
-                <input class="input" type="password" placeholder="Password">
-                <input class="input" type="password" placeholder="Confirm password">
+                <input class="input" type="text" placeholder="שם פרטי">
+                <input class="input" type="text" placeholder="שם משפחה">
+                <input class="input" type="email" placeholder="דואר אלקטרוני">
+                <input class="input" type="password" placeholder="סיסמה">
+                <input class="input" type="password" placeholder="אימות סיסמה">
 
-                <button href="#" class="button">SignUp</button>
+                <a href="#" class="button">הרשמה</a>
                 <div class="policyApproval">
 
-                    
+                    <span id="textForCheck">הנני מאשר/ת כי קראתי את <a href="#">תקנון האתר</a> ומסכימ/ה לתנאיהם</span>
+                    <input id="check" type="checkbox">
 
                 </div>
             </form>
 
             <form id="form3" class="tab--form">
-                <input class="input" type="email" placeholder="Email">
-                <button href="#" class="button">Reset password</button>
+                <input class="input" type="email" placeholder="דואר אלקטרוני">
+                <a href="#" class="button">אפסו את הסיסמה</a>
 
         </div>
         </form>
