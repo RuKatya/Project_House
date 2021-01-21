@@ -13,58 +13,59 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.policyApproval{
+
+.policyApproval {
     display: flex;
     justify-content: flex-end;
-  
-
 }
-#check{
+
+#check {
     width: auto;
     height: auto;
-
 }
-#textForCheck{
+
+#textForCheck {
     text-align: right;
 }
 
-.input::placeholder{
+.input::placeholder {
     text-align: right;
 }
-.formsContainer{
+
+.formsContainer {
     background-color: rgba(77, 77, 77, 0.4);
     padding: 10px;
     width: 35vw;
-   
-    
-  
 }
+
 .tab--form {
     background-color: #fff;
     display: none;
     padding: 70px 150px 30px;
     height: 470px;
-   
 }
 
 .tab--form.active {
     display: block;
 }
 
-
 .tab--form a {
     text-decoration: none;
     transition: 0.3s;
     color: #298cad;
 }
+
+
 /* .tab--form a:hover{
     color: #36d2ff;
 } */
+
 .tab--form ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
+
 .tab--form input {
     display: block;
     width: 100%;
@@ -78,29 +79,30 @@ label.tab {
     border-radius: 3px 3px 0 0;
     margin-bottom: -1px;
     cursor: pointer;
-   }
+}
 
-    label.tab.active {
+label.tab.active {
     background-color: #fff;
     color: #1d5f75;
-   } 
+}
 
-   input[name="tabs"]:checked + label {
+input[name="tabs"]:checked+label {
     background-color: #fff;
     color: #1d5f75;
-   }
-   input[name="tabs"]{
-       display: none;
-      
-   }
+}
+
+input[name="tabs"] {
+    display: none;
+}
 
 .tab::before {
-content: '\f090';
-font-family: 'FontAwesome', sans-serif;
-font-size: 24px;
-margin-right: 11px;
-font-weight: normal;
+    content: '\f090';
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 24px;
+    margin-right: 11px;
+    font-weight: normal;
 }
+
 .tab[for*='2']::before {
     content: '\f234';
 }
@@ -108,7 +110,8 @@ font-weight: normal;
 .del {
     display: none;
 }
-.input{
+
+.input {
     font-size: 16px;
     border: 2px solid #e9eaea;
     border-radius: 5px;
@@ -119,14 +122,15 @@ font-weight: normal;
     outline: none;
     direction: rtl;
 }
-.input:hover{
+
+.input:hover {
     border: 2px solid #bebebe;
     transition: 0.3;
 }
 
-::-webkit-input-placeholder {color: #c4c9c9;}
-
-
+::-webkit-input-placeholder {
+    color: #c4c9c9;
+}
 
 a.button {
     background: #298cad;
@@ -140,9 +144,9 @@ a.button {
     border-radius: 5px;
 }
 
-a.button:hover{
+a.button:hover {
     transition: 0.3s;
-    background-color:  #0c6886;
+    background-color: #0c6886;
 }
 
 .social {
@@ -150,6 +154,7 @@ a.button:hover{
     justify-content: space-between;
     font-size: 24px;
 }
+
 .social a {
     width: 40px;
     height: 40px;
@@ -158,63 +163,57 @@ a.button:hover{
     text-align: center;
 }
 
-.social + a {
+.social+a {
     margin-top: 10px;
     display: block;
     font-size: 16px;
     text-align: center;
 }
 
-  @media only screen and (max-width: 1400px) {
-    .formsContainer{
-        width: 60vw;   
+@media only screen and (max-width: 1400px) {
+    .formsContainer {
+        width: 60vw;
     }
     .tab--form {
-       padding: 70px 100px 30px;
-       
+        padding: 70px 100px 30px;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    .formsContainer{
-        width: 70vw;    
+    .formsContainer {
+        width: 70vw;
     }
     .tab--form {
         padding: 70px 70px 30px;
-        
-     }
-}  
+    }
+}
 
 @media only screen and (max-width: 480px) {
-    .formsContainer{
+    .formsContainer {
         width: 80vw;
-     
     }
-    .tab{
-        font-size: 80%; 
-     }
-     .tab::before {
-         font-size: 100%;
-     }
-     .tab--form {
+    .tab {
+        font-size: 80%;
+    }
+    .tab::before {
+        font-size: 100%;
+    }
+    .tab--form {
         padding: 30px 50px 30px;
-        
-     }
+    }
 }
 
 @media only screen and (max-width: 280px) {
-    .formsContainer{
+    .formsContainer {
         width: 80vw;
-        
     }
-    .tab{
-        font-size: 68%; 
-     }
-     .tab::before {
-         font-size: 100%;
-     }
-     .tab--form {
+    .tab {
+        font-size: 68%;
+    }
+    .tab::before {
+        font-size: 100%;
+    }
+    .tab--form {
         padding: 30px 30px 30px;
-        
-     }
+    }
 }

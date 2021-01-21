@@ -23,8 +23,8 @@ function mysubmit(event) {
         })
 }
 
-function deleteRoom(event) {
-    const dataID = event.target.dataset.id
+function deleteRoom(e) {
+    const dataID = e.target.dataset.id
 
     fetch("/deleteRoom", {
             method: "post",

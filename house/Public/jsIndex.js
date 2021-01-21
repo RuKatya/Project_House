@@ -1,12 +1,25 @@
-function hendleSubmitUsers(e) {
+//---------LANDING PAGE---------//
+hendleLoginPage = (e) => {
+    e.preventDefault();
+    document.getElementById("Login").style.display = "block"
+    document.getElementById("CreateAccount").style.display = "none"
+    
+}
+hendleCreatePage = (e) => {
+    e.preventDefault();
+    document.getElementById("Login").style.display = "none"
+    document.getElementById("CreateAccount").style.display = "block"
+
+}
+
+//---------LOGIN---------//
+hendleSubmitUsers = (e) => {
     e.preventDefault();
 
     const userName = e.target.children.userName.value;
     const password = e.target.children.password.value;
-
     console.log(userName, password)
 
-    //-----LOGIN----//
     fetch('/login', {
             method: 'POST',
             headers: {
@@ -65,39 +78,6 @@ function hendleSubmitWeater(e) {
                 <p>The temperature is ${Math.round(data.weather.main.temp-273.15)} &#8451 </p>
                 <p>It's feels like ${Math.round(data.weather.main.feels_like-273.15)} &#8451</p>
                 <p>The wind speed is ${data.weather.wind.speed}</p>`;
-            }
-        })
-}
-
-
-
-function createRoom(e) {
-  
-    let roomName = e.target.children.roomName.value
-    let assignUser = e.target.children.assignUser.value
-    let size = e.target.children.size.value
-    let assignHouse = e.target.children.assignHouse.value
-    let lastClean = e.target.children.lastClean.value
-
-    fetch('/createRoom', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                roomName,
-                assignUser,
-                size,
-                assignHouse,
-                lastClean
-            })
-        }).then(r => r.json())
-        .then(data => {
-            console.log(data)
-            if (data.validation == true) {
-                window.open("rooms.html")
-            } else {
-                alert("go-out-of-here!!!!!!")
             }
         })
 }

@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="styleRoomPage.css">
 
 </head>
+<style>
+.deleteButton{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: red;
+    box-shadow: 5px 5px 5px;
+}
+
+</style>
 
 <body>
     <div class="main">
@@ -60,12 +70,11 @@
         </footer>
     </div>
     <script>
-        function createRoom(e) {
+        createRoom = (e) => {
             e.preventDefault()
-
-            let roomName = e.target.children.roomName.value
-            let assignUser = e.target.children.assignUser.value
-            let assignHouse = e.target.children.assignHouse.value
+            const roomName = e.target.children.roomName.value
+            const assignUser = e.target.children.assignUser.value
+            const assignHouse = e.target.children.assignHouse.value
 
             fetch('/createRoom', {
                     method: 'POST',
@@ -80,7 +89,23 @@
                 }).then(r => r.json())
                 .then(data => {
                     console.log(data)
-                
+                })
+        }
+
+        deleteRoom = (e) => {
+            e.preventDefault()
+            const roomID = event.target.dataset.id
+            fetch('/deleteRoom', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        roomID
+                    })
+                }).then(r => r.json())
+                .then(data => {
+                    console.log(data)
                 })
         }
     </script>
