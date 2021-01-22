@@ -34,6 +34,34 @@ input {
 
 /* LOGIN */
 
+.loginCreate__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: rgba(223, 221, 221, 0.246);
+    width: 50%;
+    padding: 1%;
+    margin: 0 0 5% 24%;
+}
+
+.loginPage {
+    color: white;
+    padding: 1.5%;
+    border: 1px solid black;
+    background-color: rgba(210, 180, 140, 0.815);
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.createPage {
+    color: rgb(255, 93, 44);
+    padding: 1.5%;
+    border: 1px solid black;
+    font-size: 1.5em;
+    background-color: rgba(210, 180, 140, 0.815);
+    font-weight: bold;
+}
+
 .mainForm {
     width: 50%;
     padding: 5%;

@@ -3,7 +3,7 @@ hendleLoginPage = (e) => {
     e.preventDefault();
     document.getElementById("Login").style.display = "block"
     document.getElementById("CreateAccount").style.display = "none"
-    
+
 }
 hendleCreatePage = (e) => {
     e.preventDefault();
