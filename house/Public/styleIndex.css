@@ -42,6 +42,7 @@ input {
     width: 50%;
     padding: 1%;
     margin: 0 0 5% 24%;
+    border-radius: 20px;
 }
 
 .loginPage, .createPage {
@@ -70,7 +71,7 @@ input {
     margin: auto;
     background-color: rgba(223, 221, 221, 0.246);
     border-radius: 50px;
-    height: 135px;
+   
 }
 
 .mainLogin__form {
@@ -79,7 +80,7 @@ input {
 }
 
 .mainLogin__form>input {
-    border-radius: 20px;
+    border-radius: 10px;
     margin: 0.5%;
     padding: 2%;
     font-size: 1.3rem;
@@ -87,9 +88,7 @@ input {
     border:none;
     
 }
-.input{
-    border: none;
-}
+
 .btn{
     border: none;
     background-color: rgb(184, 130, 148);
@@ -99,8 +98,8 @@ input {
     transition: 0.3s;
     
 }
-.mainLogin__form>input:hover{
-    border: 1px solid black
+.input:hover{
+    border: 1px solid rgb(63, 63, 63);
 }
 
 #mainWeather {
@@ -152,11 +151,15 @@ img {
 
 .mainWeather__form--input {
     width: 90%;
-    border-radius: 20px;
+    border-radius: 10px;
     margin: 0.5%;
     padding: 1%;
     font-size: 1.3rem;
     outline: none;
+    border: none;
+}
+.mainWeather__form--input:hover{
+    border: 1px solid rgb(63, 63, 63);
 }
 
 
