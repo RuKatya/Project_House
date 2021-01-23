@@ -23,9 +23,9 @@ mongoose.connect(url, {
   useUnifiedTopology: true
 }); //connectin to the db
 
-var User = mongoose.model('user', {
+var User = mongoose.model('User', {
   //collection
-  userName: String,
+  name: String,
   //with big letter !!!
   password: Number,
   role: String,
@@ -34,102 +34,95 @@ var User = mongoose.model('user', {
 var Room = mongoose.model('Room', {
   //collection
   roomName: String,
-  assignUser: [String],
-  assignHouse: String
+  assignUser: [String]
 }); //-----------users-------------//
-// const Shneor = new User({
-//     userName: "Shneor",
-//     password: "123",
-//     role: "admin",
-//     assignRooms: ["assignRoom1"]
-// })
-// Shneor.save().then(doc => console.log(doc)).catch(e => {
+
+var Shneor = new User({
+  name: "Shneor",
+  password: "123",
+  role: "admin",
+  assignRooms: ["assignRoom1"]
+});
+var Dudi = new User({
+  name: "Dudi",
+  password: "456",
+  role: "child",
+  assignRooms: ["assignRoom1", "assignRoom2"]
+});
+var Lior = new User({
+  name: "Lior",
+  password: "789",
+  role: "child",
+  assignRooms: ["assignRoom1"]
+}); // Lior.save().then(doc => console.log(doc)).catch(e => {
 //     console.log(e)
 // })
-// const Dudi = new User({
-//     userName: "Dudi",
-//     password: "456",
-//     role: "child",
-//     assignRooms: ["assignRoom1", "assignRoom2"]
-// })
-// Dudi.save().then(doc => console.log(doc)).catch(e => {
-//     console.log(e)
-// })
-// const Lior = new User({
-//     userName: "Lior",
-//     password: "789",
-//     role: "child",
-//     assignRooms: ["assignRoom1"]
-// })
-// Lior.save().then(doc => console.log(doc)).catch(e => {
-//     console.log(e)
-// })
-// const Katya = new User({
-//     userName: "Katya",
-//     password: "159",
-//     role: "guest",
-//     assignRooms: ["assignRoom1"]
-// })
-// Katya.save().then(doc => console.log(doc)).catch(e => {
-//     console.log(e)
-// })
-// ---------ADMIN-----------//
-// function isAdmin(req, res, next) {
-//     const { role } = req.cookies
-//     res.authorized = false;
-//     if (role === 'admin' ) {
-//         res.authorized = true;
-//         console.log(res.authorized)
-//     }
-//     next()
-// }
-//----------LOGIN-------------//
+
+var Katya = new User({
+  name: "Katya",
+  password: "159",
+  role: "guest",
+  assignRooms: ["assignRoom1"]
+}); // ---------ADMIN-----------//
+
+isAdmin = function isAdmin(req, res, next) {
+  res.authorized = false;
+  var role = req.cookies.role;
+
+  if (role === 'admin') {
+    res.authorized = true;
+    console.log(res.authorized);
+  }
+
+  next();
+}; //----------LOGIN-------------//
+
 
 app.post("/login", function _callee(req, res) {
-  var _req$body, userName, password, validation, role, doc, ok;
+  var _req$body, name, password, validation, role, doc, _ok;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _req$body = req.body, userName = _req$body.userName, password = _req$body.password;
+          _req$body = req.body, name = _req$body.name, password = _req$body.password;
           validation = false;
           role = 'denied';
           _context.next = 5;
           return regeneratorRuntime.awrap(User.findOne({
-            userName: userName
+            name: name
           }));
 
         case 5:
           doc = _context.sent;
 
-          if (doc.userName == userName && doc.password == password) {
+          if (doc.name == name && doc.password == password) {
+            _ok = false;
             validation = true;
             role = doc.role;
+            res.cookie('role', role, {
+              maxAge: 20000000,
+              httpOnly: false
+            });
           }
 
-          ok = false;
-          res.cookie('role', role, {
-            maxAge: 20000000,
-            httpOnly: false
-          });
           if (role === 'child' || role === 'admin' || role === 'guest') ok = true;
           res.send({
             ok: ok
-          }); //     res.cookie("User validated", userName, { maxAge: 30000, httpOnly: true })
+          }); //     res.cookie("User validated", name, { maxAge: 30000, httpOnly: true })
           // } else {
-          //     alert(`Sorry ${e.userName} doesn't exist`);
+          //     alert(`Sorry ${e.name} doesn't exist`);
           // }
           // res.send({ validation });
 
-        case 11:
+        case 9:
         case "end":
           return _context.stop();
       }
     }
   });
 }); // let role = 'denied';
-// const indexUser = users.findIndex(user => user.username === username && user.password === password);
+// const indexUser = users.findIndex(User => user.name === name && user.password === password);
 // if (indexUser > -1) {
 //     isUserExist = true;
 //     role = users[indexUser].role;
@@ -153,16 +146,16 @@ app.get("/check-valid", function (req, res) {
 }); //-------------CREATE ACCOUNT-----------//
 
 app.post('/createAccount', function _callee2(req, res) {
-  var _req$body2, userName, password, role, newUser;
+  var _req$body2, name, password, role, newUser;
 
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _req$body2 = req.body, userName = _req$body2.userName, password = _req$body2.password, role = _req$body2.role;
+          _req$body2 = req.body, name = _req$body2.name, password = _req$body2.password, role = _req$body2.role;
           _context2.next = 3;
           return regeneratorRuntime.awrap(new User({
-            userName: userName,
+            name: name,
             password: password,
             role: role
           }));
@@ -174,7 +167,7 @@ app.post('/createAccount', function _callee2(req, res) {
           })["catch"](function (e) {
             return console.log(e);
           });
-          console.log(userName, password, role);
+          console.log(name, password, role);
 
         case 6:
         case "end":

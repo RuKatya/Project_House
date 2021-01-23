@@ -16,8 +16,8 @@ mongoose.connect(url, {
     useUnifiedTopology: true
 }); //connectin to the db
 
-const User = mongoose.model('user', { //collection
-    userName: String, //with big letter !!!
+const User = mongoose.model('User', { //collection
+    name: String, //with big letter !!!
     password: Number,
     role: String,
     assignRooms: [String]
@@ -26,99 +26,101 @@ const User = mongoose.model('user', { //collection
 const Room = mongoose.model('Room', { //collection
     roomName: String,
     assignUser: [String],
-    assignHouse: String,
 });
 
 //-----------users-------------//
-// const Shneor = new User({
-//     userName: "Shneor",
-//     password: "123",
-//     role: "admin",
-//     assignRooms: ["assignRoom1"]
-// })
-// Shneor.save().then(doc => console.log(doc)).catch(e => {
-//     console.log(e)
-// })
+const Shneor = new User({
+    name: "Shneor",
+    password: "123",
+    role: "admin",
+    assignRooms: ["assignRoom1"]
+})
 
-// const Dudi = new User({
-//     userName: "Dudi",
-//     password: "456",
-//     role: "child",
-//     assignRooms: ["assignRoom1", "assignRoom2"]
-// })
-// Dudi.save().then(doc => console.log(doc)).catch(e => {
-//     console.log(e)
-// })
-// const Lior = new User({
-//     userName: "Lior",
-//     password: "789",
-//     role: "child",
-//     assignRooms: ["assignRoom1"]
-// })
+
+const Dudi = new User({
+    name: "Dudi",
+    password: "456",
+    role: "child",
+    assignRooms: ["assignRoom1", "assignRoom2"]
+})
+
+
+const Lior = new User({
+    name: "Lior",
+    password: "789",
+    role: "child",
+    assignRooms: ["assignRoom1"]
+})
 // Lior.save().then(doc => console.log(doc)).catch(e => {
 //     console.log(e)
 // })
-// const Katya = new User({
-//     userName: "Katya",
-//     password: "159",
-//     role: "guest",
-//     assignRooms: ["assignRoom1"]
-// })
-// Katya.save().then(doc => console.log(doc)).catch(e => {
-//     console.log(e)
-// })
+
+const Katya = new User({
+    name: "Katya",
+    password: "159",
+    role: "guest",
+    assignRooms: ["assignRoom1"]
+})
+
+
 
 // ---------ADMIN-----------//
 
-// function isAdmin(req, res, next) {
-//     const { role } = req.cookies
-//     res.authorized = false;
+isAdmin = (req, res, next) => {
+    res.authorized = false;
+    const {
+        role
+    } = req.cookies
 
-//     if (role === 'admin' ) {
-//         res.authorized = true;
-//         console.log(res.authorized)
-//     }
 
-//     next()
-// }
+    if (role === 'admin') {
+        res.authorized = true;
+        console.log(res.authorized)
+    }
+
+    next()
+}
 
 //----------LOGIN-------------//
-app.post("/login", async(req, res) => {
-    let { userName, password } = req.body;
+app.post("/login", async (req, res) => {
+    let {name,password} = req.body;
     let validation = false;
     let role = 'denied';
-    const doc = await User.findOne({ userName: userName });
-    if (doc.userName == userName && doc.password == password) {
+    const doc = await User.findOne({
+        name
+    });
+    if (doc.name == name && doc.password == password) {
+        let ok = false;
         validation = true;
-        role = doc.role 
+        role = doc.role
+        res.cookie('role', role, {maxAge: 20000000,httpOnly: false});
     }
-    let ok = false;
-    res.cookie('role', role, { maxAge: 20000000, httpOnly: false });
+    if (role === 'child' || role === 'admin' || role === 'guest') ok = true;
 
-    if (role === 'child' || role === 'admin'|| role === 'guest') ok = true;
-
-    res.send({ ok })
-    //     res.cookie("User validated", userName, { maxAge: 30000, httpOnly: true })
+    res.send({
+        ok
+    })
+    //     res.cookie("User validated", name, { maxAge: 30000, httpOnly: true })
     // } else {
-    //     alert(`Sorry ${e.userName} doesn't exist`);
+    //     alert(`Sorry ${e.name} doesn't exist`);
     // }
     // res.send({ validation });
 });
 
 // let role = 'denied';
 
-    // const indexUser = users.findIndex(user => user.username === username && user.password === password);
-    // if (indexUser > -1) {
-    //     isUserExist = true;
-    //     role = users[indexUser].role;
-    // }
+// const indexUser = users.findIndex(User => user.name === name && user.password === password);
+// if (indexUser > -1) {
+//     isUserExist = true;
+//     role = users[indexUser].role;
+// }
 
-    // let ok = false;
-    // res.cookie('role', role, { maxAge: 20000000, httpOnly: false });
+// let ok = false;
+// res.cookie('role', role, { maxAge: 20000000, httpOnly: false });
 
-    // if (role === 'public' || role === 'admin') ok = true;
+// if (role === 'public' || role === 'admin') ok = true;
 
-    // res.send({ ok })
+// res.send({ ok })
 
 app.get("/check-valid", (req, res) => {
     let validation = true;
@@ -126,21 +128,27 @@ app.get("/check-valid", (req, res) => {
     if (checkCookie == false) {
         validation = false;
     }
-    res.send({ validation });
+    res.send({
+        validation
+    });
 });
 
 //-------------CREATE ACCOUNT-----------//
-app.post('/createAccount', async(req, res) => {
-    let { userName, password, role } = req.body;
+app.post('/createAccount', async (req, res) => {
+    let {
+        name,
+        password,
+        role
+    } = req.body;
 
     const newUser = await new User({
-        userName,
+        name,
         password,
         role
     });
     newUser.save().then(doc => console.log(doc)).catch(e => console.log(e));
 
-    console.log(userName, password, role)
+    console.log(name, password, role)
 
 })
 
@@ -148,12 +156,18 @@ app.post('/createAccount', async(req, res) => {
 //----------ROOM FUNCTIONS-------------//
 
 app.get('/read', (req, res) => {
-    res.send({ ok: true })
+    res.send({
+        ok: true
+    })
 })
 
 //-------------CREATE ROOM--------------//
-app.post("/createRoom", async(req, res) => {
-    let { roomName, assignUser, assignHouse } = req.body;
+app.post("/createRoom", async (req, res) => {
+    let {
+        roomName,
+        assignUser,
+        assignHouse
+    } = req.body;
     const newRoom = await new Room({
         roomName,
         assignUser,
@@ -163,33 +177,47 @@ app.post("/createRoom", async(req, res) => {
 });
 
 //-------------DELETE ROOM--------------//
-app.post('/deleteroom', async(req, res) => {
-    const { dataID } = req.body
+app.post('/deleteroom', async (req, res) => {
+    const {
+        dataID
+    } = req.body
     await Room.findByIdAndDelete(dataID)
     const data = await Room.find({})
-    res.send({ data })
+    res.send({
+        data
+    })
 })
 
 //-------------UPDATE ROOM--------------//
-app.post('/updateRoom', async(req, res) => {
-    const { dataID } = req.body
+app.post('/updateRoom', async (req, res) => {
+    const {
+        dataID
+    } = req.body
     await Room.findById(dataID)
     const data = await Room.find({})
-    res.send({ data })
+    res.send({
+        data
+    })
 })
 
 //------------- ROOM INFO--------------//
-app.post('/roomIinfo', async(req, res) => {
-    const { dataID } = req.body
+app.post('/roomIinfo', async (req, res) => {
+    const {
+        dataID
+    } = req.body
     await Room.findByIdfindByIdAndUpdate(dataID)
     const data = await Room.find({})
-    res.send({ data })
+    res.send({
+        data
+    })
 })
 
 //-------------WEATHER-----------//
 
 app.post('/weather', (req, res) => {
-    const { city } = req.body;
+    const {
+        city
+    } = req.body;
     console.log(city)
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=84dda819f36a2f81e3babdb748579c85`)
         .then(r => r.json())

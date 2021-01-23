@@ -16,9 +16,9 @@ hendleCreatePage = (e) => {
 hendleSubmitUsers = (e) => {
     e.preventDefault();
 
-    const userName = e.target.children.userName.value;
+    const name = e.target.children.name.value;
     const password = e.target.children.password.value;
-    console.log(userName, password)
+    console.log(name, password)
 
     fetch('/login', {
             method: 'POST',
@@ -26,7 +26,7 @@ hendleSubmitUsers = (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userName,
+                name,
                 password
             })
         }).then(r => r.json())
@@ -53,10 +53,10 @@ function hendleGetIn(){
 function hendleCreate(e) {
     e.preventDefault();
 
-    const userName = e.target.children.userName.value;
+    const name = e.target.children.name.value;
     const password = e.target.children.password.value;
     const role = e.target.children.role.value;
-    console.log(userName, password, role)
+    console.log(name, password, role)
 
     fetch('/createAccount', {
             method: 'POST',
@@ -64,7 +64,7 @@ function hendleCreate(e) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userName,
+                name,
                 password,
                 role
             })
