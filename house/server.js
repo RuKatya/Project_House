@@ -86,26 +86,30 @@ app.post("/login", async (req, res) => {
     let {name,password} = req.body;
     let validation = false;
     let role = 'denied';
-    const doc = await User.findOne({
-        name
+    let doc = await User.findOne({
+        name:name
     });
-    if (doc.name == name && doc.password == password) {
-        let ok = false;
+     if (await doc.name == name && doc.password == password) {
+       
         validation = true;
         role = doc.role
         res.cookie('role', role, {maxAge: 20000000,httpOnly: false});
     }
-    if (role === 'child' || role === 'admin' || role === 'guest') ok = true;
-
-    res.send({
-        ok
-    })
+  
     //     res.cookie("User validated", name, { maxAge: 30000, httpOnly: true })
     // } else {
     //     alert(`Sorry ${e.name} doesn't exist`);
     // }
     // res.send({ validation });
 });
+//----------CHECK VALIDATION-------------//
+app.get('/read', (req, res) => {
+    let {cookies} = req
+    if (cookies == admin ||  cookies == child )
+    res.send({
+        ok: true
+    })
+})
 
 // let role = 'denied';
 
@@ -122,17 +126,6 @@ app.post("/login", async (req, res) => {
 
 // res.send({ ok })
 
-app.get("/check-valid", (req, res) => {
-    let validation = true;
-    const checkCookie = req.cookies.validated;
-    if (checkCookie == false) {
-        validation = false;
-    }
-    res.send({
-        validation
-    });
-});
-
 //-------------CREATE ACCOUNT-----------//
 app.post('/createAccount', async (req, res) => {
     let {
@@ -147,19 +140,10 @@ app.post('/createAccount', async (req, res) => {
         role
     });
     newUser.save().then(doc => console.log(doc)).catch(e => console.log(e));
-
-    console.log(name, password, role)
-
 })
 
 
 //----------ROOM FUNCTIONS-------------//
-
-app.get('/read', (req, res) => {
-    res.send({
-        ok: true
-    })
-})
 
 //-------------CREATE ROOM--------------//
 app.post("/createRoom", async (req, res) => {
@@ -177,11 +161,11 @@ app.post("/createRoom", async (req, res) => {
 });
 
 //-------------DELETE ROOM--------------//
-app.post('/deleteroom', async (req, res) => {
+app.delete('/deleteroom', async (req, res) => {
     const {
-        dataID
+        roomID
     } = req.body
-    await Room.findByIdAndDelete(dataID)
+    await Room.findByIdAndDelete(roomID)
     const data = await Room.find({})
     res.send({
         data
@@ -189,12 +173,20 @@ app.post('/deleteroom', async (req, res) => {
 })
 
 //-------------UPDATE ROOM--------------//
-app.post('/updateRoom', async (req, res) => {
+app.put('/updateRoom', async (req, res) => {
+    
     const {
-        dataID
+        assignUser,
+        roomName,
+        Selectedroom
     } = req.body
-    await Room.findById(dataID)
+    let lastRoomId = await Room.find({roomName:Selectedroom})
+    console.log("lastRoomId: ", lastRoomId)
+    let roomID = lastRoomId._id
+    console.log("roomID: ", roomID)
+    await Room.findByIdAndUpdate(roomID,{roomName:roomName, assignUser: assignUser})
     const data = await Room.find({})
+    console.log("data: ", data)
     res.send({
         data
     })
@@ -203,9 +195,9 @@ app.post('/updateRoom', async (req, res) => {
 //------------- ROOM INFO--------------//
 app.post('/roomIinfo', async (req, res) => {
     const {
-        dataID
+        roomID
     } = req.body
-    await Room.findByIdfindByIdAndUpdate(dataID)
+    await Room.findById(roomID)
     const data = await Room.find({})
     res.send({
         data

@@ -30,6 +30,21 @@
             <input type="text" placeholder="assignHouse" name="assignHouse">
             <button type="submit">Create</button>
         </form>
+        <form onsubmit="updateRoom(event)" class="formCreating">
+            <select id="roomList" name="roomList">
+                <option style="display: none;">בחר חדר</option>
+                <option value="b">חדר הורים</option>
+                <option value="c">חדר ילדים</option>
+                <option value="d">סלון</option>
+                <option value="sdfb">sdfb</option>
+            </select>
+            <input type="text" placeholder="roomName" name="roomName">
+            <input type="text" placeholder="assignUser" name="assignUser">
+           
+            <button type="submit">Create</button>
+        </form>
+
+
 
         <div class="rooms">
             <div class="roomsSmall">
@@ -101,6 +116,30 @@
                     },
                     body: JSON.stringify({
                         roomID
+                    })
+                }).then(r => r.json())
+                .then(data => {
+                    console.log(data)
+                })
+        }
+        updateRoom = (e) => {
+            e.preventDefault()
+            const roomName = e.target.children.roomName.value
+            const assignUser = e.target.children.assignUser.value
+            const Selectedroom = document.querySelector('#roomList').value
+            
+            
+
+            fetch('/updateRoom', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        roomName,
+                        assignUser,
+                        Selectedroom
+                        
                     })
                 }).then(r => r.json())
                 .then(data => {

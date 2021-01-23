@@ -79,7 +79,7 @@ isAdmin = function isAdmin(req, res, next) {
 
 
 app.post("/login", function _callee(req, res) {
-  var _req$body, name, password, validation, role, doc, _ok;
+  var _req$body, name, password, validation, role, doc;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -95,31 +95,46 @@ app.post("/login", function _callee(req, res) {
 
         case 5:
           doc = _context.sent;
+          _context.next = 8;
+          return regeneratorRuntime.awrap(doc.name);
 
-          if (doc.name == name && doc.password == password) {
-            _ok = false;
-            validation = true;
-            role = doc.role;
-            res.cookie('role', role, {
-              maxAge: 20000000,
-              httpOnly: false
-            });
+        case 8:
+          _context.t1 = _context.sent;
+          _context.t2 = name;
+          _context.t0 = _context.t1 == _context.t2;
+
+          if (!_context.t0) {
+            _context.next = 13;
+            break;
           }
 
-          if (role === 'child' || role === 'admin' || role === 'guest') ok = true;
-          res.send({
-            ok: ok
-          }); //     res.cookie("User validated", name, { maxAge: 30000, httpOnly: true })
-          // } else {
-          //     alert(`Sorry ${e.name} doesn't exist`);
-          // }
-          // res.send({ validation });
+          _context.t0 = doc.password == password;
 
-        case 9:
+        case 13:
+          if (!_context.t0) {
+            _context.next = 17;
+            break;
+          }
+
+          validation = true;
+          role = doc.role;
+          res.cookie('role', role, {
+            maxAge: 20000000,
+            httpOnly: false
+          });
+
+        case 17:
         case "end":
           return _context.stop();
       }
     }
+  });
+}); //----------CHECK VALIDATION-------------//
+
+app.get('/read', function (req, res) {
+  var cookies = req.cookies;
+  if (cookies == admin || cookies == child) res.send({
+    ok: true
   });
 }); // let role = 'denied';
 // const indexUser = users.findIndex(User => user.name === name && user.password === password);
@@ -131,19 +146,7 @@ app.post("/login", function _callee(req, res) {
 // res.cookie('role', role, { maxAge: 20000000, httpOnly: false });
 // if (role === 'public' || role === 'admin') ok = true;
 // res.send({ ok })
-
-app.get("/check-valid", function (req, res) {
-  var validation = true;
-  var checkCookie = req.cookies.validated;
-
-  if (checkCookie == false) {
-    validation = false;
-  }
-
-  res.send({
-    validation: validation
-  });
-}); //-------------CREATE ACCOUNT-----------//
+//-------------CREATE ACCOUNT-----------//
 
 app.post('/createAccount', function _callee2(req, res) {
   var _req$body2, name, password, role, newUser;
@@ -167,21 +170,15 @@ app.post('/createAccount', function _callee2(req, res) {
           })["catch"](function (e) {
             return console.log(e);
           });
-          console.log(name, password, role);
 
-        case 6:
+        case 5:
         case "end":
           return _context2.stop();
       }
     }
   });
 }); //----------ROOM FUNCTIONS-------------//
-
-app.get('/read', function (req, res) {
-  res.send({
-    ok: true
-  });
-}); //-------------CREATE ROOM--------------//
+//-------------CREATE ROOM--------------//
 
 app.post("/createRoom", function _callee3(req, res) {
   var _req$body3, roomName, assignUser, assignHouse, newRoom;
@@ -214,15 +211,15 @@ app.post("/createRoom", function _callee3(req, res) {
   });
 }); //-------------DELETE ROOM--------------//
 
-app.post('/deleteroom', function _callee4(req, res) {
-  var dataID, data;
+app["delete"]('/deleteroom', function _callee4(req, res) {
+  var roomID, data;
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          dataID = req.body.dataID;
+          roomID = req.body.roomID;
           _context4.next = 3;
-          return regeneratorRuntime.awrap(Room.findByIdAndDelete(dataID));
+          return regeneratorRuntime.awrap(Room.findByIdAndDelete(roomID));
 
         case 3:
           _context4.next = 5;
@@ -242,27 +239,42 @@ app.post('/deleteroom', function _callee4(req, res) {
   });
 }); //-------------UPDATE ROOM--------------//
 
-app.post('/updateRoom', function _callee5(req, res) {
-  var dataID, data;
+app.put('/updateRoom', function _callee5(req, res) {
+  var _req$body4, assignUser, roomName, Selectedroom, lastRoomId, roomID, data;
+
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          dataID = req.body.dataID;
+          _req$body4 = req.body, assignUser = _req$body4.assignUser, roomName = _req$body4.roomName, Selectedroom = _req$body4.Selectedroom;
           _context5.next = 3;
-          return regeneratorRuntime.awrap(Room.findById(dataID));
+          return regeneratorRuntime.awrap(Room.find({
+            roomName: Selectedroom
+          }));
 
         case 3:
-          _context5.next = 5;
+          lastRoomId = _context5.sent;
+          console.log("lastRoomId: ", lastRoomId);
+          roomID = lastRoomId._id;
+          console.log("roomID: ", roomID);
+          _context5.next = 9;
+          return regeneratorRuntime.awrap(Room.findByIdAndUpdate(roomID, {
+            roomName: roomName,
+            assignUser: assignUser
+          }));
+
+        case 9:
+          _context5.next = 11;
           return regeneratorRuntime.awrap(Room.find({}));
 
-        case 5:
+        case 11:
           data = _context5.sent;
+          console.log("data: ", data);
           res.send({
             data: data
           });
 
-        case 7:
+        case 14:
         case "end":
           return _context5.stop();
       }
@@ -271,14 +283,14 @@ app.post('/updateRoom', function _callee5(req, res) {
 }); //------------- ROOM INFO--------------//
 
 app.post('/roomIinfo', function _callee6(req, res) {
-  var dataID, data;
+  var roomID, data;
   return regeneratorRuntime.async(function _callee6$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
-          dataID = req.body.dataID;
+          roomID = req.body.roomID;
           _context6.next = 3;
-          return regeneratorRuntime.awrap(Room.findByIdfindByIdAndUpdate(dataID));
+          return regeneratorRuntime.awrap(Room.findById(roomID));
 
         case 3:
           _context6.next = 5;
