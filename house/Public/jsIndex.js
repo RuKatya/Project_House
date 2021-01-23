@@ -40,6 +40,31 @@ hendleSubmitUsers = (e) => {
         })
 }
 
+//-------CREATE------//
+function hendleCreate(e) {
+    e.preventDefault();
+
+    const userName = e.target.children.userName.value;
+    const password = e.target.children.password.value;
+    const role = e.target.children.role.value;
+    console.log(userName, password, role)
+
+    fetch('/createAccount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userName,
+                password,
+                role
+            })
+        }).then(r => r.json())
+        .then(data => {
+            console.log(data)
+        })
+}
+
 //-----WEATHER------//
 function hendleSubmitWeater(e) {
     e.preventDefault();

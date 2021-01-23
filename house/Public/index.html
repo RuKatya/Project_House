@@ -22,16 +22,20 @@
 
             <div class="mainForm mainLogin" id="Login">
                 <form onsubmit="hendleSubmitUsers(event)" class="mainLogin__form">
-                    <input class="input" type="text" name="userName" placeholder="username">
-                    <input class="input" type="password" name="password" placeholder="password">
-                    <input class="btn" type="submit" value="Login">
+                    <input class="input" type="text" name="userName" placeholder="Username">
+                    <input class="input" type="password" name="password" placeholder="Password">
+                    <input class="btn" type="submit" value="Sing in">
+                    <a href="#">
+                        <p class="forgot">Forgot password</p>
+                    </a>
                 </form>
             </div>
 
             <div class="mainForm mainCreateAccount" id="CreateAccount" style="display: none;">
-                <form class="mainLogin__form">
-                    <input class="input" type="text" name="username" placeholder="Name">
-                    <input class="input" type="password" placeholder="Password">
+                <form onsubmit="hendleCreate(event)" class="mainLogin__form">
+                    <input class="input" type="text" name="userName" placeholder="Name">
+                    <input class="input" type="password" name="password" placeholder="Password">
+                    <input class="input" type="text" name="role" placeholder="Role">
                     <input class="btn" type="submit" value="Create user">
                 </form>
             </div>
@@ -42,7 +46,7 @@
             <div id="weather"></div>
             <form onsubmit="hendleSubmitWeater(event)" class="mainWeather__form">
                 <input type="text" name="city" placeholder="Choose youre city" class="mainWeather__form--input">
-                <input  type="submit" value="Set" class="mainWeather__form--input btn">
+                <input type="submit" value="Set" class="mainWeather__form--input btn">
             </form>
         </div>
 

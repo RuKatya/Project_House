@@ -39,7 +39,31 @@ hendleSubmitUsers = function hendleSubmitUsers(e) {
       alert("go-out-of-here!!!!!!");
     }
   });
-}; //-----WEATHER------//
+}; //-------CREATE------//
+
+
+function hendleCreate(e) {
+  e.preventDefault();
+  var userName = e.target.children.userName.value;
+  var password = e.target.children.password.value;
+  var role = e.target.children.role.value;
+  console.log(userName, password, role);
+  fetch('/createAccount', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userName: userName,
+      password: password,
+      role: role
+    })
+  }).then(function (r) {
+    return r.json();
+  }).then(function (data) {
+    console.log(data);
+  });
+} //-----WEATHER------//
 
 
 function hendleSubmitWeater(e) {
