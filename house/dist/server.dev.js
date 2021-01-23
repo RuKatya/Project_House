@@ -73,10 +73,20 @@ var Room = mongoose.model('Room', {
 // Katya.save().then(doc => console.log(doc)).catch(e => {
 //     console.log(e)
 // })
+// ---------ADMIN-----------//
+// function isAdmin(req, res, next) {
+//     const { role } = req.cookies
+//     res.authorized = false;
+//     if (role === 'admin' ) {
+//         res.authorized = true;
+//         console.log(res.authorized)
+//     }
+//     next()
+// }
 //----------LOGIN-------------//
 
 app.post("/login", function _callee(req, res) {
-  var _req$body, userName, password, validation, doc;
+  var _req$body, userName, password, validation, role, doc, ok;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -84,35 +94,51 @@ app.post("/login", function _callee(req, res) {
         case 0:
           _req$body = req.body, userName = _req$body.userName, password = _req$body.password;
           validation = false;
-          _context.next = 4;
+          role = 'denied';
+          _context.next = 5;
           return regeneratorRuntime.awrap(User.findOne({
             userName: userName
           }));
 
-        case 4:
+        case 5:
           doc = _context.sent;
 
           if (doc.userName == userName && doc.password == password) {
             validation = true;
-            res.cookie("User validated", userName, {
-              maxAge: 30000,
-              httpOnly: true
-            });
-          } else {
-            alert("Sorry ".concat(e.userName, " doesn't exist"));
+            role = doc.role;
           }
 
-          res.send({
-            validation: validation
+          ok = false;
+          res.cookie('role', role, {
+            maxAge: 20000000,
+            httpOnly: false
           });
+          if (role === 'child' || role === 'admin' || role === 'guest') ok = true;
+          res.send({
+            ok: ok
+          }); //     res.cookie("User validated", userName, { maxAge: 30000, httpOnly: true })
+          // } else {
+          //     alert(`Sorry ${e.userName} doesn't exist`);
+          // }
+          // res.send({ validation });
 
-        case 7:
+        case 11:
         case "end":
           return _context.stop();
       }
     }
   });
-});
+}); // let role = 'denied';
+// const indexUser = users.findIndex(user => user.username === username && user.password === password);
+// if (indexUser > -1) {
+//     isUserExist = true;
+//     role = users[indexUser].role;
+// }
+// let ok = false;
+// res.cookie('role', role, { maxAge: 20000000, httpOnly: false });
+// if (role === 'public' || role === 'admin') ok = true;
+// res.send({ ok })
+
 app.get("/check-valid", function (req, res) {
   var validation = true;
   var checkCookie = req.cookies.validated;
@@ -157,7 +183,12 @@ app.post('/createAccount', function _callee2(req, res) {
     }
   });
 }); //----------ROOM FUNCTIONS-------------//
-//-------------CREATE ROOM--------------//
+
+app.get('/read', function (req, res) {
+  res.send({
+    ok: true
+  });
+}); //-------------CREATE ROOM--------------//
 
 app.post("/createRoom", function _callee3(req, res) {
   var _req$body3, roomName, assignUser, assignHouse, newRoom;

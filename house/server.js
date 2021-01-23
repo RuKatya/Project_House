@@ -68,19 +68,57 @@ const Room = mongoose.model('Room', { //collection
 //     console.log(e)
 // })
 
+// ---------ADMIN-----------//
+
+// function isAdmin(req, res, next) {
+//     const { role } = req.cookies
+//     res.authorized = false;
+
+//     if (role === 'admin' ) {
+//         res.authorized = true;
+//         console.log(res.authorized)
+//     }
+
+//     next()
+// }
+
 //----------LOGIN-------------//
 app.post("/login", async(req, res) => {
     let { userName, password } = req.body;
     let validation = false;
+    let role = 'denied';
     const doc = await User.findOne({ userName: userName });
     if (doc.userName == userName && doc.password == password) {
         validation = true;
-        res.cookie("User validated", userName, { maxAge: 30000, httpOnly: true })
-    } else {
-        alert(`Sorry ${e.userName} doesn't exist`);
+        role = doc.role 
     }
-    res.send({ validation });
+    let ok = false;
+    res.cookie('role', role, { maxAge: 20000000, httpOnly: false });
+
+    if (role === 'child' || role === 'admin'|| role === 'guest') ok = true;
+
+    res.send({ ok })
+    //     res.cookie("User validated", userName, { maxAge: 30000, httpOnly: true })
+    // } else {
+    //     alert(`Sorry ${e.userName} doesn't exist`);
+    // }
+    // res.send({ validation });
 });
+
+// let role = 'denied';
+
+    // const indexUser = users.findIndex(user => user.username === username && user.password === password);
+    // if (indexUser > -1) {
+    //     isUserExist = true;
+    //     role = users[indexUser].role;
+    // }
+
+    // let ok = false;
+    // res.cookie('role', role, { maxAge: 20000000, httpOnly: false });
+
+    // if (role === 'public' || role === 'admin') ok = true;
+
+    // res.send({ ok })
 
 app.get("/check-valid", (req, res) => {
     let validation = true;
@@ -108,6 +146,10 @@ app.post('/createAccount', async(req, res) => {
 
 
 //----------ROOM FUNCTIONS-------------//
+
+app.get('/read', (req, res) => {
+    res.send({ ok: true })
+})
 
 //-------------CREATE ROOM--------------//
 app.post("/createRoom", async(req, res) => {

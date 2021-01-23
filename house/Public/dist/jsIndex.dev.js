@@ -33,13 +33,24 @@ hendleSubmitUsers = function hendleSubmitUsers(e) {
   }).then(function (data) {
     console.log(data);
 
-    if (data.validation == true) {
-      window.open("rooms.html");
-    } else {
-      alert("go-out-of-here!!!!!!");
+    if (data.ok == true) {
+      window.location.href = 'rooms.html';
+    } //  else {
+    //     alert("go-out-of-here!!!!!!")
+    // }
+
+  });
+};
+
+function hendleGetIn() {
+  fetch('/read').then(function (r) {
+    return r.json();
+  }).then(function (data) {
+    if (data.ok === false) {
+      window.location.href = 'index.html';
     }
   });
-}; //-------CREATE------//
+} //-------CREATE------//
 
 
 function hendleCreate(e) {

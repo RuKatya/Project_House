@@ -32,12 +32,21 @@ hendleSubmitUsers = (e) => {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if (data.validation == true) {
-                window.open("rooms.html")
-            } else {
-                alert("go-out-of-here!!!!!!")
-            }
+            if (data.ok == true) {
+                window.location.href='rooms.html'
+           } //  else {
+            //     alert("go-out-of-here!!!!!!")
+            // }
         })
+}
+
+function hendleGetIn(){
+    fetch('/read')
+      .then(r => r.json())
+      .then(data => {
+        if(data.ok === false){
+          window.location.href='index.html'
+      }})
 }
 
 //-------CREATE------//
