@@ -162,14 +162,14 @@ app.post('/createAccount', async (req, res) => {
         checkPassword
     });
     console.log(newUser)
+const salt = "stas"
 
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(newUser.password, salt, function(err, hash) {
+        bcrypt.hash(newUser.password, saltRounds, async function(err, hash) {
             try {
-                console.log('hi')
+                console.log(hash)
               newUser.password = hash;
-               newUser.save();
-        
+              await newUser.save();
+              console.log(newUser._id)
               const token = jwt.encode(
                 {
                   role: newUser.role,
@@ -193,10 +193,6 @@ app.post('/createAccount', async (req, res) => {
               res.end();
             }
         });
-    });
-    // bcrypt.hash(newUser.password, salt, async function (err, hash) {
-       
-    //   });
     
 })
 
