@@ -50,28 +50,32 @@ function hendleGetIn(){
 }
 
 //-------CREATE------//
-function hendleCreate(e) {
+function handleCreate(e) {
     e.preventDefault();
 
     const name = e.target.children.name.value;
+    const email = e.target.children.email.value;
     const password = e.target.children.password.value;
-    const role = e.target.children.role.value;
-    console.log(name, password, role)
+    const checkPassword = e.target.children.checkPassword.value;
+    console.log(name, password, email, checkPassword)
 
-    fetch('/createAccount', {
+     fetch('/createAccount', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 name,
-                password,
-                role
+                email,
+                password, 
+                checkPassword
             })
         }).then(r => r.json())
         .then(data => {
-            console.log(data)
-        })
+            if(data.status == "allowed"){
+                window.location.href='rooms.html'
+            }
+        }) 
 }
 
 //-----WEATHER------//

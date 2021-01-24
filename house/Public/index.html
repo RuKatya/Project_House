@@ -22,7 +22,7 @@
 
             <div class="mainForm mainLogin" id="Login">
                 <form onsubmit="hendleSubmitUsers(event)" class="mainLogin__form">
-                    <input class="input" type="text" name="name" placeholder="name">
+                    <input class="input" type="text" name="name" placeholder="Username">
                     <input class="input" type="password" name="password" placeholder="Password">
                     <input class="btn" type="submit" value="Sing in">
                     <a href="#">
@@ -32,10 +32,11 @@
             </div>
 
             <div class="mainForm mainCreateAccount" id="CreateAccount" style="display: none;">
-                <form onsubmit="hendleCreate(event)" class="mainLogin__form">
-                    <input class="input" type="text" name="name" placeholder="Name">
+                <form onsubmit="handleCreate(event)" class="mainLogin__form">
+                    <input class="input" type="text" name="name" placeholder="Username">
+                    <input class="input" type="text" name="email" placeholder="Email">
                     <input class="input" type="password" name="password" placeholder="Password">
-                    <input class="input" type="text" name="role" placeholder="Role">
+                    <input class="input" type="password" name="checkPassword" placeholder="Confirm password">
                     <input class="btn" type="submit" value="Create user">
                 </form>
             </div>

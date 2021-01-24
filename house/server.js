@@ -6,7 +6,10 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(express.static('public'));
 app.use(bodyParser.json());
-
+const bcrypt = require('bcryptjs');
+const jwt = require("jwt-simple");
+const saltRounds = 7;
+const jwtSecret = "23";
 //-----------mongoose----------//
 const mongoose = require('mongoose'); //npm i mongoose
 const url = 'mongodb+srv://KatyaRu:qHO9SxoCGZc6lv7C@cluster0.mfqlq.mongodb.net/test'
@@ -17,10 +20,31 @@ mongoose.connect(url, {
 }); //connectin to the db
 
 const User = mongoose.model('User', { //collection
-    name: String, //with big letter !!!
-    password: Number,
-    role: String,
-    assignRooms: [String]
+    name: {
+type: String,
+unique: true,
+reqiired: true,
+trim: true
+    } , //with big letter !!!
+ email: {
+     type: String,
+     unique: true,
+     required: true,
+     trim: true,
+     },    
+password: {
+    type: String,
+    required: true,
+    trim: true
+},
+role: {
+    type: String,
+    default: "user"
+},
+assignRooms:{
+    type: [String]
+}
+    //assignRooms: [String]
 });
 
 const Room = mongoose.model('Room', { //collection
@@ -128,18 +152,52 @@ app.get('/read', (req, res) => {
 
 //-------------CREATE ACCOUNT-----------//
 app.post('/createAccount', async (req, res) => {
-    let {
+    const { name, email, password, checkPassword } = req.body;
+    console.log(req.body)
+  
+     const newUser = await new User({
         name,
+        email,
         password,
-        role
-    } = req.body;
-
-    const newUser = await new User({
-        name,
-        password,
-        role
+        checkPassword
     });
-    newUser.save().then(doc => console.log(doc)).catch(e => console.log(e));
+    console.log(newUser)
+
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+            try {
+                console.log('hi')
+              newUser.password = hash;
+               newUser.save();
+        
+              const token = jwt.encode(
+                {
+                  role: newUser.role,
+                  name: newUser.name,
+                  assignRooms: newUser. assignRooms,
+                  time: new Date().getTime(),
+                  id: newUser._id
+                },
+                jwtSecret
+              );
+              console.log(token)
+              res.cookie("token", token, {
+                maxAge: 1500000,
+                httpOnly: true,
+              });
+              res.send({ status: "allowed" });
+            } catch (e) {
+              console.log(e.message);
+              console.log(e.stack);
+              res.send({ status: "not allowed" });
+              res.end();
+            }
+        });
+    });
+    // bcrypt.hash(newUser.password, salt, async function (err, hash) {
+       
+    //   });
+    
 })
 
 
