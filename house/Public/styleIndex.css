@@ -15,6 +15,12 @@ body {
 
 input {
     text-align: center;
+    border: 1px solid #e9eaea;
+    
+}
+.input:hover {
+    border: 1px solid rgb(114, 113, 113);
+   
 }
 
 
@@ -90,7 +96,7 @@ input {
     padding: 2%;
     font-size: 1.3rem;
     outline: none;
-    border: none;
+    
 }
 
 .btn {
@@ -103,13 +109,12 @@ input {
     transition: 0.3s;
 }
 
-.input:hover {
-    border: 1px solid rgb(63, 63, 63);
-}
+
 
 .forgot {
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 1.3rem;
+    text-align: center;
 }
 
 
@@ -166,11 +171,14 @@ img {
     padding: 1%;
     font-size: 1.3rem;
     outline: none;
-    border: none;
+    
 }
 
 .mainWeather__form--input:hover {
     border: 1px solid rgb(63, 63, 63);
+}
+.mainWeather__form--input.btn {
+    border: none;
 }
 
 
