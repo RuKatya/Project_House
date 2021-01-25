@@ -10,6 +10,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jwt-simple");
 const saltRounds = 7;
 const jwtSecret = "23";
+const {check} = require('express-validator')
+const {validationResult} = require('express-validator')
+
 //-----------mongoose----------//
 const mongoose = require('mongoose'); //npm i mongoose
 const url = 'mongodb+srv://KatyaRu:qHO9SxoCGZc6lv7C@cluster0.mfqlq.mongodb.net/test'
@@ -178,7 +181,17 @@ app.get('/read', (req, res) => {
 // res.send({ ok })
 
 //-------------CREATE ACCOUNT-----------//
-app.post('/createAccount', async (req, res) => {
+app.post('/createAccount', [
+    check('name', 'Username cannot be empty').notEmpty(),check('email', 'username must be an email').isEmail(),
+check('password', 'password must be at least 4 - 10 characters').isLength({min:4, max:10})
+], async (req, res) => {
+    const errors = validationResult(req)
+    console.log(errors)
+    if (!errors.isEmpty()) {
+     return res.status(400).json({message: 'Registration error', errors})
+     
+    }
+    console.log(errors)
     const { name, email, password, checkPassword } = req.body;
     console.log(req.body)
   
