@@ -162,11 +162,11 @@ app.post('/createAccount', async (req, res) => {
         checkPassword
     });
     console.log(newUser)
-const salt = "stas"
+
 
         bcrypt.hash(newUser.password, saltRounds, async function(err, hash) {
             try {
-                console.log(hash)
+                console.log('hash:', hash)
               newUser.password = hash;
               await newUser.save();
               console.log(newUser._id)
