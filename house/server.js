@@ -107,18 +107,45 @@ isAdmin = (req, res, next) => {
 
 //----------LOGIN-------------//
 app.post("/login", async (req, res) => {
-    let {name,password} = req.body;
-    let validation = false;
-    let role = 'denied';
-    let doc = await User.findOne({
-        name:name
-    });
-     if (await doc.name == name && doc.password == password) {
+    try{
+        const {name,password} = req.body;
+        /* let validation = false;
+        let role = 'denied'; */
+        const user = await User.findOne({name});
+        if(!user) {
+            return res.status(400).json({message: 'User is not found'})
+        }
+        const validPassword = bcrypt.compareSync(password, user.password)
+        if(!validPassword){
+            return res.status(400).json({message: 'invalid password'})
+        }
+        const token = jwt.encode(
+            {
+              role: User.role,
+              name: User.name,
+              assignRooms: User. assignRooms,
+              time: new Date().getTime(),
+              id: User._id
+            },
+            jwtSecret
+          );
+          console.log(token)
+          res.cookie("token", token, {
+            maxAge: 1500000,
+            httpOnly: true,
+          });
+          return res.json({status: 'allowed'})
+          
+    } catch (e){
+        console.log(e)
+        res.status(400).json({message:'Login error'})
+    }
+     /* if (await doc.name == name && doc.password == password) {
        
         validation = true;
         role = doc.role
         res.cookie('role', role, {maxAge: 20000000,httpOnly: false});
-    }
+    } */
   
     //     res.cookie("User validated", name, { maxAge: 30000, httpOnly: true })
     // } else {
@@ -185,11 +212,11 @@ app.post('/createAccount', async (req, res) => {
                 maxAge: 1500000,
                 httpOnly: true,
               });
-              res.send({ status: "allowed" });
+              res.send({ status: 'user registered successfully' });
             } catch (e) {
               console.log(e.message);
               console.log(e.stack);
-              res.send({ status: "not allowed" });
+              res.send({ status: 'Registration error' });
               res.end();
             }
         });

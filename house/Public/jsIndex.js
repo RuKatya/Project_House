@@ -32,7 +32,7 @@ hendleSubmitUsers = (e) => {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if (data.ok == true) {
+            if(data.status == "allowed"){
                 window.location.href='rooms.html'
            } //  else {
             //     alert("go-out-of-here!!!!!!")
