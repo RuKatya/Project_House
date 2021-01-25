@@ -73,7 +73,7 @@ function handleCreate(e) {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if(data.status == "allowed"){
+            if(data.status == "Registration error"){
                 window.location.href='rooms.html'
             }
         }) 

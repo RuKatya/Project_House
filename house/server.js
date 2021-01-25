@@ -183,7 +183,7 @@ app.get('/read', (req, res) => {
 //-------------CREATE ACCOUNT-----------//
 app.post('/createAccount', [
     check('name', 'Username cannot be empty').notEmpty(),check('email', 'username must be an email').isEmail(),
-check('password', 'password must be at least 4 - 10 characters').isLength({min:4, max:10})
+check('password', 'password must be at least 3 - 10 characters').isLength({min:3, max:10})
 ], async (req, res) => {
     const errors = validationResult(req)
     console.log(errors)
