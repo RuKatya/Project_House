@@ -67,7 +67,6 @@ const Room = mongoose.model("Room", {
     },
 });
 
-
 // ---------ADMIN-----------//
 
 isAdmin = (req, res, next) => {
@@ -87,7 +86,7 @@ isAdmin = (req, res, next) => {
 
 // Client Routes
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/index.html"));
+    res.sendile(path.join(__dirname + "/public/index.html"));
 });
 
 app.get("/rooms", (req, res) => {
@@ -106,7 +105,7 @@ app.get("/api/read", (req, res) => {
 });
 
 // Get all users
-app.get("/api/users", async (req, res) => {
+app.get("/api/users", async(req, res) => {
     try {
         const users = await User.find();
         res.status(200).send({
@@ -120,7 +119,7 @@ app.get("/api/users", async (req, res) => {
 });
 
 // Get user by id
-app.get("/api/users/:id", async (req, res) => {
+app.get("/api/users/:id", async(req, res) => {
     try {
         const user = await User.findById(req.params.id);
         res.status(200).send({
@@ -134,7 +133,7 @@ app.get("/api/users/:id", async (req, res) => {
 });
 
 // delete user by id
-app.delete("/api/users/:id", async (req, res) => {
+app.delete("/api/users/:id", async(req, res) => {
     try {
         const user = await User.findOneAndDelete(req.params.id);
         res.status(200).send({
@@ -148,7 +147,7 @@ app.delete("/api/users/:id", async (req, res) => {
 });
 
 // update user by id
-app.patch("/api/users/:id", async (req, res) => {
+app.patch("/api/users/:id", async(req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
@@ -167,13 +166,13 @@ app.patch("/api/users/:id", async (req, res) => {
 
 //----------LOGIN-------------//
 
-app.post("/api/login", async (req, res) => {
+app.post("/api/login", async(req, res) => {
     try {
         const {
             username,
             password
         } = req.body;
-     
+
         const user = await User.findOne({
             username
         });
@@ -224,7 +223,7 @@ app.post("/api/register", [
         min: 3,
         max: 10
     })
-], async (req, res) => {
+], async(req, res) => {
     const errors = validationResult(req)
     console.log(errors)
     if (!errors.isEmpty()) {
@@ -238,11 +237,11 @@ app.post("/api/register", [
     const newUser = new User(req.body);
     await newUser.save();
     res.status(201).send({
-      newUser
+        newUser
     });
 
 
-    bcrypt.hash(newUser.password, saltRounds, async  (err, hash) => {
+    bcrypt.hash(newUser.password, saltRounds, async(err, hash) => {
         try {
             console.log('hash:', hash)
             newUser.password = hash;
@@ -280,69 +279,60 @@ app.post("/api/register", [
 //----------ROOM FUNCTIONS-------------//
 
 //-------------CREATE ROOM--------------//
-app.post("/createRoom", async (req, res) => {
-    let {
-        roomName,
-        assignUser,
-        assignHouse
-    } = req.body;
-    const newRoom = await new Room({
-        roomName,
-        assignUser,
-        assignHouse
-    });
-    newRoom.save().then(doc => console.log(doc)).catch(e => console.log(e));
+app.get("/api/room", async(req, res) => {
+    try {
+        const rooms = await Room.find();
+        res.status(200).send({ rooms });
+    } catch (err) {
+        res.status(404).send({ err });
+    }
+});
+
+app.post("/api/room", async(req, res) => {
+    try {
+        const newRoom = new Room(req.body);
+        await newRoom.save();
+        res.status(201).send({ newRoom });
+    } catch (error) {
+        res.status(404).send({ error });
+    }
 });
 
 //-------------DELETE ROOM--------------//
-app.delete('/deleteroom', async (req, res) => {
-    const {
-        roomID
-    } = req.body
-    await Room.findByIdAndDelete(roomID)
-    const data = await Room.find({})
-    res.send({
-        data
-    })
-})
+app.delete("/api/room/:id", async(req, res) => {
+    try {
+        await Room.findByIdAndDelete(req.params.id);
+        res.status(200).send({ status: "deleted" });
+    } catch (error) {
+        res.status(404).send({ error });
+    }
+});
 
 //-------------UPDATE ROOM--------------//
-app.put('/updateRoom', async (req, res) => {
+app.patch("/api/room/:id", async(req, res) => {
+    try {
+        const room = await Room.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
 
-    const {
-        assignUser,
-        roomName,
-        Selectedroom
-    } = req.body
-    let lastRoomId = await Room.find({
-        roomName: Selectedroom
-    })
-    console.log("lastRoomId: ", lastRoomId)
-    let roomID = lastRoomId._id
-    console.log("roomID: ", roomID)
-    await Room.findByIdAndUpdate(roomID, {
-        roomName: roomName,
-        assignUser: assignUser
-    })
-    const data = await Room.find({})
-    console.log("data: ", data)
-    res.send({
-        data
-    })
-})
+        res.status(201).send({ room });
+    } catch (err) {
+        res.status(400).send({ err });
+    }
+});
 
-//------------- ROOM INFO--------------//
-app.post('/roomIinfo', async (req, res) => {
-    const {
-        roomID
-    } = req.body
-    await Room.findById(roomID)
-    const data = await Room.find({})
-    res.send({
-        data
-    })
-})
-
+//-------------ROOM INFO--------------//
+app.get("/api/room/:id", async(req, res) => {
+    try {
+        const room = await Room.findById(req.params.id);
+        res.status(200).send({
+            room,
+        });
+    } catch (error) {
+        res.status(404).send({ error });
+    }
+});
 //-------------WEATHER-----------//
 
 app.post('/weather', (req, res) => {
