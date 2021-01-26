@@ -59,7 +59,7 @@ function handleCreate(e) {
     const checkPassword = e.target.children.checkPassword.value;
     console.log(name, password, email, checkPassword)
 
-     fetch('/createAccount', {
+     fetch('/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ function handleCreate(e) {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if(data.status == "Registration error"){
+            if(data.status == "user registered successfully"){
                 window.location.href='rooms.html'
             }
         }) 
