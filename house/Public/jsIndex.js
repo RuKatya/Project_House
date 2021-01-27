@@ -42,7 +42,6 @@ hendleSubmitUsers = (e) => {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-<<<<<<< HEAD
             if(data.status == "allowed1"){
                 window.location.href='rooms/teenRoom.html'
            }   
@@ -55,30 +54,6 @@ hendleSubmitUsers = (e) => {
     }
 })
 } 
-           
-           
-           
-=======
-            if (data.status == "allowed") {
-                window.location.href = 'rooms.html'
-            } else {
-                const message = document.getElementById('message__login')
-                message.innerHTML = `Invalid username or password`;
-                message.style.color = 'red'
-            }
-        })
-}
->>>>>>> 9dff0d78db5f677e34f581933322a2c7379d7bb7
-
-function hendleGetIn() {
-    fetch('/read')
-        .then(r => r.json())
-        .then(data => {
-            if (data.ok === false) {
-                window.location.href = 'index.html'
-            }
-        })
-}
 
 //-------CREATE------//
 function handleCreate(e) {
@@ -104,13 +79,8 @@ function handleCreate(e) {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-<<<<<<< HEAD
             if(data.message == "user registered successfully"){
                 window.location.href='rooms.html'
-=======
-            if (data.status == "user registered successfully") {
-                window.location.href = 'rooms.html'
->>>>>>> 9dff0d78db5f677e34f581933322a2c7379d7bb7
             } else {
                 const message = document.getElementById('message__signIn')
                 message.innerHTML = `${data.message}`;
