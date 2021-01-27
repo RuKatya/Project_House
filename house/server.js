@@ -3,16 +3,16 @@ const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
-const {check} = require('express-validator')
-const {validationResult} = require('express-validator')
-const secret = 'SECRET_KEY_RANDOM' 
-const generateAccessToken = (id, role) =>{
+const { check } = require('express-validator')
+const { validationResult } = require('express-validator')
+const secret = 'SECRET_KEY_RANDOM'
+const generateAccessToken = (id, role) => {
     const payload = {
         id,
         role
     }
-    return jwt.sign(payload, secret, {expiresIn: '24h'})
-    }
+    return jwt.sign(payload, secret, { expiresIn: '24h' })
+}
 const app = express(); ///server;
 
 app.use(cookieParser());
@@ -30,10 +30,9 @@ mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log("DB CONNECTION SUCCESSFUL")); //connectin to the db
-//connectin to the db
 
 //-----MODELS------//
-const User = mongoose.model('User', { //collection
+const User = mongoose.model('User', {
     username: {
         type: String,
         unique: true,
@@ -61,10 +60,12 @@ const User = mongoose.model('User', { //collection
 });
 
 const Room = mongoose.model("Room", {
-    //collection
     roomName: {
         type: String,
-        required: true,
+        // required: true,
+    },
+    notes: {
+        type: [String],
     },
 });
 
@@ -182,7 +183,7 @@ app.post("/api/login", async(req, res) => {
                 message: 'invalid password'
             })
         }
-        
+
         const token = generateAccessToken(User._id, User.role)
         console.log(token)
         res.cookie("token", token, {
@@ -235,11 +236,12 @@ app.post("/api/register", [
     const newUser = new User(req.body);
     console.log(newUser)
     const checkPassword = req.body.checkPassword
-    console.log('check:',checkPassword)
+    console.log('check:', checkPassword)
     if (newUser.password !== checkPassword) {
         return res.status(400).json({
-            message: 'Password does not match'})
-        }
+            message: 'Password does not match'
+        })
+    }
     bcrypt.hash(newUser.password, saltRounds, async(err, hash) => {
         try {
             console.log('hash:', hash)
@@ -269,7 +271,21 @@ app.post("/api/register", [
 //----------ROOM FUNCTIONS-------------//
 
 //-------------CREATE ROOM--------------//
-app.get("/api/room", async(req, res) => {
+app.post("/api/room", async(req, res) => {
+    // const { roomName } = req.body
+    try {
+        const newRoom = new Room(req.body);
+        console.log(req.body)
+        await newRoom.save();
+        res.status(201).send({ newRoom });
+        console.log(newRoom.id)
+    } catch (error) {
+        res.status(404).send({ error });
+    }
+});
+
+//----------FIND ROOM----------//
+app.get("/room", async(req, res) => {
     try {
         const rooms = await Room.find();
         res.status(200).send({ rooms });
@@ -278,18 +294,10 @@ app.get("/api/room", async(req, res) => {
     }
 });
 
-app.post("/api/room", async(req, res) => {
-    try {
-        const newRoom = new Room(req.body);
-        await newRoom.save();
-        res.status(201).send({ newRoom });
-    } catch (error) {
-        res.status(404).send({ error });
-    }
-});
+
 
 //-------------DELETE ROOM--------------//
-app.delete("/api/room/:id", async(req, res) => {
+app.delete("api/room", async(req, res) => {
     try {
         await Room.findByIdAndDelete(req.params.id);
         res.status(200).send({ status: "deleted" });
@@ -299,14 +307,14 @@ app.delete("/api/room/:id", async(req, res) => {
 });
 
 //-------------UPDATE ROOM--------------//
-app.patch("/api/room/:id", async(req, res) => {
+app.patch("/room", async(req, res) => {
     try {
         const room = await Room.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
         });
 
-        res.status(201).send({ room });
+        res.status(201).send({ rooms });
     } catch (err) {
         res.status(400).send({ err });
     }

@@ -42,6 +42,7 @@ hendleSubmitUsers = (e) => {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
+<<<<<<< HEAD
             if(data.status == "allowed1"){
                 window.location.href='rooms/teenRoom.html'
            }   
@@ -57,14 +58,26 @@ hendleSubmitUsers = (e) => {
            
            
            
+=======
+            if (data.status == "allowed") {
+                window.location.href = 'rooms.html'
+            } else {
+                const message = document.getElementById('message__login')
+                message.innerHTML = `Invalid username or password`;
+                message.style.color = 'red'
+            }
+        })
+}
+>>>>>>> 9dff0d78db5f677e34f581933322a2c7379d7bb7
 
-function hendleGetIn(){
+function hendleGetIn() {
     fetch('/read')
-      .then(r => r.json())
-      .then(data => {
-        if(data.ok === false){
-          window.location.href='index.html'
-      }})
+        .then(r => r.json())
+        .then(data => {
+            if (data.ok === false) {
+                window.location.href = 'index.html'
+            }
+        })
 }
 
 //-------CREATE------//
@@ -77,7 +90,7 @@ function handleCreate(e) {
     const checkPassword = e.target.children.checkPassword.value;
     console.log(username, password, email, checkPassword)
 
-     fetch('/api/register', {
+    fetch('/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -85,20 +98,25 @@ function handleCreate(e) {
             body: JSON.stringify({
                 username,
                 email,
-                password, 
+                password,
                 checkPassword
             })
         }).then(r => r.json())
         .then(data => {
             console.log(data)
+<<<<<<< HEAD
             if(data.message == "user registered successfully"){
                 window.location.href='rooms.html'
+=======
+            if (data.status == "user registered successfully") {
+                window.location.href = 'rooms.html'
+>>>>>>> 9dff0d78db5f677e34f581933322a2c7379d7bb7
             } else {
                 const message = document.getElementById('message__signIn')
                 message.innerHTML = `${data.message}`;
                 message.style.color = 'red'
             }
-        }) 
+        })
 }
 
 //-----WEATHER------//

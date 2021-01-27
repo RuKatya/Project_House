@@ -1,20 +1,16 @@
-
 body {
     margin: 0;
     padding: 0;
-}
-
-a {
-    text-decoration: none;
-}
-
-.main {
     background: linear-gradient( to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)50%), url('img/index/house.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: top;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+a {
+    text-decoration: none;
 }
 
 .back {
@@ -28,24 +24,33 @@ a {
     width: 4%;
 }
 
-.formCreating {
-    width: 70%;
-    margin: 1% 0% 1% 25%;
-    display: flex;
-    column-gap: 1.5%;
-}
-
-.formCreating>input {
+.createRoom_form {
+    width: 15%;
     padding: 0.5%;
-    border-radius: 10px;
+    text-align: center;
+    background-color: rgba(173, 173, 173, 0.377);
 }
 
-.formCreating>button {
+h3 {
+    color: white;
+}
+
+.correctTime,
+.correctDate {
+    width: 15%;
     padding: 0.5%;
-    border-radius: 10px;
+    text-align: center;
+    background-color: rgba(173, 173, 173, 0.377);
+    text-shadow: 0px 0px 5px black;
 }
 
-.rooms {
+#correctTime,
+#correctDate {
+    font-size: 2.5em;
+    color: white;
+}
+
+.updateRoom {
     position: relative;
     margin: 0 0 5% 3%;
     padding: 5%;
@@ -56,72 +61,6 @@ a {
     text-align: center;
     background-color: rgba(223, 221, 221, 0.246);
     border-radius: 50px;
-}
-
-.roomsSmall__img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-    box-shadow: 1px 1px 7px black;
-}
-
-.roomsParag {
-    background-color: rgba(223, 221, 221, 0.500);
-    text-shadow: 1px 1px 7px black;
-    border-radius: 15px;
-    color: white;
-    font-size: 4em;
-}
-
-
-/* first row */
-
-.roomsSmall__livingRoom {
-    position: absolute;
-    top: 5%;
-    left: 15%;
-    width: 30%;
-}
-
-.roomsSmall__kitchenRoom {
-    position: absolute;
-    top: 5%;
-    left: 62%;
-    width: 30%;
-}
-
-
-/* second row */
-
-.roomsSmall__restRoom {
-    position: absolute;
-    top: 36%;
-    left: 15%;
-    width: 30%;
-}
-
-.roomsSmall__bedRoom {
-    position: absolute;
-    top: 36%;
-    left: 62%;
-    width: 30%;
-}
-
-
-/* third row */
-
-.roomsSmall__teenRoom {
-    position: absolute;
-    top: 67%;
-    left: 15%;
-    width: 30%;
-}
-
-.roomsSmall__childRoom {
-    position: absolute;
-    top: 67%;
-    left: 65%;
-    width: 30%;
 }
 
 footer {
