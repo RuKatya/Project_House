@@ -16,12 +16,13 @@
 
         <div class="loginCreate">
             <div class="loginCreate__buttons">
-                <div class="loginPage" for="LoginPage" id="LoginPage" onclick="hendleLoginPage(event)">Login</div>
-                <div class="createPage" for="createPage" id="createPage" onclick="hendleCreatePage(event)">Create user</div>
+                <div class="login__btn active" for="LoginPage" id="login__btn" onclick="hendleLoginPage(event)">Log In</div>
+                <div class="signIn__btn" for="createPage" id="signIn__btn" onclick="hendleCreatePage(event)">Sign In</div>
             </div>
 
-            <div class="mainForm mainLogin" id="Login">
+            <div class="mainForm mainLogin" id="loginPage">
                 <form onsubmit="hendleSubmitUsers(event)" class="mainLogin__form">
+                    <div id="message__login">message</div>
                     <input class="input" type="text" name="name" placeholder="Username">
                     <input class="input" type="password" name="password" placeholder="Password">
                     <input class="btn" type="submit" value="Sign In">
@@ -31,8 +32,9 @@
                 </form>
             </div>
 
-            <div class="mainForm mainCreateAccount" id="CreateAccount" style="display: none;">
+            <div class="mainForm mainCreateAccount" id="signInPage" style="display: none;">
                 <form onsubmit="handleCreate(event)" class="mainLogin__form">
+                    <div id="message__signIn">message</div>
                     <input class="input" type="text" name="name" placeholder="Username">
                     <input class="input" type="text" name="email" placeholder="Email">
                     <input class="input" type="password" name="password" placeholder="Password">

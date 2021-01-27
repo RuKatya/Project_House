@@ -33,7 +33,7 @@ mongoose.connect(url, {
 
 //-----MODELS------//
 const User = mongoose.model('User', { //collection
-    name: {
+    username: {
         type: String,
         unique: true,
         required: [true, "To register you must enter username"],
@@ -182,6 +182,7 @@ app.post("/api/login", async(req, res) => {
             })
         }
         const validPassword = bcrypt.compareSync(password, user.password)
+        console.log(validPassword)
         if (!validPassword) {
             return res.status(400).json({
                 message: 'invalid password'
@@ -218,7 +219,7 @@ app.post("/api/login", async(req, res) => {
 
 //-------------CREATE ACCOUNT-----------//
 app.post("/api/register", [
-    check('name', 'Username cannot be empty').notEmpty(), check('email', 'username must be an email').isEmail(),
+    check('username', 'Username cannot be empty').notEmpty(), check('email', 'username must be an email').isEmail(),
     check('password', 'password must be at least 3 - 10 characters').isLength({
         min: 3,
         max: 10
@@ -228,19 +229,15 @@ app.post("/api/register", [
     console.log(errors)
     if (!errors.isEmpty()) {
         return res.status(400).json({
-            message: 'Registration error',
+            message: `${errors.errors[0].msg}`,
             errors
         })
 
     }
     console.log(errors)
     const newUser = new User(req.body);
-    await newUser.save();
-    res.status(201).send({
-        newUser
-    });
-
-
+    console.log(newUser)
+      
     bcrypt.hash(newUser.password, saltRounds, async(err, hash) => {
         try {
             console.log('hash:', hash)
@@ -249,7 +246,7 @@ app.post("/api/register", [
             console.log(newUser._id)
             const token = jwt.encode({
                     role: newUser.role,
-                    name: newUser.name,
+                    username: newUser.username,
                     assignRooms: newUser.assignRooms,
                     time: new Date().getTime(),
                     id: newUser._id

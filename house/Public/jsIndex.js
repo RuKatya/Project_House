@@ -1,14 +1,24 @@
 //---------LANDING PAGE---------//
+let loginPage = document.getElementById("loginPage")
+let signInPage = document.getElementById("signInPage")
+let loginButton = document.getElementById("login__btn")
+let signInButton = document.getElementById("signIn__btn")
+
 hendleLoginPage = (e) => {
     e.preventDefault();
-    document.getElementById("Login").style.display = "block"
-    document.getElementById("CreateAccount").style.display = "none"
+    loginPage.style.display = "block"
+    signInPage.style.display = "none"
+    signInButton.classList.remove("active");
+    loginButton.classList.add("active");
+
 
 }
 hendleCreatePage = (e) => {
     e.preventDefault();
-    document.getElementById("Login").style.display = "none"
-    document.getElementById("CreateAccount").style.display = "block"
+    loginPage.style.display = "none"
+    signInPage.style.display = "block"
+    signInButton.classList.add("active");
+    loginButton.classList.remove("active");
 
 }
 
@@ -16,17 +26,17 @@ hendleCreatePage = (e) => {
 hendleSubmitUsers = (e) => {
     e.preventDefault();
 
-    const name = e.target.children.name.value;
+    const username = e.target.children.name.value;
     const password = e.target.children.password.value;
-    console.log(name, password)
+    console.log(username, password)
 
-    fetch('/login', {
+    fetch('/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name,
+                username,
                 password
             })
         }).then(r => r.json())
@@ -34,9 +44,11 @@ hendleSubmitUsers = (e) => {
             console.log(data)
             if(data.status == "allowed"){
                 window.location.href='rooms.html'
-           } //  else {
-            //     alert("go-out-of-here!!!!!!")
-            // }
+           }   else {
+                const message = document.getElementById('message__login')
+                message.innerHTML = `Invalid username or password`;
+                message.style.color = 'red'
+            }
         })
 }
 
@@ -53,11 +65,11 @@ function hendleGetIn(){
 function handleCreate(e) {
     e.preventDefault();
 
-    const name = e.target.children.name.value;
+    const username = e.target.children.name.value;
     const email = e.target.children.email.value;
     const password = e.target.children.password.value;
     const checkPassword = e.target.children.checkPassword.value;
-    console.log(name, password, email, checkPassword)
+    console.log(username, password, email, checkPassword)
 
      fetch('/api/register', {
             method: 'POST',
@@ -65,7 +77,7 @@ function handleCreate(e) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name,
+                username,
                 email,
                 password, 
                 checkPassword
@@ -75,6 +87,10 @@ function handleCreate(e) {
             console.log(data)
             if(data.status == "user registered successfully"){
                 window.location.href='rooms.html'
+            } else {
+                const message = document.getElementById('message__signIn')
+                message.innerHTML = `${data.message}`;
+                message.style.color = 'red'
             }
         }) 
 }
