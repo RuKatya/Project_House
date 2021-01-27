@@ -53,10 +53,10 @@ const User = mongoose.model('User', { //collection
     },
     role: {
         type: String,
-        default: "admin"
+        default: "admin",
     },
     assignRooms: {
-        type: [String]
+        type: [String],
     }
 });
 
@@ -94,16 +94,8 @@ app.get("/rooms", (req, res) => {
     res.sendFile(path.join(__dirname + "/public/rooms.html"));
 });
 
-//----------CHECK VALIDATION-------------//
-app.get("/api/read", (req, res) => {
-    let {
-        cookies
-    } = req;
-    if (cookies == admin || cookies == child)
-        res.send({
-            ok: true,
-        });
-});
+
+
 
 // Get all users
 app.get("/api/users", async(req, res) => {
@@ -182,6 +174,7 @@ app.post("/api/login", async(req, res) => {
                 message: 'User is not found'
             })
         }
+       
         const validPassword = bcrypt.compareSync(password, user.password)
         console.log(validPassword)
         if (!validPassword) {
@@ -196,10 +189,20 @@ app.post("/api/login", async(req, res) => {
             maxAge: 1500000,
             httpOnly: true,
         });
-        return res.json({
-            status: 'allowed'
-        })
-
+        console.log(user.role)
+        if (user.role == 'admin'){
+            return res.json({
+                status: 'allowed2'
+            })
+        } 
+        if (user.role == 'child'){
+            return res.json({
+                status: 'allowed1'
+            })
+        }
+            
+      
+       
     } catch (e) {
         console.log(e)
         res.status(400).json({
@@ -208,6 +211,8 @@ app.post("/api/login", async(req, res) => {
     }
 
 });
+
+
 
 //-------------CREATE ACCOUNT-----------//
 app.post("/api/register", [
@@ -242,7 +247,7 @@ app.post("/api/register", [
             await newUser.save();
             console.log(newUser._id)
             const token = generateAccessToken(newUser._id, newUser.role)
-            console.log(token)
+            console.log("token:", token)
             res.cookie("token", token, {
                 maxAge: 1500000,
                 httpOnly: true,

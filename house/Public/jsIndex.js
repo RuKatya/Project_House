@@ -42,15 +42,21 @@ hendleSubmitUsers = (e) => {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if(data.status == "allowed"){
-                window.location.href='rooms.html'
-           }   else {
-                const message = document.getElementById('message__login')
-                message.innerHTML = `Invalid username or password`;
-                message.style.color = 'red'
-            }
-        })
-}
+            if(data.status == "allowed1"){
+                window.location.href='rooms/teenRoom.html'
+           }   
+           if(data.status == "allowed2"){
+            window.location.href='rooms.html'
+       }  else {
+        const message = document.getElementById('message__login')
+        message.innerHTML = `Invalid username or password`;
+        message.style.color = 'red'
+    }
+})
+} 
+           
+           
+           
 
 function hendleGetIn(){
     fetch('/read')
@@ -85,7 +91,7 @@ function handleCreate(e) {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if(data.status == "user registered successfully"){
+            if(data.message == "user registered successfully"){
                 window.location.href='rooms.html'
             } else {
                 const message = document.getElementById('message__signIn')
