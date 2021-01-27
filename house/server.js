@@ -1,15 +1,18 @@
 const express = require('express')
-const jwt = require("jwt-simple");
+const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
-const {
-    check
-} = require('express-validator')
-const {
-    validationResult
-} = require('express-validator')
-
+const {check} = require('express-validator')
+const {validationResult} = require('express-validator')
+const secret = 'SECRET_KEY_RANDOM' 
+const generateAccessToken = (id, role) =>{
+    const payload = {
+        id,
+        role
+    }
+    return jwt.sign(payload, secret, {expiresIn: '24h'})
+    }
 const app = express(); ///server;
 
 app.use(cookieParser());
@@ -18,8 +21,6 @@ app.use(express.json());
 
 
 const saltRounds = 7;
-const jwtSecret = "23";
-
 
 //-----------mongoose----------//
 const mongoose = require('mongoose'); //npm i mongoose
@@ -188,15 +189,8 @@ app.post("/api/login", async(req, res) => {
                 message: 'invalid password'
             })
         }
-        const token = jwt.encode({
-                role: User.role,
-                username: User.username,
-                assignRooms: User.assignRooms,
-                time: new Date().getTime(),
-                id: User._id
-            },
-            jwtSecret
-        );
+        
+        const token = generateAccessToken(User._id, User.role)
         console.log(token)
         res.cookie("token", token, {
             maxAge: 1500000,
@@ -214,8 +208,6 @@ app.post("/api/login", async(req, res) => {
     }
 
 });
-
-
 
 //-------------CREATE ACCOUNT-----------//
 app.post("/api/register", [
@@ -244,15 +236,7 @@ app.post("/api/register", [
             newUser.password = hash;
             await newUser.save();
             console.log(newUser._id)
-            const token = jwt.encode({
-                    role: newUser.role,
-                    username: newUser.username,
-                    assignRooms: newUser.assignRooms,
-                    time: new Date().getTime(),
-                    id: newUser._id
-                },
-                jwtSecret
-            );
+            const token = generateAccessToken(newUser._id, newUser.role)
             console.log(token)
             res.cookie("token", token, {
                 maxAge: 1500000,
@@ -262,8 +246,7 @@ app.post("/api/register", [
                 status: 'user registered successfully'
             });
         } catch (e) {
-            console.log(e.message);
-            console.log(e.stack);
+            console.log(e);
             res.send({
                 status: 'Registration error'
             });
