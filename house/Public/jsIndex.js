@@ -42,9 +42,9 @@ hendleSubmitUsers = (e) => {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if(data.status == "allowed"){
-                window.location.href='rooms.html'
-           }   else {
+            if (data.status == "allowed") {
+                window.location.href = 'rooms.html'
+            } else {
                 const message = document.getElementById('message__login')
                 message.innerHTML = `Invalid username or password`;
                 message.style.color = 'red'
@@ -52,13 +52,14 @@ hendleSubmitUsers = (e) => {
         })
 }
 
-function hendleGetIn(){
+function hendleGetIn() {
     fetch('/read')
-      .then(r => r.json())
-      .then(data => {
-        if(data.ok === false){
-          window.location.href='index.html'
-      }})
+        .then(r => r.json())
+        .then(data => {
+            if (data.ok === false) {
+                window.location.href = 'index.html'
+            }
+        })
 }
 
 //-------CREATE------//
@@ -71,7 +72,7 @@ function handleCreate(e) {
     const checkPassword = e.target.children.checkPassword.value;
     console.log(username, password, email, checkPassword)
 
-     fetch('/api/register', {
+    fetch('/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -79,20 +80,20 @@ function handleCreate(e) {
             body: JSON.stringify({
                 username,
                 email,
-                password, 
+                password,
                 checkPassword
             })
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if(data.status == "user registered successfully"){
-                window.location.href='rooms.html'
+            if (data.status == "user registered successfully") {
+                window.location.href = 'rooms.html'
             } else {
                 const message = document.getElementById('message__signIn')
                 message.innerHTML = `${data.message}`;
                 message.style.color = 'red'
             }
-        }) 
+        })
 }
 
 //-----WEATHER------//

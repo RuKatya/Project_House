@@ -41,6 +41,7 @@ setInterval(getDate, 0)
 function hendleCreateRoom(e) {
     e.preventDefault()
     const roomName = e.target.children.roomName.value
+    const room = document.getElementById('putRoom')
 
     console.log(roomName) //for check
 
@@ -54,7 +55,9 @@ function hendleCreateRoom(e) {
             })
         }).then(r => r.json())
         .then(data => {
-            console.log(data)
+            console.log(data.newRoom._id)
+            console.log(data.newRoom.roomName)
+            room.innerHTML = `<div class="huina"><h1>${data.newRoom.roomName}</h1></div>`
         })
 }
 
@@ -87,3 +90,7 @@ fetch('/api/room', {
     .then(data => {
         console.log(data)
     })
+
+function allrooms() {
+
+}

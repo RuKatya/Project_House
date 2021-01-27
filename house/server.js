@@ -270,8 +270,10 @@ app.post("/api/room", async(req, res) => {
     // const { roomName } = req.body
     try {
         const newRoom = new Room(req.body);
+        console.log(req.body)
         await newRoom.save();
         res.status(201).send({ newRoom });
+        console.log(newRoom.id)
     } catch (error) {
         res.status(404).send({ error });
     }
