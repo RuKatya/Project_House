@@ -53,7 +53,7 @@ const User = mongoose.model('User', { //collection
     },
     role: {
         type: String,
-        default: "child"
+        default: "admin"
     },
     assignRooms: {
         type: [String]
@@ -211,8 +211,8 @@ app.post("/api/login", async(req, res) => {
 
 //-------------CREATE ACCOUNT-----------//
 app.post("/api/register", [
-    check('username', 'Username cannot be empty').notEmpty(), check('email', 'username must be an email').isEmail(),
-    check('password', 'password must be at least 3 - 10 characters').isLength({
+    check('username', 'Username cannot be empty').notEmpty(), check('email', 'Invalid email').isEmail(),
+    check('password', 'Password must be at least 3 - 10 characters').isLength({
         min: 3,
         max: 10
     })
@@ -226,10 +226,15 @@ app.post("/api/register", [
         })
 
     }
-    console.log(errors)
+    console.log("errors:", errors)
     const newUser = new User(req.body);
     console.log(newUser)
-      
+    const checkPassword = req.body.checkPassword
+    console.log('check:',checkPassword)
+    if (newUser.password !== checkPassword) {
+        return res.status(400).json({
+            message: 'Password does not match'})
+        }
     bcrypt.hash(newUser.password, saltRounds, async(err, hash) => {
         try {
             console.log('hash:', hash)
@@ -243,12 +248,12 @@ app.post("/api/register", [
                 httpOnly: true,
             });
             res.send({
-                status: 'user registered successfully'
+                message: 'user registered successfully'
             });
         } catch (e) {
             console.log(e);
             res.send({
-                status: 'Registration error'
+                message: 'Registration error'
             });
             res.end();
         }
