@@ -1,4 +1,4 @@
-//---------Correct time-----//
+//---------CORRECT TIME-------//
 function getTime() {
     let date = new Date();
     let hours = date.getHours();
@@ -17,7 +17,7 @@ function getTime() {
 }
 setInterval(getTime, 0);
 
-//-----------Correct Date---------//
+//---------CORRECT DATE---------//
 function getDate() {
     let date = new Date();
     let day = date.getDate();
@@ -37,7 +37,7 @@ function getDate() {
 }
 setInterval(getDate, 0)
 
-//-----Create room-------//
+//-----CREATE ROOM-------//
 function hendleCreateRoom(e) {
     e.preventDefault()
     const roomName = e.target.children.roomName.value
@@ -57,40 +57,61 @@ function hendleCreateRoom(e) {
         .then(data => {
             console.log(data.newRoom._id)
             console.log(data.newRoom.roomName)
-            room.innerHTML = `<div class="huina"><h1>${data.newRoom.roomName}</h1></div>`
+            room.innerHTML += `<div class="huina"><h1>${data.newRoom.roomName}</h1></div>`
         })
 }
 
-//--------Delete rooms----------//
-// const roomName = event.target.dataset.id
+// //--------DELETE ROOMS----------//
+// // const roomName = event.target.dataset.id
 
-fetch('/api/room', {
-        method: 'delete',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            roomName
-        })
-    }).then(r => r.json())
-    .then(data => {
-        console.log(data)
-    })
+// fetch('/api/room', {
+//         method: 'delete',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             roomName
+//         })
+//     }).then(r => r.json())
+//     .then(data => {
+//         console.log(data)
+//     })
 
-//--------Update room------------//
-fetch('/api/room', {
-        method: 'patch',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            roomName
-        })
-    }).then(r => r.json())
-    .then(data => {
-        console.log(data)
-    })
+// //--------UPDATE ROOM----------//
+// fetch('/api/room', {
+//         method: 'patch',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             roomName
+//         })
+//     }).then(r => r.json())
+//     .then(data => {
+//         console.log(data)
+//     })
 
+//---------ONLOAD----------//
 function allrooms() {
+    fetch('/api/onload', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                roomName
+            })
+        }).then(r => r.json())
+        .then(data => {
+            console.log(data)
+            setRoomsOnPage(data.rooms)
+                // console.log(data.newRoom.roomName)
+        })
+}
+
+const setRoomsOnPage = (rooms) => {
+    const roomsToShow = rooms.map((room) => `<p>${room.roomName}</p>`)
+    console.log(rooms)
+    document.getElementById('putRoom').innerHTML = roomsToShow.join(' ');
 
 }

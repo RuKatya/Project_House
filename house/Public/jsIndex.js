@@ -42,18 +42,18 @@ hendleSubmitUsers = (e) => {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if(data.status == "allowed1"){
-                window.location.href='rooms/teenRoom.html'
-           }   
-           if(data.status == "allowed2"){
-            window.location.href='rooms.html'
-       }  else {
-        const message = document.getElementById('message__login')
-        message.innerHTML = `Invalid username or password`;
-        message.style.color = 'red'
-    }
-})
-} 
+            if (data.status == "allowed1") {
+                window.location.href = 'rooms/teenRoom.html'
+            }
+            if (data.status == "allowed2") {
+                window.location.href = 'rooms.html'
+            } else {
+                const message = document.getElementById('message__login')
+                message.innerHTML = `Invalid username or password`;
+                message.style.color = 'red'
+            }
+        })
+}
 
 //-------CREATE------//
 function handleCreate(e) {
@@ -79,8 +79,8 @@ function handleCreate(e) {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-            if(data.message == "user registered successfully"){
-                window.location.href='rooms.html'
+            if (data.message == "user registered successfully") {
+                window.location.href = 'rooms.html'
             } else {
                 const message = document.getElementById('message__signIn')
                 message.innerHTML = `${data.message}`;

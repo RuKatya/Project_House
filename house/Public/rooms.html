@@ -14,7 +14,7 @@
     </style>
 </head>
 
-<body>
+<body onload="allrooms()">
 
     <div class="back">
         <a href="index.html"><img src="icons/back.svg"></a>
@@ -30,21 +30,19 @@
         <h3>Create your room</h3>
         <input type="text" id="roomName" placeholder="Name of room">
         <input type="submit" value="Create room">
-    </form>
 
-    <div class="correctTime">
-        <h3>Correct time</h3>
+        <h3 class="h3_correct">Correct time</h3>
         <div id="correctTime" onload="getTime()"></div>
-    </div>
 
-    <div class="correctDate">
-        <h3>Correct date</h3>
+        <h3 class="h3_correct">Correct date</h3>
         <div id="correctDate" onload="getDate()"></div>
-    </div>
+
+
+    </form>
 
 
     <div id="createRoom">
-        <div id="putRoom" onload="allrooms()"></div>
+        <div id="putRoom"></div>
     </div>
 
 

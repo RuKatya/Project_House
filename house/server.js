@@ -6,10 +6,10 @@ const cookieParser = require('cookie-parser');
 const { check } = require('express-validator')
 const { validationResult } = require('express-validator')
 const secret = 'SECRET_KEY_RANDOM'
-const generateAccessToken = (id, role) => {
+const generateAccessToken = (user) => {
     const payload = {
-        id,
-        role
+        user,
+        role: user.role
     }
     return jwt.sign(payload, secret, { expiresIn: '24h' })
 }
@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.json());
 
-
+// saltRounds means -
 const saltRounds = 7;
 
 //-----------mongoose----------//
@@ -28,7 +28,8 @@ const url = 'mongodb+srv://KatyaRu:qHO9SxoCGZc6lv7C@cluster0.mfqlq.mongodb.net/t
 
 mongoose.connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: false,
+    useCreateIndex: true
 }).then(() => console.log("DB CONNECTION SUCCESSFUL")); //connectin to the db
 
 //-----MODELS------//
@@ -62,7 +63,7 @@ const User = mongoose.model('User', {
 const Room = mongoose.model("Room", {
     roomName: {
         type: String,
-        // required: true,
+        required: true,
     },
     notes: {
         type: [String],
@@ -70,7 +71,6 @@ const Room = mongoose.model("Room", {
 });
 
 // ---------ADMIN-----------//
-
 isAdmin = (req, res, next) => {
     res.authorized = false;
     const {
@@ -86,16 +86,22 @@ isAdmin = (req, res, next) => {
     next()
 }
 
+const getUserAuthMiddle = (req, res, next) => {
+    jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
+        req.user = decodedToken;
+
+        next()
+    })
+}
+
 // Client Routes
-app.get("/", (req, res) => {
-    res.sendile(path.join(__dirname + "/public/index.html"));
-});
+// app.get("/", (req, res) => {
+//     res.sendile(path.join(__dirname + "/public/index.html"));
+// });
 
-app.get("/rooms", (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/rooms.html"));
-});
-
-
+// app.get("/rooms", (req, res) => {
+//     res.sendFile(path.join(__dirname + "/public/rooms.html"));
+// });
 
 
 // Get all users
@@ -159,7 +165,6 @@ app.patch("/api/users/:id", async(req, res) => {
 });
 
 //----------LOGIN-------------//
-
 app.post("/api/login", async(req, res) => {
     try {
         const {
@@ -175,7 +180,7 @@ app.post("/api/login", async(req, res) => {
                 message: 'User is not found'
             })
         }
-       
+
         const validPassword = bcrypt.compareSync(password, user.password)
         console.log(validPassword)
         if (!validPassword) {
@@ -184,26 +189,26 @@ app.post("/api/login", async(req, res) => {
             })
         }
 
-        const token = generateAccessToken(User._id, User.role)
+        const token = generateAccessToken(user)
         console.log(token)
         res.cookie("token", token, {
             maxAge: 1500000,
-            httpOnly: true,
+            httpOnly: false,
         });
         console.log(user.role)
-        if (user.role == 'admin'){
+        if (user.role == 'admin') {
             return res.json({
                 status: 'allowed2'
             })
-        } 
-        if (user.role == 'child'){
+        }
+        if (user.role == 'child') {
             return res.json({
                 status: 'allowed1'
             })
         }
-            
-      
-       
+
+
+
     } catch (e) {
         console.log(e)
         res.status(400).json({
@@ -212,8 +217,6 @@ app.post("/api/login", async(req, res) => {
     }
 
 });
-
-
 
 //-------------CREATE ACCOUNT-----------//
 app.post("/api/register", [
@@ -268,6 +271,7 @@ app.post("/api/register", [
 
 })
 
+
 //----------ROOM FUNCTIONS-------------//
 
 //-------------CREATE ROOM--------------//
@@ -294,10 +298,8 @@ app.get("/room", async(req, res) => {
     }
 });
 
-
-
 //-------------DELETE ROOM--------------//
-app.delete("api/room", async(req, res) => {
+app.delete("/api/room", async(req, res) => {
     try {
         await Room.findByIdAndDelete(req.params.id);
         res.status(200).send({ status: "deleted" });
@@ -331,8 +333,39 @@ app.get("/api/room/:id", async(req, res) => {
         res.status(404).send({ error });
     }
 });
-//-------------WEATHER-----------//
 
+
+
+//---------ONLOAD-------------//
+app.post("/api/onload", getUserAuthMiddle, async(req, res) => {
+    try {
+        const assignedRooms = req.user.user.assignRooms;
+        let rooms = [];
+        for (const roomId of assignedRooms) {
+            let roomFromDb = await Room.findById(roomId);
+            rooms.push(roomFromDb);
+        }
+        res.send({ rooms })
+
+    } catch (err) {
+        res.status(404).send({ err });
+    }
+
+});
+
+isUser = (req, res, next) => {
+    // res.authorized = false;
+    // const {
+    //     role
+    // } = req.cookies;
+
+
+    res.user = req.cookies;
+
+    next()
+}
+
+//-------------WEATHER-----------//
 app.post('/weather', (req, res) => {
     const {
         city
