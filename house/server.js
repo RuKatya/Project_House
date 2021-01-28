@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.json());
 
-// saltRounds means -
+// saltRounds means - 
 const saltRounds = 7;
 
 //-----------mongoose----------//
