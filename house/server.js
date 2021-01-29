@@ -321,6 +321,18 @@ app.post("/api/notes", async(req, res) => {
     }
 }); 
  
+//-----DELETE TASK-------//
+
+app.delete("/api/deletenotes", async(req, res) => {
+    try {
+        const {deleteTask,roomId} = req.body
+        console.log(roomId, deleteTask)
+        await Room.findByIdAndUpdate(roomId, {$pull: {notes: deleteTask}})
+        res.status(200).send({ status: "deleted" }); 
+    } catch (error) {
+        res.status(404).send({ error });
+    }
+});
 
 
 //----------FIND ROOM----------//

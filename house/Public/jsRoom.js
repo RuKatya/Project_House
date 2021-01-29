@@ -46,10 +46,10 @@ let display = ''
         .then(data => {
           
             data.rooms.forEach(room => {
-                const listTasks = room.notes.map((task) => `<div>${task}<input type="radio"><button>delete</button></div>`).join(' ')
+                const listTasks = room.notes.map((task) => `<div>${task}<input type="radio"><button id="${room._id}" name="${task}" onclick="handleDeleteTask(event)">delete</button></div>`).join(' ')
                
                 display += `<div class="huina"><h3>${room.roomName}</h3><form id="${room._id}" onsubmit='handleAddTask(event)'>
-                <input id="newTask" type='text' placeholder="add task" name='newTask' required>
+                <input class="newTask" type='text' placeholder="add task" name='newTask' required>
                 <input type="submit" value="add task">
             </form> 
                          <div>${listTasks}</div></div>`
@@ -120,14 +120,36 @@ function handleAddTask(e) {
         .then(data => {
             console.log(data)
             getAllRooms()
-           /*  room.innerHTML += `<div class="huina"><h1>${data.newRoom.roomName}</h1><form onsubmit='HandleAddTask(event)'>
-            <input type='text' placeholder="name" name='name' required>
-            <input type="submit" value="add task">
-        </form> 
-                     <div>${data.notes}</div></div>` */
+          
         }) 
-      
-} 
+     } 
+
+
+//-----DELETE TASK-------//
+
+function handleDeleteTask(e) {
+    e.preventDefault()
+    const roomId = e.target.id
+    const deleteTask = e.target.name
+    const rooms = document.getElementById('putRoom')
+
+    fetch('/api/deletenotes', {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                deleteTask,
+                roomId
+            })
+        }).then(r => r.json())
+        .then(data => {
+            console.log(data)
+            getAllRooms()
+          
+        })  
+     } 
+
 
 document.addEventListener('DOMContentLoaded', getAllRooms())
 
