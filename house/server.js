@@ -307,6 +307,19 @@ app.post("/api/room", async(req, res) => {
     }
 });
 
+//-----DELETE ROOM-------//
+
+app.delete("/api/deleteroom", async(req, res) => {
+    try {
+        const {roomId} = req.body
+        console.log(roomId)
+        await Room.findByIdAndDelete(roomId)
+        res.status(200).send({ status: "deleted" }); 
+    } catch (error) {
+        res.status(404).send({ error });
+    }
+});
+
 //-----CREATE TASK-------//
 
 app.post("/api/notes", async(req, res) => {

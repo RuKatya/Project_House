@@ -44,11 +44,13 @@ let display = ''
     fetch('/allrooms')
         .then(r => r.json())
         .then(data => {
-          
+          if(data.rooms == 'undefined'){
+              
+          }
             data.rooms.forEach(room => {
                 const listTasks = room.notes.map((task) => `<div>${task}<input type="radio"><button id="${room._id}" name="${task}" onclick="handleDeleteTask(event)">delete</button></div>`).join(' ')
-               
-                display += `<div class="huina"><h3>${room.roomName}</h3><form id="${room._id}" onsubmit='handleAddTask(event)'>
+           
+                display += `<div class="huina"><h3>${room.roomName}</h3><button id="${room._id}" onclick="handleDeleteRoom(event)">Delete room</button><form id="${room._id}" onsubmit='handleAddTask(event)'>
                 <input class="newTask" type='text' placeholder="add task" name='newTask' required>
                 <input type="submit" value="add task">
             </form> 
@@ -62,11 +64,31 @@ let display = ''
         
 }
 
+//-----DELETE ROOM-------//
+
+function handleDeleteRoom(e) {
+    e.preventDefault() 
+    const roomId = e.target.id
+  
+    console.log(roomId) //for check
+
+    fetch('/api/deleteroom', {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                roomId
+            })
+        }).then(r => r.json())
+        .then(data => {
+            console.log(data)
+            getAllRooms()
+     })
+        
+}
 
 
-/* function writeToDome(){
-
-} */
 
 function hendleCreateRoom(e) {
     e.preventDefault() 
@@ -87,13 +109,15 @@ function hendleCreateRoom(e) {
         .then(data => {
             console.log(data.newRoom._id)
             console.log(data.newRoom.roomName)
-            room.innerHTML += `<div class="huina" name='${data.newRoom._id}'><h3>${data.newRoom.roomName}</h3><form id="${data.newRoom._id}" onsubmit='handleAddTask(event)'>
+            room.innerHTML += `<div class="huina" name='${data.newRoom._id}'><h3>${data.newRoom.roomName}</h3><button id="${data.newRoom._id}" onclick="handleDeleteRoom(event)">Delete room</button><form id="${data.newRoom._id}" onsubmit='handleAddTask(event)'>
             <input id="newTask" type='text' placeholder="add task" name='newTask' required>
             <input type="submit" value="add task">
         </form> 
-                     <div>${data.notes}</div></div>`
+                    </div>`
         })
 }
+
+
 
 
 //-----CREATE TASK-------//
