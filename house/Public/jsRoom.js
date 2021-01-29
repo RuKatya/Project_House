@@ -39,20 +39,16 @@ setInterval(getDate, 0)
 
 //-----CREATE ROOM-------//
 
-function getAllRooms() {
-
+function getAllRooms(rooms) {
+let display = ''
     fetch('/allrooms')
         .then(r => r.json())
         .then(data => {
           
-            
-
             data.rooms.forEach(room => {
                 const listTasks = room.notes.map((task) => `<div>${task}<input type="radio"><button>delete</button></div>`).join(' ')
                
-
-                document.getElementById('putRoom').innerHTML +=
-                `<div class="huina"><h1>${room.roomName}</h1><form id="${room._id}" onsubmit='handleAddTask(event)'>
+                display += `<div class="huina"><h3>${room.roomName}</h3><form id="${room._id}" onsubmit='handleAddTask(event)'>
                 <input id="newTask" type='text' placeholder="add task" name='newTask' required>
                 <input type="submit" value="add task">
             </form> 
@@ -61,10 +57,16 @@ function getAllRooms() {
             
            
             })
+            document.getElementById('putRoom').innerHTML = display
         })
+        
 }
 
-document.addEventListener('DOMContentLoaded', getAllRooms())
+
+
+/* function writeToDome(){
+
+} */
 
 function hendleCreateRoom(e) {
     e.preventDefault() 
@@ -85,7 +87,7 @@ function hendleCreateRoom(e) {
         .then(data => {
             console.log(data.newRoom._id)
             console.log(data.newRoom.roomName)
-            room.innerHTML += `<div class="huina" name='${data.newRoom._id}'><h1>${data.newRoom.roomName}</h1><form id="${data.newRoom._id}" onsubmit='handleAddTask(event)'>
+            room.innerHTML += `<div class="huina" name='${data.newRoom._id}'><h3>${data.newRoom.roomName}</h3><form id="${data.newRoom._id}" onsubmit='handleAddTask(event)'>
             <input id="newTask" type='text' placeholder="add task" name='newTask' required>
             <input type="submit" value="add task">
         </form> 
@@ -101,7 +103,8 @@ function handleAddTask(e) {
     const roomId = e.target.id
     console.log('roomId:', roomId)
     const newTask = document.getElementById('newTask')
-    
+    const rooms = document.getElementById('putRoom')
+
     console.log(createTask) 
 
     fetch('/api/notes', {
@@ -116,16 +119,17 @@ function handleAddTask(e) {
         }).then(r => r.json())
         .then(data => {
             console.log(data)
-           
+            getAllRooms()
            /*  room.innerHTML += `<div class="huina"><h1>${data.newRoom.roomName}</h1><form onsubmit='HandleAddTask(event)'>
             <input type='text' placeholder="name" name='name' required>
             <input type="submit" value="add task">
         </form> 
                      <div>${data.notes}</div></div>` */
         }) 
+      
 } 
 
-
+document.addEventListener('DOMContentLoaded', getAllRooms())
 
 // //--------DELETE ROOMS----------//
 // // const roomName = event.target.dataset.id
