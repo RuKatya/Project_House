@@ -45,13 +45,18 @@ function getAllRooms() {
         .then(r => r.json())
         .then(data => {
           
+            
+
             data.rooms.forEach(room => {
+                const listTasks = room.notes.map((task) => `<div>${task}<input type="radio"><button>delete</button></div>`).join(' ')
+               
+
                 document.getElementById('putRoom').innerHTML +=
                 `<div class="huina"><h1>${room.roomName}</h1><form id="${room._id}" onsubmit='handleAddTask(event)'>
                 <input id="newTask" type='text' placeholder="add task" name='newTask' required>
                 <input type="submit" value="add task">
             </form> 
-                         <div>${room.notes}</div></div>`
+                         <div>${listTasks}</div></div>`
                 
             
            
