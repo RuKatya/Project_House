@@ -44,15 +44,18 @@ function getAllRooms() {
     fetch('/allrooms')
         .then(r => r.json())
         .then(data => {
-            console.log(data.rooms)
-           /*  data.rooms.forEach(data => {
+          
+            data.rooms.forEach(room => {
                 document.getElementById('putRoom').innerHTML +=
-                `<div class="huina"><h1>${data.rooms.newRoom.roomName}</h1><form id="${data.rooms.newRoom._id}" onsubmit='handleAddTask(event)'>
+                `<div class="huina"><h1>${room.roomName}</h1><form id="${room._id}" onsubmit='handleAddTask(event)'>
                 <input id="newTask" type='text' placeholder="add task" name='newTask' required>
                 <input type="submit" value="add task">
             </form> 
-                         <div>${data.rooms.notes}</div></div>`;
-            }); */
+                         <div>${room.notes}</div></div>`
+                
+            
+           
+            })
         })
 }
 
