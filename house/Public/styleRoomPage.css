@@ -64,7 +64,10 @@ a {
 }
 
 .deleteRoom:hover {
-    color: rgb(255, 5, 5);
+    background-color: rgba(255, 0, 0, 0.301);
+    transition: 0.15s;
+    color: white;
+    font-weight: bold;
 }
 
 h3 {
