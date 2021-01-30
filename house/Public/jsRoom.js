@@ -41,7 +41,7 @@ setInterval(getDate, 0)
 
 function getAllRooms(rooms) {
     let display = ''
-    fetch('/allrooms')
+    fetch("/api/allrooms")
         .then(r => r.json())
         .then(data => {
             if (data.rooms == 'undefined') {

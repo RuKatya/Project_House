@@ -72,7 +72,7 @@ const Room = mongoose.model("Room", {
 });
 
 // ---------ADMIN-----------//
-function isAdmin(req, res, next) {
+const isAdmin = (req, res, next) => {
     res.authorized = false;
     const {role} = req.cookies;
     
@@ -230,14 +230,15 @@ app.post("/api/register", [
         return res.status(400).json({
             message: `${errors.errors[0].msg}`,
             errors
-        })
+            
 
+        })
+        
     }
     console.log("errors:", errors)
     const newUser = new User(req.body);
     console.log(newUser)
-    const checkPassword = req.body.checkPassword
-    console.log('check:', checkPassword)
+    const {checkPassword} = req.body
     if (newUser.password !== checkPassword) {
         return res.status(400).json({
             message: 'Password does not match'
@@ -249,12 +250,9 @@ app.post("/api/register", [
             newUser.password = hash;
             await newUser.save();
             console.log(newUser._id)
-            const token = generateAccessToken(newUser._id, newUser.role)
-            console.log("token:", token)
-            res.cookie("token", token, {
-                maxAge: 1500000,
-                httpOnly: true,
-            });
+
+            creatTokenCookie(newUser, res);
+
             res.send({
                 message: 'user registered successfully'
             });
@@ -272,33 +270,12 @@ app.post("/api/register", [
 
 //-----------------------------ROOM FUNCTIONS------------------------------------//
 
-
-//-------------GET ALL ROOMS--------------//
-
-app.get('/allrooms', async(req, res) => {
-    /*   try { */
-    const rooms = await Room.find({});
-    console.log(rooms)
-    res.status(200).send({
-        rooms
-    });
-    /*  } catch (error) {
-         res.status(404).send({ error });
-     } */
-});
-
-
-
 //-------------CREATE ROOM--------------//
 app.post("/api/room", async(req, res) => {
-    // const { roomName } = req.body
     try {
         const newRoom = new Room(req.body);
-        console.log('newRoom:', newRoom)
         await newRoom.save();
         res.status(201).send({ newRoom });
-        console.log('newRoom:', newRoom)
-        console.log(newRoom.id)
     } catch (error) {
         res.status(404).send({ error });
     }
@@ -309,56 +286,7 @@ app.post("/api/room", async(req, res) => {
 app.delete("/api/deleteroom", async(req, res) => {
     try {
         const { roomId } = req.body
-        console.log(roomId)
-        await Room.findByIdAndDelete(roomId)
-        res.status(200).send({ status: "deleted" });
-    } catch (error) {
-        res.status(404).send({ error });
-    }
-});
-
-//-----CREATE TASK-------//
-
-app.post("/api/notes", async(req, res) => {
-
-    try {
-        const { createTask, roomId } = req.body
-        console.log(roomId, createTask)
-        await Room.findByIdAndUpdate(roomId, { $push: { notes: createTask } })
-        res.status(200).send({ status: "update" });
-    } catch (error) {
-        res.status(404).send({ error });
-    }
-});
-
-//-----DELETE TASK-------//
-
-app.delete("/api/deletenotes", async(req, res) => {
-    try {
-        const { deleteTask, roomId } = req.body
-        console.log(roomId, deleteTask)
-        await Room.findByIdAndUpdate(roomId, { $pull: { notes: deleteTask } })
-        res.status(200).send({ status: "deleted" });
-    } catch (error) {
-        res.status(404).send({ error });
-    }
-});
-
-
-//----------FIND ROOM----------//
-app.get("/room", async(req, res) => {
-    try {
-        const rooms = await Room.find();
-        res.status(200).send({ rooms });
-    } catch (err) {
-        res.status(404).send({ err });
-    }
-});
-
-//-------------DELETE ROOM--------------//
-app.delete("/api/room", async(req, res) => {
-    try {
-        await Room.findByIdAndDelete(req.params.id);
+        await Room.findByIdAndDelete(roomId);
         res.status(200).send({ status: "deleted" });
     } catch (error) {
         res.status(404).send({ error });
@@ -390,25 +318,63 @@ app.get("/api/room/:id", async(req, res) => {
         res.status(404).send({ error });
     }
 });
+//-------------GET ALL ROOMS--------------//
+app.get('/api/allrooms', async(req, res) => {
+      try { 
+    const rooms = await Room.find({});
+    res.status(200).send({
+        rooms
+    });
+      } catch (error) {
+         res.status(404).send({ error });
+     } 
+});
 
+
+//-----CREATE TASK-------//
+
+app.post("/api/notes", async(req, res) => {
+
+    try {
+        const { createTask, roomId } = req.body
+        console.log(roomId, createTask)
+        await Room.findByIdAndUpdate(roomId, { $push: { notes: createTask } })
+        res.status(200).send({ status: "update" });
+    } catch (error) {
+        res.status(404).send({ error });
+    }
+});
+
+//-----DELETE TASK-------//
+
+app.delete("/api/deletenotes", async(req, res) => {
+    try {
+        const { deleteTask, roomId } = req.body
+        console.log(roomId, deleteTask)
+        await Room.findByIdAndUpdate(roomId, { $pull: { notes: deleteTask } })
+        res.status(200).send({ status: "deleted" });
+    } catch (error) {
+        res.status(404).send({ error });
+    }
+});
 
 
 //---------ONLOAD-------------//
-app.post("/api/onload", getUserAuthMiddle, async(req, res) => {
-    try {
-        const assignedRooms = req.user.user.assignRooms;
-        let rooms = [];
-        for (const roomId of assignedRooms) {
-            let roomFromDb = await Room.findById(roomId);
-            rooms.push(roomFromDb);
-        }
-        res.send({ rooms })
+// app.post("/api/onload", getUserAuthMiddle, async(req, res) => {
+//     try {
+//         const assignedRooms = req.user.user.assignRooms;
+//         let rooms = [];
+//         for (const roomId of assignedRooms) {
+//             let roomFromDb = await Room.findById(roomId);
+//             rooms.push(roomFromDb);
+//         }
+//         res.send({ rooms })
 
-    } catch (err) {
-        res.status(404).send({ err });
-    }
+//     } catch (err) {
+//         res.status(404).send({ err });
+//     }
 
-});
+// });
 
 isUser = (req, res, next) => {
     // res.authorized = false;
@@ -442,3 +408,12 @@ const PORT = 3030;
 app.listen(PORT, () => {
     console.log(`RUNNING: ${PORT}`)
 })
+
+const creatTokenCookie = (newUser, res) => {
+    const token = generateAccessToken(newUser._id, newUser.role);
+    console.log("token:", token);
+    res.cookie("token", token, {
+        maxAge: 1500000,
+        httpOnly: true,
+    });
+}
