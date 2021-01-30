@@ -37,39 +37,42 @@ function getDate() {
 }
 setInterval(getDate, 0)
 
-//-----CREATE ROOM-------//
+//-----CREATE ROOM-------// ----THIS IS TACK OR WHAT?
 
 function getAllRooms(rooms) {
-let display = ''
+    let display = ''
     fetch('/allrooms')
         .then(r => r.json())
         .then(data => {
-          if(data.rooms == 'undefined'){
-              
-          }
+            if (data.rooms == 'undefined') {
+
+            }
             data.rooms.forEach(room => {
-                const listTasks = room.notes.map((task) => `<div>${task}<input type="radio"><button id="${room._id}" name="${task}" onclick="handleDeleteTask(event)">delete</button></div>`).join(' ')
-           
-                display += `<div class="huina"><h3>${room.roomName}</h3><button id="${room._id}" onclick="handleDeleteRoom(event)">Delete room</button><form id="${room._id}" onsubmit='handleAddTask(event)'>
-                <input class="newTask" type='text' placeholder="add task" name='newTask' required>
-                <input type="submit" value="add task">
-            </form> 
-                         <div>${listTasks}</div></div>`
-                
-            
-           
+                const listTasks = room.notes.map((task) => `<div>${task}
+                <button id="${room._id}" name="${task}" class="deleteTask" onclick="handleDeleteTask(event)">Done</button>
+                </div>`).join(' ')
+
+                display += `<div class="roomsAndTask">
+                <div class="gridHeadline">
+                    <h3>${room.roomName}</h3>
+                    <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete room</button>
+                </div>
+                <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
+                    <input class="newTask" type='text' placeholder="add task" name='newTask' required>
+                    <input type="submit" value="Add task">
+                </form><div class="listTask">${listTasks}</div></div>`
             })
             document.getElementById('putRoom').innerHTML = display
         })
-        
+
 }
 
 //-----DELETE ROOM-------//
 
 function handleDeleteRoom(e) {
-    e.preventDefault() 
+    e.preventDefault()
     const roomId = e.target.id
-  
+
     console.log(roomId) //for check
 
     fetch('/api/deleteroom', {
@@ -84,14 +87,14 @@ function handleDeleteRoom(e) {
         .then(data => {
             console.log(data)
             getAllRooms()
-     })
-        
+        })
+
 }
 
 
 
 function hendleCreateRoom(e) {
-    e.preventDefault() 
+    e.preventDefault()
     const roomName = e.target.children.roomName.value
     const room = document.getElementById('putRoom')
 
@@ -109,16 +112,17 @@ function hendleCreateRoom(e) {
         .then(data => {
             console.log(data.newRoom._id)
             console.log(data.newRoom.roomName)
-            room.innerHTML += `<div class="huina" name='${data.newRoom._id}'><h3>${data.newRoom.roomName}</h3><button id="${data.newRoom._id}" onclick="handleDeleteRoom(event)">Delete room</button><form id="${data.newRoom._id}" onsubmit='handleAddTask(event)'>
-            <input id="newTask" type='text' placeholder="add task" name='newTask' required>
-            <input type="submit" value="add task">
-        </form> 
-                    </div>`
+            room.innerHTML += `<div class="roomsAndTask" name='${data.newRoom._id}'>
+            <div class="gridHeadline">
+                <h3>${data.newRoom.roomName}</h3>
+                <button id="${data.newRoom._id}" onclick="handleDeleteRoom(event)">Delete room</button>
+            </div>
+            <form id="${data.newRoom._id}" onsubmit='handleAddTask(event)' class="formTask">
+                <input id="newTask" class="newTask" type='text' placeholder="add task" name='newTask' required>
+                <input type="submit" value="add task">
+            </form></div>`
         })
 }
-
-
-
 
 //-----CREATE TASK-------//
 function handleAddTask(e) {
@@ -129,7 +133,7 @@ function handleAddTask(e) {
     const newTask = document.getElementById('newTask')
     const rooms = document.getElementById('putRoom')
 
-    console.log(createTask) 
+    console.log(createTask)
 
     fetch('/api/notes', {
             method: 'POST',
@@ -144,18 +148,16 @@ function handleAddTask(e) {
         .then(data => {
             console.log(data)
             getAllRooms()
-          
-        }) 
-     } 
+        })
+}
 
 
 //-----DELETE TASK-------//
-
 function handleDeleteTask(e) {
     e.preventDefault()
     const roomId = e.target.id
     const deleteTask = e.target.name
-    const rooms = document.getElementById('putRoom')
+        // const rooms = document.getElementById('putRoom')
 
     fetch('/api/deletenotes', {
             method: 'delete',
@@ -170,64 +172,7 @@ function handleDeleteTask(e) {
         .then(data => {
             console.log(data)
             getAllRooms()
-          
-        })  
-     } 
-
-
-document.addEventListener('DOMContentLoaded', getAllRooms())
-
-// //--------DELETE ROOMS----------//
-// // const roomName = event.target.dataset.id
-
-// fetch('/api/room', {
-//         method: 'delete',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             roomName
-//         })
-//     }).then(r => r.json())
-//     .then(data => {
-//         console.log(data)
-//     })
-
-// //--------UPDATE ROOM----------//
-// fetch('/api/room', {
-//         method: 'patch',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             roomName
-//         })
-//     }).then(r => r.json())
-//     .then(data => {
-//         console.log(data)
-//     })
-
-//---------ONLOAD----------//
-/* function allrooms() {
-    fetch('/api/onload', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                roomName
-            })
-        }).then(r => r.json())
-        .then(data => {
-            console.log(data)
-            setRoomsOnPage(data.rooms)
-                // console.log(data.newRoom.roomName)
         })
 }
 
-const setRoomsOnPage = (rooms) => {
-    const roomsToShow = rooms.map((room) => `<p>${room.roomName}</p>`)
-    console.log(rooms)
-    document.getElementById('putRoom').innerHTML = roomsToShow.join(' ');
-
-} */
+document.addEventListener('DOMContentLoaded', getAllRooms())

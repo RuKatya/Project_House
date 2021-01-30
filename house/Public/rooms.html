@@ -6,46 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styleRoomPage.css">
-    <style>
-        .huina {
-            color: white;
-            font-size: 2em;
-        }
-    </style>
 </head>
 
-<!-- <body onload="allrooms()"> -->
 <body>
-
     <div class="back">
         <a href="index.html"><img src="icons/back.svg"></a>
     </div>
 
-    <!-- 1. Create button of create
-        2. Send name of room
-        3. Get back id of room and create Inner HTML
-        4. Button of delete and update
-        5.  -->
-
     <form class="createRoom_form" onsubmit="hendleCreateRoom(event)">
-        <h3>Create your room</h3>
+        <h3 class="createRoom_form__h3">Create your room</h3>
         <input type="text" id="roomName" placeholder="Name of room">
-        <input type="submit" value="Create room">
+        <input type="submit" value="Create room" class="createRoom_form__btn">
 
         <h3 class="h3_correct">Correct time</h3>
         <div id="correctTime" onload="getTime()"></div>
 
         <h3 class="h3_correct">Correct date</h3>
         <div id="correctDate" onload="getDate()"></div>
-
-
     </form>
 
 
-    <div id="createRoom">
-        <div id="putRoom"></div>
-    </div>
-
+    <div id="putRoom"></div>
 
     <footer>
         THANK YOU
