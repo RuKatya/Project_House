@@ -24,7 +24,7 @@ const saltRounds = 7;
 
 //-----------mongoose----------//
 const mongoose = require('mongoose'); //npm i mongoose
-const url = 'mongodb+srv://KatyaRu:qHO9SxoCGZc6lv7C@cluster0.mfqlq.mongodb.net/test'
+const url = 'mongodb+srv://KatyaRu:H68Z6wmvbbSdDMhE@cluster0.mfqlq.mongodb.net/test'
 
 mongoose.connect(url, {
     useNewUrlParser: true,
@@ -279,15 +279,15 @@ app.post("/api/register", [
 //-------------GET ALL ROOMS--------------//
 
 app.get('/allrooms', async(req, res) => {
-  /*   try { */
-        const rooms = await Room.find({});
-        console.log(rooms)
-        res.status(200).send({
-            rooms
-        });
-   /*  } catch (error) {
-        res.status(404).send({ error });
-    } */
+    /*   try { */
+    const rooms = await Room.find({});
+    console.log(rooms)
+    res.status(200).send({
+        rooms
+    });
+    /*  } catch (error) {
+         res.status(404).send({ error });
+     } */
 });
 
 
@@ -311,10 +311,10 @@ app.post("/api/room", async(req, res) => {
 
 app.delete("/api/deleteroom", async(req, res) => {
     try {
-        const {roomId} = req.body
+        const { roomId } = req.body
         console.log(roomId)
         await Room.findByIdAndDelete(roomId)
-        res.status(200).send({ status: "deleted" }); 
+        res.status(200).send({ status: "deleted" });
     } catch (error) {
         res.status(404).send({ error });
     }
@@ -323,25 +323,25 @@ app.delete("/api/deleteroom", async(req, res) => {
 //-----CREATE TASK-------//
 
 app.post("/api/notes", async(req, res) => {
-    
+
     try {
-        const {createTask,roomId} = req.body
+        const { createTask, roomId } = req.body
         console.log(roomId, createTask)
-        await Room.findByIdAndUpdate(roomId, {$push: {notes: createTask}})
+        await Room.findByIdAndUpdate(roomId, { $push: { notes: createTask } })
         res.status(200).send({ status: "update" });
     } catch (error) {
         res.status(404).send({ error });
     }
-}); 
- 
+});
+
 //-----DELETE TASK-------//
 
 app.delete("/api/deletenotes", async(req, res) => {
     try {
-        const {deleteTask,roomId} = req.body
+        const { deleteTask, roomId } = req.body
         console.log(roomId, deleteTask)
-        await Room.findByIdAndUpdate(roomId, {$pull: {notes: deleteTask}})
-        res.status(200).send({ status: "deleted" }); 
+        await Room.findByIdAndUpdate(roomId, { $pull: { notes: deleteTask } })
+        res.status(200).send({ status: "deleted" });
     } catch (error) {
         res.status(404).send({ error });
     }

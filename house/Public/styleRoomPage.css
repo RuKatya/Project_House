@@ -63,7 +63,9 @@ a {
     outline: none;
 }
 
-.deleteRoom:hover {}
+.deleteRoom:hover {
+    color: rgb(255, 5, 5);
+}
 
 h3 {
     color: white;
