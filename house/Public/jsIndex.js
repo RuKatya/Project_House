@@ -1,4 +1,4 @@
-//---------LANDING PAGE---------//
+ //---------LANDING PAGE---------//
 let loginPage = document.getElementById("loginPage")
 let signInPage = document.getElementById("signInPage")
 let loginButton = document.getElementById("login__btn")

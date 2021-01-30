@@ -72,14 +72,11 @@ const Room = mongoose.model("Room", {
 });
 
 // ---------ADMIN-----------//
-isAdmin = (req, res, next) => {
+function isAdmin(req, res, next) {
     res.authorized = false;
-    const {
-        role
-    } = req.cookies;
-
-
-    if (role === 'admin') {
+    const {role} = req.cookies;
+    
+    if ({role} === 'admin') {
         res.authorized = true;
         console.log(res.authorized)
     }
