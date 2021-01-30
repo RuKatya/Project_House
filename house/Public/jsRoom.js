@@ -37,7 +37,7 @@ function getDate() {
 }
 setInterval(getDate, 0)
 
-//-----CREATE ROOM-------// ----THIS IS TACK OR WHAT?
+//-----CREATE ROOM-------// ----THIS IS TASK OR WHAT?
 
 function getAllRooms(rooms) {
     let display = ''
@@ -59,7 +59,7 @@ function getAllRooms(rooms) {
                 </div>
                 <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
                     <input class="newTask" type='text' placeholder="add task" name='newTask' required>
-                    <input type="submit" value="Add task">
+                    <input type="submit" class="addTask" value="Add task">
                 </form><div class="listTask">${listTasks}</div></div>`
             })
             document.getElementById('putRoom').innerHTML = display
@@ -115,11 +115,11 @@ function hendleCreateRoom(e) {
             room.innerHTML += `<div class="roomsAndTask" name='${data.newRoom._id}'>
             <div class="gridHeadline">
                 <h3>${data.newRoom.roomName}</h3>
-                <button id="${data.newRoom._id}" onclick="handleDeleteRoom(event)">Delete room</button>
+                <button id="${data.newRoom._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete room</button>
             </div>
             <form id="${data.newRoom._id}" onsubmit='handleAddTask(event)' class="formTask">
                 <input id="newTask" class="newTask" type='text' placeholder="add task" name='newTask' required>
-                <input type="submit" value="add task">
+                <input type="submit" class="addTask" value="add task">
             </form></div>`
         })
 }

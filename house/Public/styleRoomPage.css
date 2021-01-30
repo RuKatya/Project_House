@@ -146,6 +146,11 @@ form {
     width: 70%;
 }
 
+.addTask:hover {
+    background-color: rgb(137, 197, 137);
+    transition: 0.3s;
+}
+
 .listTask {
     font-size: 0.8em;
     padding-bottom: 5%;
