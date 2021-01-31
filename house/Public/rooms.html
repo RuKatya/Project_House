@@ -84,7 +84,7 @@
                                 onclick="handleDeleteTask(event)">Done</button>
                         </div>`).join(' ')
 
-                        display += `<div class="roomsAndTask">
+                        display += `<div class="roomsAndTask" onclick="onClickRoom(event)">
                             <div class="gridHeadline">
                                 <h3>${room.roomName}</h3>
                                 <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
@@ -96,27 +96,45 @@
                             </form>
                             <div class="listTask">${listTasks}</div>
                         </div>`
-                        })
+                    })
                     document.getElementById('putRoom').innerHTML = display
                 })
 
         }
-        onClickRoom = (e)=>{
-            `<div class="body">
-                <div class="back">
-                    <a href="/rooms.html"><img src="icons/back.svg"></a>
-                </div>
+        // SHOW SINGEL ROOM
 
-                <div>
-                    <h1>Bed room</h1>
-                </div>
-                <div class="notes">
-                    example
-                </div>
-            </div>`
 
+        onClickRoom = (e) => {
+            let showRoom = ''
+            console.log("room clickd")
+
+            fetch("/api/allrooms")
+                .then(r => r.json())
+                .then(data => {
+                    data.rooms.forEach(room => {
+                        const listTasks = room.notes.map((task) => `<div>${task}
+                            <button id="${room._id}" name="${task}" class="deleteTask"
+                                onclick="handleDeleteTask(event)">Done</button>
+                        </div>`).join(' onClickRoom')
+
+                        showRoom += `<div class="body">
+                            <div class="back">
+                                <a href="/rooms.html"><img src="icons/back.svg"></a>
+                            </div>
+
+                            <div>
+                                <h1>${room.roomName}</h1>
+                            </div>
+                            <div class="notes">
+                                ${listTasks}
+                            </div>
+                        </div>`
+                    })
+                    document.getElementById('putRoom').innerHTML = showRoom
+                })
 
         }
+
 
         //-----DELETE ROOM-------//
         handleDeleteRoom = (e) => {
@@ -180,7 +198,7 @@
         }
 
         //-----DELETE TASK-------//
-         handleDeleteTask = (e)=> {
+        handleDeleteTask = (e) => {
             e.preventDefault()
             const roomId = e.target.id
             const deleteTask = e.target.name
@@ -200,7 +218,7 @@
                     getAllRooms()
                 })
         }
-    
+
         document.addEventListener('DOMContentLoaded', getAllRooms())
     </script>
 </body>
