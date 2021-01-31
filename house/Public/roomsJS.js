@@ -83,7 +83,7 @@
   }
 
   const getAllUsers = (e) => {
-    
+    e.preventDefault()
       fetch('/api/users')
 
 
@@ -92,7 +92,7 @@
               console.log(data)
               // getElementById("users").innerHTML
               // const listUsers = users.map((user) => `<option id="${user._id}">${user.username}</option>`).join(' ')
-              return{data} 
+              
 
           })
   }
