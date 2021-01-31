@@ -127,7 +127,7 @@ app.delete("/api/users/:id", async(req, res) => {
 });
 
 // update user by id
-app.patch("/api/users/:id", async(req, res) => {
+app.put("/api/users", async(req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
@@ -269,7 +269,8 @@ app.get('/api/allrooms', async(req, res) => {
     try {
         const rooms = await Room.find({});
         res.status(200).send({
-            rooms
+            rooms,
+
         });
     } catch (error) {
         res.status(404).send({ error });

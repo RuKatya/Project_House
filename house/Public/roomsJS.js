@@ -38,29 +38,34 @@
 
   //-----RENDER ROOMS PAGE-------// 
 
-  getAllRooms = (rooms) => {
-      
+   getAllRooms = (rooms) => {
+
       let display = ''
       fetch("/api/allrooms")
           .then(r => r.json())
           .then(data => {
+              console.log(data)
+              const users = getAllUsers()
+              console.log(users)
+              
+
+
               data.rooms.forEach(room => {
                   const listTasks = room.notes.map((task) => `<div>${task}
                       <button id="${room._id}" name="${task}" class="deleteTask"
                           onclick="handleDeleteTask(event)">Done</button>
                   </div>`).join(' ')
 
-                  const listUsers = users.map((user) => `<option id="${user._id}">${user.username}</option>`).join(' ')
-                
-            
 
-
-                  display += `<div class="roomsAndTask" onclick="onClickRoom(event)">
+                  display += `<div class="roomsAndTask">
                       <div class="gridHeadline">
                           <h3>${room.roomName}</h3> 
-                          <select> <option style="display: none">Select user </option>
-                         ${listUsers}
+
+                          <select id ="users"> <option style="display: none">Select user </option>
+                         
                       </select>
+                     
+                      <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
       
                           <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
                               room</button>
@@ -77,52 +82,84 @@
 
   }
 
-function getAllUsers(e) {
-    e.preventDefault
-    fetch('/api/users')
-       
-   
-    .then(r => r.json())
-    .then(data => {
-        console.log(data)
-        
-    })
-}
+  const getAllUsers = (e) => {
+    
+      fetch('/api/users')
+
+
+          .then(r => r.json())
+          .then(data => {
+              console.log(data)
+              // getElementById("users").innerHTML
+              // const listUsers = users.map((user) => `<option id="${user._id}">${user.username}</option>`).join(' ')
+              return{data} 
+
+          })
+  }
+  const addUserToRoom = (e) => {
+      e.preventDefault()
+
+      console.log(e)
+      const roomID = e.target.id
+      const choosenUser = document.querySelector('#users').value
+
+      console.log(choosenUser, roomID)
+      fetch('/api/users', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  roomID,
+                  choosenUser
+              })
+          }).then(r => r.json())
+          .then(data => {
+              console.log(data)
+              getAllRooms()
+
+          })
+  }
+
+
+
+
+
 
 
 
   // // SHOW SINGEL ROOM
 
-//   onClickRoom = (e) => {
-//       let showRoom = ''
-//       console.log("room clickd")
+  //   onClickRoom = (e) => {
+  //       let showRoom = ''
+  //       console.log("room clickd")
 
-//       fetch("/api/allrooms")
-//           .then(r => r.json())
-//           .then(data => {
-//               data.rooms.forEach(room => {
-//                   const listTasks = room.notes.map((task) => `<div>${task}
-//                       <button id="${room._id}" name="${task}" class="deleteTask"
-//                           onclick="handleDeleteTask(event)">Done</button>
-//                   </div>`).join(' onClickRoom')
+  //       fetch("/api/allrooms")
+  //           .then(r => r.json())
+  //           .then(data => {
+  //               data.rooms.forEach(room => {
+  //                   const listTasks = room.notes.map((task) => `<div>${task}
+  //                       <button id="${room._id}" name="${task}" class="deleteTask"
+  //                           onclick="handleDeleteTask(event)">Done</button>
+  //                   </div>`).join(' onClickRoom')
 
-//                   showRoom += `<div class="body">
-//                       <div class="back">
-//                           <a href="/rooms.html"><img src="icons/back.svg"></a>
-//                       </div>
+  //                   showRoom += `<div class="body">
+  //                       <div class="back">
+  //                           <a href="/rooms.html"><img src="icons/back.svg"></a>
+  //                       </div>
 
-//                       <div>
-//                           <h1>${room.roomName}</h1>
-//                       </div>
-//                       <div class="notes">
-//                           ${listTasks}
-//                       </div>
-//                   </div>`
-//               })
-//               document.getElementById('singelRoom').innerHTML = showRoom
-//           })
+  //                       <div>
+  //                           <h1>${room.roomName}</h1>
+  //                       </div>
+  //                       <div class="notes">
+  //                           ${listTasks}
+  //                       </div>
+  //                   </div>`
+  //               })
+  //               document.getElementById('singelRoom').innerHTML = showRoom
+  //           })
 
-//   }
+  //   }
 
 
   //-----DELETE ROOM-------//
@@ -210,7 +247,7 @@ function getAllUsers(e) {
 
   document.addEventListener('DOMContentLoaded', getAllRooms());
   let eeee = 1
-  if(1 ==1){
+  if (1 == 1) {
 
-    console.log("rtyuibvfyuj")
+      console.log("rtyuibvfyuj")
   }
