@@ -1,6 +1,6 @@
   //---------CORRECT TIME-------//
-  let date = new Date();
-  getTime = () => {
+  function getTime() {
+      let date = new Date();
       let hours = date.getHours();
       let minutes = date.getMinutes();
       let seconds = date.getSeconds();
@@ -18,7 +18,8 @@
   setInterval(getTime, 0);
 
   //---------CORRECT DATE---------//
-  getDate = () => {
+  function getDate() {
+      let date = new Date();
       let day = date.getDate();
       let month = date.getMonth() + 1;
       let year = date.getFullYear()
@@ -32,7 +33,6 @@
 
       let dateToday = `${day}/${month}/${year}`
       document.getElementById('correctDate').innerHTML = dateToday
-
   }
   setInterval(getDate, 0)
 
@@ -76,9 +76,9 @@
                       </form>
                       <div class="listTask">${listTasks}</div>
                   </div>`
+                  })
+                  document.getElementById('putRoom').innerHTML = display
               })
-              document.getElementById('putRoom').innerHTML = display
-          })
 
   }
 
@@ -246,8 +246,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', getAllRooms());
-  let eeee = 1
-  if (1 == 1) {
 
-      console.log("rtyuibvfyuj")
-  }
+
+
