@@ -62,8 +62,8 @@
      const username = e.target.children.name.value;
      const email = e.target.children.email.value;
      const password = e.target.children.password.value;
-     const checkPassword = e.target.children.checkPassword.value;
-     console.log(username, password, email, checkPassword)
+     const confirmPassword = e.target.children.confirmPassword.value;
+     console.log(username, password, email, confirmPassword)
 
      fetch('/api/register', {
              method: 'POST',
@@ -74,7 +74,7 @@
                  username,
                  email,
                  password,
-                 checkPassword
+                 confirmPassword
              })
          }).then(r => r.json())
          .then(data => {
