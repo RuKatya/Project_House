@@ -78,26 +78,43 @@
             fetch("/api/allrooms")
                 .then(r => r.json())
                 .then(data => {
-                    if (data.rooms == 'undefined') {
-
-                    }
                     data.rooms.forEach(room => {
                         const listTasks = room.notes.map((task) => `<div>${task}
-                <button id="${room._id}" name="${task}" class="deleteTask" onclick="handleDeleteTask(event)">Done</button>
-                </div>`).join(' ')
+                            <button id="${room._id}" name="${task}" class="deleteTask"
+                                onclick="handleDeleteTask(event)">Done</button>
+                        </div>`).join(' ')
 
                         display += `<div class="roomsAndTask">
-                <div class="gridHeadline">
-                    <h3>${room.roomName}</h3>
-                    <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete room</button>
-                </div>
-                <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
-                    <input class="newTask" type='text' placeholder="add task" name='newTask' required>
-                    <input type="submit" class="addTask" value="Add task">
-                </form><div class="listTask">${listTasks}</div></div>`
-                    })
+                            <div class="gridHeadline">
+                                <h3>${room.roomName}</h3>
+                                <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
+                                    room</button>
+                            </div>
+                            <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
+                                <input class="newTask" type='text' placeholder="add task" name='newTask' required>
+                                <input type="submit" class="addTask" value="Add task">
+                            </form>
+                            <div class="listTask">${listTasks}</div>
+                        </div>`
+                        })
                     document.getElementById('putRoom').innerHTML = display
                 })
+
+        }
+        onClickRoom = (e)=>{
+            `<div class="body">
+                <div class="back">
+                    <a href="/rooms.html"><img src="icons/back.svg"></a>
+                </div>
+
+                <div>
+                    <h1>Bed room</h1>
+                </div>
+                <div class="notes">
+                    example
+                </div>
+            </div>`
+
 
         }
 
