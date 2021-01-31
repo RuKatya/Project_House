@@ -50,9 +50,18 @@
                           onclick="handleDeleteTask(event)">Done</button>
                   </div>`).join(' ')
 
+                  const listUsers = users.map((user) => `<option id="${user._id}">${user.username}</option>`).join(' ')
+                
+            
+
+
                   display += `<div class="roomsAndTask" onclick="onClickRoom(event)">
                       <div class="gridHeadline">
-                          <h3>${room.roomName}</h3>
+                          <h3>${room.roomName}</h3> 
+                          <select> <option style="display: none">Select user </option>
+                         ${listUsers}
+                      </select>
+      
                           <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
                               room</button>
                       </div>
@@ -67,6 +76,21 @@
           })
 
   }
+
+function getAllUsers(e) {
+    e.preventDefault
+    fetch('/api/users')
+       
+   
+    .then(r => r.json())
+    .then(data => {
+        console.log(data)
+        
+    })
+}
+
+
+
   // // SHOW SINGEL ROOM
 
 //   onClickRoom = (e) => {
