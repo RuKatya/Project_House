@@ -190,4 +190,3 @@
 
     console.log("rtyuibvfyuj")
   }
-  let eeee = 12
