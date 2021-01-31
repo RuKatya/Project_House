@@ -17,7 +17,7 @@ const saltRounds = 7;
 
 //-----------mongoose----------//
 const mongoose = require('mongoose'); //npm i mongoose
-const url = 'mongodb+srv://KatyaRu:H68Z6wmvbbSdDMhE@cluster0.mfqlq.mongodb.net/test'
+const url = 'mongodb+srv://KatyaRu:cytSjCbnf9PqLVaZ@cluster0.mfqlq.mongodb.net/test'
 
 mongoose.connect(url, {
     useNewUrlParser: true,
@@ -67,9 +67,9 @@ const Room = mongoose.model("Room", {
 // ---------ADMIN-----------//
 const isAdmin = (req, res, next) => {
     res.authorized = false;
-    const {role} = req.cookies;
-    
-    if ({role} === 'admin') {
+    const { role } = req.cookies;
+
+    if ({ role } === 'admin') {
         res.authorized = true;
         console.log(res.authorized)
     }
@@ -201,17 +201,17 @@ app.post("/api/login", async(req, res) => {
 //-------------CREATE ACCOUNT-----------//
 app.post("/api/register", [
     check('username', 'Username cannot be empty').notEmpty(), check('email', 'Invalid email').isEmail(),
-    check('password', 'Password must be at least 3 - 10 characters').isLength({min: 3,max: 10})
+    check('password', 'Password must be at least 3 - 10 characters').isLength({ min: 3, max: 10 })
 ], async(req, res) => {
     const errors = validationResult(req)
     console.log("errors:", errors)
     if (!errors.isEmpty()) {
-        return res.status(400).json({message: `${errors.errors[0].msg}`,errors})
+        return res.status(400).json({ message: `${errors.errors[0].msg}`, errors })
     }
     const newUser = new User(req.body);
-    const {confirmPassword} = req.body
+    const { confirmPassword } = req.body
     if (newUser.password !== confirmPassword) {
-        return res.status(400).json({message: 'Password does not match'})
+        return res.status(400).json({ message: 'Password does not match' })
     }
     encryptionGenerator(newUser, res);
 })
@@ -266,14 +266,14 @@ app.get("/api/room/:id", async(req, res) => {
 });
 //-------------GET ALL ROOMS--------------//
 app.get('/api/allrooms', async(req, res) => {
-      try { 
-    const rooms = await Room.find({});
-    res.status(200).send({
-        rooms
-    });
-      } catch (error) {
-         res.status(404).send({ error });
-     } 
+    try {
+        const rooms = await Room.find({});
+        res.status(200).send({
+            rooms
+        });
+    } catch (error) {
+        res.status(404).send({ error });
+    }
 });
 
 //----------------------------- TASK FUNCTIONS----------------------//
@@ -341,11 +341,11 @@ app.listen(PORT, () => {
 
 //-------------encryptions-----------//
 const generateAccessToken = (user) => {
-    const payload = {user, role:user.role}
+    const payload = { user, role: user.role }
     return jwt.sign(payload, secret, { expiresIn: '24h' })
 }
-const encryptionGenerator = (newUser, res)=> {
-    bcrypt.hash(newUser.password, saltRounds, async (err, hash) => {
+const encryptionGenerator = (newUser, res) => {
+    bcrypt.hash(newUser.password, saltRounds, async(err, hash) => {
         try {
             newUser.password = hash;
             await newUser.save();
@@ -362,5 +362,3 @@ const creatTokenCookie = (newUser, res) => {
         httpOnly: true,
     });
 }
-
-
