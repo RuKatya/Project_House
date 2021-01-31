@@ -1,6 +1,6 @@
   //---------CORRECT TIME-------//
-  let date = new Date();
-  getTime = () => {
+  function getTime() {
+      let date = new Date();
       let hours = date.getHours();
       let minutes = date.getMinutes();
       let seconds = date.getSeconds();
@@ -18,7 +18,8 @@
   setInterval(getTime, 0);
 
   //---------CORRECT DATE---------//
-  getDate = () => {
+  function getDate() {
+      let date = new Date();
       let day = date.getDate();
       let month = date.getMonth() + 1;
       let year = date.getFullYear()
@@ -32,25 +33,24 @@
 
       let dateToday = `${day}/${month}/${year}`
       document.getElementById('correctDate').innerHTML = dateToday
-
   }
   setInterval(getDate, 0)
 
   //-----RENDER ROOMS PAGE-------// 
 
   getAllRooms = (rooms) => {
-      
-      let display = ''
-      fetch("/api/allrooms")
-          .then(r => r.json())
-          .then(data => {
-              data.rooms.forEach(room => {
-                  const listTasks = room.notes.map((task) => `<div>${task}
+
+          let display = ''
+          fetch("/api/allrooms")
+              .then(r => r.json())
+              .then(data => {
+                  data.rooms.forEach(room => {
+                      const listTasks = room.notes.map((task) => `<div>${task}
                       <button id="${room._id}" name="${task}" class="deleteTask"
                           onclick="handleDeleteTask(event)">Done</button>
                   </div>`).join(' ')
 
-                  display += `<div class="roomsAndTask" onclick="onClickRoom(event)">
+                      display += `<div class="roomsAndTask" onclick="onClickRoom(event)">
                       <div class="gridHeadline">
                           <h3>${room.roomName}</h3>
                           <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
@@ -62,43 +62,43 @@
                       </form>
                       <div class="listTask">${listTasks}</div>
                   </div>`
+                  })
+                  document.getElementById('putRoom').innerHTML = display
               })
-              document.getElementById('putRoom').innerHTML = display
-          })
 
-  }
-  // // SHOW SINGEL ROOM
+      }
+      // // SHOW SINGEL ROOM
 
-//   onClickRoom = (e) => {
-//       let showRoom = ''
-//       console.log("room clickd")
+  //   onClickRoom = (e) => {
+  //       let showRoom = ''
+  //       console.log("room clickd")
 
-//       fetch("/api/allrooms")
-//           .then(r => r.json())
-//           .then(data => {
-//               data.rooms.forEach(room => {
-//                   const listTasks = room.notes.map((task) => `<div>${task}
-//                       <button id="${room._id}" name="${task}" class="deleteTask"
-//                           onclick="handleDeleteTask(event)">Done</button>
-//                   </div>`).join(' onClickRoom')
+  //       fetch("/api/allrooms")
+  //           .then(r => r.json())
+  //           .then(data => {
+  //               data.rooms.forEach(room => {
+  //                   const listTasks = room.notes.map((task) => `<div>${task}
+  //                       <button id="${room._id}" name="${task}" class="deleteTask"
+  //                           onclick="handleDeleteTask(event)">Done</button>
+  //                   </div>`).join(' onClickRoom')
 
-//                   showRoom += `<div class="body">
-//                       <div class="back">
-//                           <a href="/rooms.html"><img src="icons/back.svg"></a>
-//                       </div>
+  //                   showRoom += `<div class="body">
+  //                       <div class="back">
+  //                           <a href="/rooms.html"><img src="icons/back.svg"></a>
+  //                       </div>
 
-//                       <div>
-//                           <h1>${room.roomName}</h1>
-//                       </div>
-//                       <div class="notes">
-//                           ${listTasks}
-//                       </div>
-//                   </div>`
-//               })
-//               document.getElementById('singelRoom').innerHTML = showRoom
-//           })
+  //                       <div>
+  //                           <h1>${room.roomName}</h1>
+  //                       </div>
+  //                       <div class="notes">
+  //                           ${listTasks}
+  //                       </div>
+  //                   </div>`
+  //               })
+  //               document.getElementById('singelRoom').innerHTML = showRoom
+  //           })
 
-//   }
+  //   }
 
 
   //-----DELETE ROOM-------//
@@ -185,8 +185,8 @@
   }
 
   document.addEventListener('DOMContentLoaded', getAllRooms());
-  let eeee = 1
-  if(1 ==1){
+  let eeeee = 1
+  if (1 == 1) {
 
-    console.log("rtyuibvfyuj")
+      console.log("rtyuibvfyuj")
   }

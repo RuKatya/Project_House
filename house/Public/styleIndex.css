@@ -17,16 +17,15 @@ body {
 input {
     text-align: center;
     border: 1px solid #e9eaea;
-    
 }
+
 .input:hover {
     border: 1px solid rgb(114, 113, 113);
-   
 }
 
 ::-webkit-input-placeholder {
     color: #bebebe;
-}   
+}
 
 
 /* HEADER */
@@ -61,23 +60,23 @@ input {
     border-radius: 15px;
 }
 
-
 #login__btn,
 #signIn__btn {
     color: white;
     padding: 1.3%;
-   /* background-color: rgba(206, 29, 103, 0.815);*/
+    /* background-color: rgba(206, 29, 103, 0.815);*/
     font-size: 1.2em;
     font-weight: bold;
     width: 30%;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0);
-    
 }
-.active{
+
+.active {
     background-color: rgba(121, 2, 51, 0.815);
     border: 1px solid rgba(121, 2, 51, 0.815);
 }
+
 #login__btn:hover,
 #signIn__btn:hover {
     border: 1px solid rgba(255, 255, 255, 0.788);
@@ -89,19 +88,13 @@ input {
     border-radius: 5px;
 }
 
-
-
-
-
 #message__login,
-#message__signIn{
+#message__signIn {
     text-align: center;
     margin-bottom: 1%;
     font-size: 1.1rem;
     color: rgba(255, 0, 0, 0);
 }
-
-
 
 .mainForm {
     width: 40%;
@@ -124,7 +117,6 @@ input {
     padding: 2%;
     font-size: 1.1rem;
     outline: none;
-    
 }
 
 .btn {
@@ -136,8 +128,6 @@ input {
     background-color: rgb(145, 94, 111);
     transition: 0.3s;
 }
-
-
 
 .forgot {
     color: rgb(255, 255, 255);
@@ -201,12 +191,12 @@ img {
     padding: 1%;
     font-size: 1.1rem;
     outline: none;
-    
 }
 
 .mainWeather__form--input:hover {
     border: 1px solid rgb(63, 63, 63);
 }
+
 .mainWeather__form--input.btn {
     border: none;
 }
@@ -222,104 +212,64 @@ footer {
     text-align: center;
     font-size: 1.2rem;
 }
-/* 
-@media only screen and (max-width: 1600px) {
-    .mainHeader {
-        margin-bottom: 8%;
-    }
-    #mainWeather {
-        margin: 5% 0% 5% 20%;
-    }
-}
 
-@media only screen and (max-width: 1400px) {
-    .mainHeader {
-        margin-bottom: 8%;
-    }
-    #mainWeather {
-        margin: 10% 0% 10% 20%;
-    }
-}
-
-@media only screen and (max-width: 1150px) {
-    .mainHeader {
-        margin-bottom: 25%;
-    }
+@media only screen and (max-width: 1030px) {
     .mainHeader>h1 {
-        padding: 6% 0 2% 0;
+        padding: 6% 0 0 0;
+        font-size: 2.5em;
     }
-    .mainLogin {
+    .loginCreate__buttons {
+        width: 60%;
+        margin: 0 0 10% 20%;
+    }
+    #login__btn,
+    #signIn__btn {
+        font-size: 1.5em;
+        width: 40%;
+    }
+    .mainForm {
+        width: 60%;
+        margin-bottom: 7%;
+    }
+    #mainWeather {
+        margin: 1% 0% 3% 20%;
         width: 60%;
     }
-    #mainWeather {
-        margin: 20% 0% 25% 15%;
-        width: 70%;
-        border-radius: 40px;
+    #weather {
+        width: 80%;
+        margin-left: 10%;
+    }
+    img {
+        width: 50%;
     }
 }
 
-@media only screen and (max-width: 1000px) {
-    .mainHeader {
-        margin-bottom: 10%;
-    }
-    .mainLogin {
-        width: 65%;
-    }
-    #mainWeather {
-        margin: 17% 0% 17% 15%;
-        width: 70%;
-    }
-}
-
-@media only screen and (max-width: 880px) {
-    .mainHeader {
-        margin-bottom: 18%;
-    }
+@media only screen and (max-width: 370px) {
     .mainHeader>h1 {
-        padding: 5% 0 2% 0;
+        padding: 6% 0 0 0;
+        font-size: 1.7em;
     }
-    .mainLogin {
-        width: 70%;
-        border-radius: 30px;
+    .loginCreate__buttons {
+        width: 80%;
+        margin: 0 0 15% 10%;
+    }
+    #login__btn,
+    #signIn__btn {
+        font-size: 1.5em;
+        width: 40%;
+    }
+    .mainForm {
+        width: 80%;
     }
     #mainWeather {
-        margin: 20% 0% 25% 10%;
+        margin: 1% 0% 3% 10%;
         width: 80%;
-        border-radius: 30px;
     }
-}
-
-@media only screen and (max-width: 720px) {
-    .mainHeader {
-        margin-bottom: 20%;
-    }
-    .mainLogin {
-        width: 80%;
-        border-radius: 30px;
-    }
-    #mainWeather {
-        margin: 25% 0% 30% 5%;
+    #weather {
         width: 90%;
-        border-radius: 30px;
+        margin-left: 5%;
+    }
+    img {
+        width: 60%;
     }
 }
-
-@media only screen and (max-width: 600px) {
-    .mainHeader {
-        margin-bottom: 30%;
-    }
-    .mainHeader>h1 {
-        padding: 8% 0 5% 0;
-    }
-    .mainLogin {
-        width: 85%;
-        border-radius: 30px;
-    }
-    #mainWeather {
-        margin: 30% 0% 40% 2%;
-        width: 95%;
-        border-radius: 30px;
-    }
-}
-
-@media only screen and (max-width: 500px) {} */
