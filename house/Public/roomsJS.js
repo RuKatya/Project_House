@@ -69,36 +69,36 @@
   }
   // // SHOW SINGEL ROOM
 
-  onClickRoom = (e) => {
-      let showRoom = ''
-      console.log("room clickd")
+//   onClickRoom = (e) => {
+//       let showRoom = ''
+//       console.log("room clickd")
 
-      fetch("/api/allrooms")
-          .then(r => r.json())
-          .then(data => {
-              data.rooms.forEach(room => {
-                  const listTasks = room.notes.map((task) => `<div>${task}
-                      <button id="${room._id}" name="${task}" class="deleteTask"
-                          onclick="handleDeleteTask(event)">Done</button>
-                  </div>`).join(' onClickRoom')
+//       fetch("/api/allrooms")
+//           .then(r => r.json())
+//           .then(data => {
+//               data.rooms.forEach(room => {
+//                   const listTasks = room.notes.map((task) => `<div>${task}
+//                       <button id="${room._id}" name="${task}" class="deleteTask"
+//                           onclick="handleDeleteTask(event)">Done</button>
+//                   </div>`).join(' onClickRoom')
 
-                  showRoom += `<div class="body">
-                      <div class="back">
-                          <a href="/rooms.html"><img src="icons/back.svg"></a>
-                      </div>
+//                   showRoom += `<div class="body">
+//                       <div class="back">
+//                           <a href="/rooms.html"><img src="icons/back.svg"></a>
+//                       </div>
 
-                      <div>
-                          <h1>${room.roomName}</h1>
-                      </div>
-                      <div class="notes">
-                          ${listTasks}
-                      </div>
-                  </div>`
-              })
-              document.getElementById('singelRoom').innerHTML = showRoom
-          })
+//                       <div>
+//                           <h1>${room.roomName}</h1>
+//                       </div>
+//                       <div class="notes">
+//                           ${listTasks}
+//                       </div>
+//                   </div>`
+//               })
+//               document.getElementById('singelRoom').innerHTML = showRoom
+//           })
 
-  }
+//   }
 
 
   //-----DELETE ROOM-------//
