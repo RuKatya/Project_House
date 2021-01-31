@@ -6,15 +6,8 @@ const cookieParser = require('cookie-parser');
 const { check } = require('express-validator')
 const { validationResult } = require('express-validator')
 const secret = 'SECRET_KEY_RANDOM'
-const generateAccessToken = (user) => {
-    const payload = {
-        user,
-        role: user.role
-    }
-    return jwt.sign(payload, secret, { expiresIn: '24h' })
-}
-const app = express(); ///server;
 
+const app = express(); ///server;
 app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.json());
@@ -87,20 +80,9 @@ const isAdmin = (req, res, next) => {
 const getUserAuthMiddle = (req, res, next) => {
     jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
         req.user = decodedToken;
-
         next()
     })
 }
-
-// Client Routes
-// app.get("/", (req, res) => {
-//     res.sendile(path.join(__dirname + "/public/index.html"));
-// });
-
-// app.get("/rooms", (req, res) => {
-//     res.sendFile(path.join(__dirname + "/public/rooms.html"));
-// });
-
 
 // Get all users
 app.get("/api/users", async(req, res) => {
@@ -219,57 +201,22 @@ app.post("/api/login", async(req, res) => {
 //-------------CREATE ACCOUNT-----------//
 app.post("/api/register", [
     check('username', 'Username cannot be empty').notEmpty(), check('email', 'Invalid email').isEmail(),
-    check('password', 'Password must be at least 3 - 10 characters').isLength({
-        min: 3,
-        max: 10
-    })
+    check('password', 'Password must be at least 3 - 10 characters').isLength({min: 3,max: 10})
 ], async(req, res) => {
     const errors = validationResult(req)
-    console.log(errors)
-    if (!errors.isEmpty()) {
-        return res.status(400).json({
-            message: `${errors.errors[0].msg}`,
-            errors
-            
-
-        })
-        
-    }
     console.log("errors:", errors)
-    const newUser = new User(req.body);
-    console.log(newUser)
-    const {checkPassword} = req.body
-    if (newUser.password !== checkPassword) {
-        return res.status(400).json({
-            message: 'Password does not match'
-        })
+    if (!errors.isEmpty()) {
+        return res.status(400).json({message: `${errors.errors[0].msg}`,errors})
     }
-    bcrypt.hash(newUser.password, saltRounds, async(err, hash) => {
-        try {
-            console.log('hash:', hash)
-            newUser.password = hash;
-            await newUser.save();
-            console.log(newUser._id)
-
-            creatTokenCookie(newUser, res);
-
-            res.send({
-                message: 'user registered successfully'
-            });
-        } catch (e) {
-            console.log(e);
-            res.send({
-                message: 'Registration error'
-            });
-            res.end();
-        }
-    });
-
+    const newUser = new User(req.body);
+    const {confirmPassword} = req.body
+    if (newUser.password !== confirmPassword) {
+        return res.status(400).json({message: 'Password does not match'})
+    }
+    encryptionGenerator(newUser, res);
 })
 
-
 //-----------------------------ROOM FUNCTIONS------------------------------------//
-
 //-------------CREATE ROOM--------------//
 app.post("/api/room", async(req, res) => {
     try {
@@ -282,7 +229,6 @@ app.post("/api/room", async(req, res) => {
 });
 
 //-----DELETE ROOM-------//
-
 app.delete("/api/deleteroom", async(req, res) => {
     try {
         const { roomId } = req.body
@@ -330,14 +276,11 @@ app.get('/api/allrooms', async(req, res) => {
      } 
 });
 
-
+//----------------------------- TASK FUNCTIONS----------------------//
 //-----CREATE TASK-------//
-
 app.post("/api/notes", async(req, res) => {
-
     try {
         const { createTask, roomId } = req.body
-        console.log(roomId, createTask)
         await Room.findByIdAndUpdate(roomId, { $push: { notes: createTask } })
         res.status(200).send({ status: "update" });
     } catch (error) {
@@ -346,7 +289,6 @@ app.post("/api/notes", async(req, res) => {
 });
 
 //-----DELETE TASK-------//
-
 app.delete("/api/deletenotes", async(req, res) => {
     try {
         const { deleteTask, roomId } = req.body
@@ -376,18 +318,6 @@ app.delete("/api/deletenotes", async(req, res) => {
 
 // });
 
-isUser = (req, res, next) => {
-    // res.authorized = false;
-    // const {
-    //     role
-    // } = req.cookies;
-
-
-    res.user = req.cookies;
-
-    next()
-}
-
 //-------------WEATHER-----------//
 app.post('/weather', (req, res) => {
     const {
@@ -409,6 +339,21 @@ app.listen(PORT, () => {
     console.log(`RUNNING: ${PORT}`)
 })
 
+//-------------encryptions-----------//
+const generateAccessToken = (user) => {
+    const payload = {user, role:user.role}
+    return jwt.sign(payload, secret, { expiresIn: '24h' })
+}
+const encryptionGenerator = (newUser, res)=> {
+    bcrypt.hash(newUser.password, saltRounds, async (err, hash) => {
+        try {
+            newUser.password = hash;
+            await newUser.save();
+            creatTokenCookie(newUser, res);
+            res.send({ message: 'user registered successfully' });
+        } catch (e) { res.send({ message: `Registration error: ${e}` }); }
+    });
+}
 const creatTokenCookie = (newUser, res) => {
     const token = generateAccessToken(newUser._id, newUser.role);
     console.log("token:", token);
@@ -417,3 +362,5 @@ const creatTokenCookie = (newUser, res) => {
         httpOnly: true,
     });
 }
+
+
