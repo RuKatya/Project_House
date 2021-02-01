@@ -62,8 +62,8 @@ setRoomsOnPage =  (rooms) => {
 
       const listUsers = room.assignUsers
       .map(
-        (user) => `<div>${user}
-        <button id="${room._id}" name="${user}" class="deleteUser"
+        (user) => `<div>${user.nameUser}
+        <button id="${room._id}" name="${user.userId}" value="${user.nameUser}" class="deleteUser"
             onclick="handleDeleteUser(event)">delete</button>
     </div>`
       )
@@ -98,7 +98,7 @@ setRoomsOnPage =  (rooms) => {
 
   document.getElementById("putRoom").innerHTML = data;
   getAllUsers();
-  setUsersOnPage(users)
+ 
 };
 
 const getAllUsers = (e) => {
@@ -136,11 +136,11 @@ const addUserToRoom = (e) => {
   console.log(e);
   const roomID = e.target.id;
   const selectedIndex = document.getElementById(`${roomID}`).options.selectedIndex
-  const choosenUser = document.getElementById(`${roomID}`).options[selectedIndex].value
+  const userId = document.getElementById(`${roomID}`).options[selectedIndex].value
   const nameUser = document.getElementById(`${roomID}`).options[selectedIndex].text
   console.log(nameUser)
   console.log(selectedIndex)
-  console.log(choosenUser, roomID);
+  console.log(userId, roomID);
   fetch("/api/users", {
     method: "PUT",
     headers: {
@@ -148,7 +148,7 @@ const addUserToRoom = (e) => {
     },
     body: JSON.stringify({
       roomID,
-      choosenUser,
+      userId,
       nameUser
     }),
   })
@@ -159,6 +159,34 @@ const addUserToRoom = (e) => {
    
     });
 };
+
+
+const handleDeleteUser = (e) => {
+  e.preventDefault();
+  const userId = e.target.name;
+  const roomId = e.target.id
+  const nameUser = e.target.value
+ 
+
+  fetch("/api/deleteuser", {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+      body: JSON.stringify({
+      roomId,
+      userId,
+      nameUser
+    }),
+  })
+    .then((r) => r.json())
+    .then((data) => {
+      console.log(data);
+      getAllRooms();
+    });
+};
+
+
 // getElementById("users").innerHTML
 // const listUsers = users.map((user) => `<option id="${user._id}">${user.username}</option>`).join(' ')
 

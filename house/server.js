@@ -46,7 +46,7 @@ const User = mongoose.model('User', {
     },
     role: {
         type: String,
-        default: "admin",
+        default: "user",
     },
     assignRooms: {
         type: [String],
@@ -66,7 +66,7 @@ const Room = mongoose.model("Room", {
     },
 
     assignUsers: {
-        type: [String],
+        type: [Object],
         
     
     }
@@ -137,11 +137,11 @@ app.delete("/api/users/:id", async(req, res) => {
 // update user by id
 app.put("/api/users", async(req, res) => {
     try {
-        const {roomID, choosenUser, nameUser} = req.body
-        console.log(roomID, choosenUser, nameUser)
+        const {roomID, userId, nameUser} = req.body
+        console.log(roomID, userId, nameUser)
         
-        await User.findByIdAndUpdate(choosenUser, { $push: { assignRooms: roomID}})
-        await Room.findByIdAndUpdate(roomID, { $push: { assignUsers: nameUser}})
+        await User.findByIdAndUpdate(userId, { $push: { assignRooms: roomID}})
+        await Room.findByIdAndUpdate(roomID, { $push: { assignUsers: {nameUser, userId} }})
 
         res.status(201).send({
             updateUser
@@ -190,7 +190,7 @@ app.post("/api/login", async(req, res) => {
                 status: 'allowed2'
             })
         }
-        if (user.role == 'child') {
+        if (user.role == 'user') {
             return res.json({
                 status: 'allowed1'
             })
@@ -310,6 +310,19 @@ app.delete("/api/deletenotes", async(req, res) => {
     }
 });
 
+app.delete("/api/deleteuser", async(req, res) => {
+ /*    try { */
+        const { userId, roomId, nameUser } = req.body
+        console.log(req.body)
+        console.log(roomId, userId, nameUser)
+        await User.findByIdAndUpdate(userId, { $pull: { assignRooms: roomId } })
+        await Room.findByIdAndUpdate(roomId, { $pull: { assignUsers: {nameUser, userId} } })
+        
+        res.status(200).send({ status: "deleted" });
+   /*  } catch (error) {
+        res.status(404).send({ error });
+    } */
+});
 
 //---------ONLOAD-------------//
 // app.post("/api/onload", getUserAuthMiddle, async(req, res) => {
