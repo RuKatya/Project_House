@@ -63,7 +63,7 @@ setRoomsOnPage =  (rooms) => {
         <div class="gridHeadline">
             <h3>${room.roomName}</h3> 
 
-            <select class="usersSelector"> 
+            <select id="usersSelector" class="usersSelector"> 
            
         </select>
        
@@ -105,9 +105,10 @@ const getAllUsers = (e) => {
 };
 
 const setUsersOnPage =(users) => {
-const usersOptions = users.map(user => `<option id="${user._id}">${user.username}</option>`)
-usersOptions.unshift(`<option style="display: none">Select user </option>`)
+const usersOptions = users.map(user => `<option value="${user._id}" id="${user._id}">${user.username}</option>`)
+usersOptions.unshift(`<option selected value = "Select user" style="display: none">Select user </option>`)
 const selectors = document.getElementsByClassName('usersSelector');
+console.log(selectors)
 for (const selector of selectors) {
     selector.innerHTML = usersOptions.join(' ');
     
@@ -116,11 +117,12 @@ for (const selector of selectors) {
 
 const addUserToRoom = (e) => {
   e.preventDefault();
-
+  
   console.log(e);
   const roomID = e.target.id;
-  const choosenUser = document.querySelector("#users").value;
-
+  const selectedIndex = document.getElementById('usersSelector').options.selectedIndex
+  const choosenUser = document.getElementById('usersSelector').options[selectedIndex].value
+  console.log(selectedIndex)
   console.log(choosenUser, roomID);
   fetch("/api/users", {
     method: "PUT",
@@ -136,6 +138,7 @@ const addUserToRoom = (e) => {
     .then((data) => {
       console.log(data);
       getAllRooms();
+      setUsersOnPage()
     });
 };
 // getElementById("users").innerHTML
