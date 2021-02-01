@@ -49,6 +49,7 @@ getAllRooms = (rooms) => {
 };
 
 setRoomsOnPage =  (rooms) => {
+
   const data = rooms.map(room => {
     const listTasks = room.notes
       .map(
@@ -59,18 +60,31 @@ setRoomsOnPage =  (rooms) => {
       )
       .join(" ");
 
+      const listUsers = room.assignUsers
+      .map(
+        (user) => `<div>${user}
+        <button id="${room._id}" name="${user}" class="deleteUser"
+            onclick="handleDeleteUser(event)">delete</button>
+    </div>`
+      )
+      .join(" ");
+
     const roomData = `<div class="roomsAndTask">
         <div class="gridHeadline">
             <h3>${room.roomName}</h3> 
 
-            <select id="usersSelector" class="usersSelector"> 
+            <select id="${room._id}" class="usersSelector"> 
            
         </select>
-       
-        <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
+        
+        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
+        room</button>
 
-            <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
-                room</button>
+        <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
+        <div class="listUsers">${listUsers}</div>
+       
+
+          
         </div>
         <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
             <input class="newTask" type='text' placeholder="add task" name='newTask' required>
@@ -84,6 +98,7 @@ setRoomsOnPage =  (rooms) => {
 
   document.getElementById("putRoom").innerHTML = data;
   getAllUsers();
+  setUsersOnPage(users)
 };
 
 const getAllUsers = (e) => {
@@ -120,8 +135,10 @@ const addUserToRoom = (e) => {
   
   console.log(e);
   const roomID = e.target.id;
-  const selectedIndex = document.getElementById('usersSelector').options.selectedIndex
-  const choosenUser = document.getElementById('usersSelector').options[selectedIndex].value
+  const selectedIndex = document.getElementById(`${roomID}`).options.selectedIndex
+  const choosenUser = document.getElementById(`${roomID}`).options[selectedIndex].value
+  const nameUser = document.getElementById(`${roomID}`).options[selectedIndex].text
+  console.log(nameUser)
   console.log(selectedIndex)
   console.log(choosenUser, roomID);
   fetch("/api/users", {
@@ -132,13 +149,14 @@ const addUserToRoom = (e) => {
     body: JSON.stringify({
       roomID,
       choosenUser,
+      nameUser
     }),
   })
     .then((r) => r.json())
     .then((data) => {
       console.log(data);
       getAllRooms();
-      setUsersOnPage()
+   
     });
 };
 // getElementById("users").innerHTML

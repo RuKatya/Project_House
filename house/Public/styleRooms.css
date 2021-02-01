@@ -103,8 +103,8 @@
         padding: 5%;
         width: 65%;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 5%;
+        /* grid-template-columns: repeat(2, 1fr);
+        gap: 5%; */
         background-color: rgba(223, 221, 221, 0.246);
         border-radius: 50px;
     }
@@ -118,10 +118,12 @@
     }
     
     .roomsAndTask>form>input {
-        padding: 2%;
-        border-radius: 15px;
+        padding: 1%;
+        border-radius: 5px;
         border: none;
         outline: none;
+        margin-left: 5%;
+        
     }
     
     form {

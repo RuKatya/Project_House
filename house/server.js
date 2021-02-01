@@ -50,6 +50,8 @@ const User = mongoose.model('User', {
     },
     assignRooms: {
         type: [String],
+        
+    
     }
 });
 
@@ -62,6 +64,12 @@ const Room = mongoose.model("Room", {
     notes: {
         type: [String],
     },
+
+    assignUsers: {
+        type: [String],
+        
+    
+    }
 });
 
 // ---------ADMIN-----------//
@@ -129,14 +137,15 @@ app.delete("/api/users/:id", async(req, res) => {
 // update user by id
 app.put("/api/users", async(req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true,
-        });
+        const {roomID, choosenUser, nameUser} = req.body
+        console.log(roomID, choosenUser, nameUser)
+        
+        await User.findByIdAndUpdate(choosenUser, { $push: { assignRooms: roomID}})
+        await Room.findByIdAndUpdate(roomID, { $push: { assignUsers: nameUser}})
 
         res.status(201).send({
-            user
-        });
+            updateUser
+        }); 
     } catch (err) {
         res.status(400).send({
             err
