@@ -49,6 +49,7 @@ getAllRooms = (rooms) => {
 };
 
 setRoomsOnPage =  (rooms) => {
+
   const data = rooms.map(room => {
     const listTasks = room.notes
       .map(
@@ -84,6 +85,7 @@ setRoomsOnPage =  (rooms) => {
 
   document.getElementById("putRoom").innerHTML = data;
   getAllUsers();
+  setUsersOnPage(users)
 };
 
 const getAllUsers = (e) => {
@@ -122,6 +124,8 @@ const addUserToRoom = (e) => {
   const roomID = e.target.id;
   const selectedIndex = document.getElementById(`${roomID}`).options.selectedIndex
   const choosenUser = document.getElementById(`${roomID}`).options[selectedIndex].value
+  const nameUser = document.getElementById(`${roomID}`).options[selectedIndex].text
+  console.log(nameUser)
   console.log(selectedIndex)
   console.log(choosenUser, roomID);
   fetch("/api/users", {
@@ -132,6 +136,7 @@ const addUserToRoom = (e) => {
     body: JSON.stringify({
       roomID,
       choosenUser,
+      nameUser
     }),
   })
     .then((r) => r.json())
