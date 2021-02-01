@@ -138,7 +138,7 @@ const addUserToRoom = (e) => {
     .then((data) => {
       console.log(data);
       getAllRooms();
-      setUsersOnPage()
+   
     });
 };
 // getElementById("users").innerHTML
