@@ -60,6 +60,15 @@ setRoomsOnPage =  (rooms) => {
       )
       .join(" ");
 
+      const listUsers = room.assignUsers
+      .map(
+        (user) => `<div>${user}
+        <button id="${room._id}" name="${user}" class="deleteUser"
+            onclick="handleDeleteUser(event)">delete</button>
+    </div>`
+      )
+      .join(" ");
+
     const roomData = `<div class="roomsAndTask">
         <div class="gridHeadline">
             <h3>${room.roomName}</h3> 
@@ -67,11 +76,15 @@ setRoomsOnPage =  (rooms) => {
             <select id="${room._id}" class="usersSelector"> 
            
         </select>
-       
-        <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
+        
+        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
+        room</button>
 
-            <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
-                room</button>
+        <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
+        <div class="listUsers">${listUsers}</div>
+       
+
+          
         </div>
         <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
             <input class="newTask" type='text' placeholder="add task" name='newTask' required>
