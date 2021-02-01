@@ -63,7 +63,7 @@ setRoomsOnPage =  (rooms) => {
         <div class="gridHeadline">
             <h3>${room.roomName}</h3> 
 
-            <select id="usersSelector" class="usersSelector"> 
+            <select id="${room._id}" class="usersSelector"> 
            
         </select>
        
@@ -120,8 +120,8 @@ const addUserToRoom = (e) => {
   
   console.log(e);
   const roomID = e.target.id;
-  const selectedIndex = document.getElementById('usersSelector').options.selectedIndex
-  const choosenUser = document.getElementById('usersSelector').options[selectedIndex].value
+  const selectedIndex = document.getElementById(`${roomID}`).options.selectedIndex
+  const choosenUser = document.getElementById(`${roomID}`).options[selectedIndex].value
   console.log(selectedIndex)
   console.log(choosenUser, roomID);
   fetch("/api/users", {
