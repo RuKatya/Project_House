@@ -14,10 +14,11 @@
     </div>
 
     <form class="createRoom_form" onsubmit="hendleCreateRoom(event)">
+        <div class="wrapperAdmin">
         <h3 class="createRoom_form__h3">Create your room</h3>
         <input type="text" id="roomName" placeholder="Name of room">
         <input type="submit" value="Create room" class="createRoom_form__btn">
-
+       </div>
         <h3 class="h3_correct">Correct time</h3>
         <div id="correctTime" onload="getTime()"></div>
 
