@@ -1,3 +1,6 @@
+var isAdmin = false
+var userId 
+
 //---------CORRECT TIME-------//
 function getTime() {
   let date = new Date();
@@ -40,61 +43,62 @@ setInterval(getDate, 0);
 //-----CHECK ADMIN-------//
 
 
-
-/* const getUsersPage = async () => {
-  let checkAdmin = await checkAdmin();
-  if(checkAdmin){
-     document.querySelector('.wrapperAdmin').style.display = 'none';
-  }
-  
-} */
-
- 
-//-----RENDER ROOMS PAGE-------//
-(async function checkAdmin() {
+async function checkAdmin() {
   let admin = false;
-  await fetch("/api/checkadmin")
+    await fetch("/api/checkadmin")
     .then((res) => res.json())
     .then((data) => {
-      if (data.admin) {
-        admin = true;
-      } else {
-        admin = false;
-       }
-      console.log(admin)
+  admin = data.admin
        });
   return admin;
-  })();
+  };
 
-  (async function checkUserId() {
-    let userId;
+  async function checkUserId() {
+   
     await fetch("/api/getUserId")
       .then((res) => res.json())
       .then((data) => {
-        /* if (data.admin) {
-          admin = true;
-        } else {
-          admin = false;
-         } */
-        console.log(data)
+        userId = data.userId
+        console.log(userId)
+        console.log('2')
          });
     return userId;
-    })();
+    };
 
-(getAllRooms = async (rooms) => {
+    
+
+
   
+ 
+//-----RENDER ROOMS PAGE-------//
+
+/* const getUsersPage = async () => {
+  let checkAdmin = await checkAdmin();
+  console.log(checkAdmin)
+   if (checkAdmin){
+     document.querySelector('.wrapperAdmin').style.display = 'none';
+  }
+  
+}  */
+
+getAllRooms = async (rooms) => {
+  console.log('3')
   await fetch("/api/allrooms")
     .then((r) => r.json())
     .then((data) => {
       console.log(data);
       setRoomsOnPage(data.rooms);
+    
     });
-})();
+};
 
 
 
-setRoomsOnPage =  (rooms) => {
 
+
+setRoomsOnPage = async (rooms) => {
+  console.log(isAdmin)
+  console.log(userId)
   const data = rooms.map(room => {
     const listTasks = room.notes
       .map(
@@ -143,6 +147,7 @@ setRoomsOnPage =  (rooms) => {
 
   document.getElementById("putRoom").innerHTML = data;
   getAllUsers();
+
  
 };
 
@@ -354,5 +359,10 @@ handleDeleteTask = (e) => {
     });
 };
 
-/* document.addEventListener("DOMContentLoaded", getAllRooms()); */
 
+
+document.addEventListener('DOMContentLoaded', async (event) => {
+  await checkAdmin().then((localIsAdmin) => {isAdmin = localIsAdmin}),  await checkUserId().then((localUserId) => {userId = localUserId}), await getAllRooms();
+  console.log(isAdmin)
+  console.log(userId)
+});

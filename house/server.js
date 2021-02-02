@@ -132,7 +132,7 @@ app.get("/api/checkadmin", isAdmin, async (req, res) => {
   });
 
   app.get("/api/getUserId",  getUserId, async (req, res) => {
-    res.send({ userId });
+    res.send(userId);
   });
 
 // Get all users
