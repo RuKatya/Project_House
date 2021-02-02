@@ -73,7 +73,7 @@ const Room = mongoose.model("Room", {
 });
 
 // ---------ADMIN-----------//
-const isAdmin = (req, res, next) => {
+/* const isAdmin = (req, res, next) => {
     res.authorized = false;
     const { role } = req.cookies;
 
@@ -83,14 +83,34 @@ const isAdmin = (req, res, next) => {
     }
 
     next()
-}
+} */
 
-const getUserAuthMiddle = (req, res, next) => {
+
+
+/*  const getUserAuthMiddle = (req, res, next) => {
     jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
         req.user = decodedToken;
         next()
     })
+}  */
+
+
+const isAdmin = (req, res, next) => {
+    jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
+        req.user = decodedToken;
+        if (decodedToken.role === "admin") {
+
+        next()
+    }else {
+        res.send({ admin: false });
+    }
+     
+    })
 }
+
+app.get("/api/checkadmin", isAdmin, async (req, res) => {
+    res.send({ admin: true });
+  });
 
 // Get all users
 app.get("/api/users", async(req, res) => {

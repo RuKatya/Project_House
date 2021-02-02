@@ -43,7 +43,7 @@
          .then(data => {
              console.log(data)
              if (data.status == "allowed1") {
-                 window.location.href = 'rooms/teenRoom.html'
+                 window.location.href = 'rooms.html'
              }
              if (data.status == "allowed2") {
                  window.location.href = 'rooms.html'

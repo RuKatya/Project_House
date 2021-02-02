@@ -36,11 +36,36 @@ function getDate() {
 }
 setInterval(getDate, 0);
 
+
+//-----CHECK ADMIN-------//
+
+const checkAdmin = async () => {
+  let admin = false;
+  await fetch("/api/checkadmin")
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.admin) {
+        admin = true;
+      } else {
+        admin = false;
+      }
+    });
+  return admin;
+};
+
+const getUsersPage = async () => {
+  let checkAdmin = await checkAdmin();
+  if(checkAdmin){
+     document.querySelector('.wrapperAdmin').style.display = 'none';
+  }
+}
+
+ 
 //-----RENDER ROOMS PAGE-------//
 
-getAllRooms = (rooms) => {
+getAllRooms = async (rooms) => {
   let display = "";
-  fetch("/api/allrooms")
+  await fetch("/api/allrooms")
     .then((r) => r.json())
     .then((data) => {
       console.log(data);
@@ -310,3 +335,4 @@ handleDeleteTask = (e) => {
 };
 
 document.addEventListener("DOMContentLoaded", getAllRooms());
+
