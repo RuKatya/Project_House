@@ -102,8 +102,7 @@ setRoomsOnPage = (rooms) => {
            
         
         
-        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete
-        room</button>
+        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">X</button>
 
         <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
         <div class="listUsers">${listUsers}</div>

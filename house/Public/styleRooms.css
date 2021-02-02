@@ -43,13 +43,19 @@
     }
 
     .deleteRoom {
+        width: 40px;
+        height: 40px;
         position: relative;
-        top: 05px;
-        padding: 1%;
+        top: -70px;
+        margin-left: 279px;
+     
         border: none;
-        border-radius: 15px;
+        border-radius: 50%;
         outline: none;
         background-color: darkgoldenrod;
+        font-size: 2rem;
+        box-shadow: 5px 5px 9px rgb(85, 85, 85);
+
     }
 
     .deleteRoom:hover {
