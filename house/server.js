@@ -96,8 +96,10 @@ const Room = mongoose.model("Room", {
 
 
 const isAdmin = (req, res, next) => {
-    jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
+       jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
         req.user = decodedToken;
+        console.log(req.user)
+        const role = decodedToken.role
         if (decodedToken.role === "admin") {
 
         next()
@@ -107,9 +109,30 @@ const isAdmin = (req, res, next) => {
      
     })
 }
+const getUserId = (req, res, next) => {
+    jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
+     req.user = decodedToken;
+     console.log('decodedToken:', decodedToken)
+     const userId = decodedToken.id
+     console.log( 'userId:' , userId)
+     if (userId) {
+        next()
+ 
+        res.send({ userId})
+     }
+
+     ;
+ 
+  
+ })
+}
 
 app.get("/api/checkadmin", isAdmin, async (req, res) => {
     res.send({ admin: true });
+  });
+
+  app.get("/api/getUserId",  getUserId, async (req, res) => {
+    res.send({ userId });
   });
 
 // Get all users
@@ -201,7 +224,7 @@ app.post("/api/login", async(req, res) => {
         const token = generateAccessToken(user)
         console.log(token)
         res.cookie("token", token, {
-            maxAge: 1500000,
+            maxAge: 15000000,
             httpOnly: false,
         });
         console.log(user.role)
@@ -384,7 +407,7 @@ app.listen(PORT, () => {
 
 //-------------encryptions-----------//
 const generateAccessToken = (user) => {
-    const payload = { user, role: user.role }
+    const payload = { user, role: user.role, id: user.id }
     return jwt.sign(payload, secret, { expiresIn: '24h' })
 }
 const encryptionGenerator = (newUser, res) => {

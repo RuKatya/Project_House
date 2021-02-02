@@ -39,7 +39,19 @@ setInterval(getDate, 0);
 
 //-----CHECK ADMIN-------//
 
-const checkAdmin = async () => {
+
+
+/* const getUsersPage = async () => {
+  let checkAdmin = await checkAdmin();
+  if(checkAdmin){
+     document.querySelector('.wrapperAdmin').style.display = 'none';
+  }
+  
+} */
+
+ 
+//-----RENDER ROOMS PAGE-------//
+(async function checkAdmin() {
   let admin = false;
   await fetch("/api/checkadmin")
     .then((res) => res.json())
@@ -48,30 +60,38 @@ const checkAdmin = async () => {
         admin = true;
       } else {
         admin = false;
-      }
-    });
+       }
+      console.log(admin)
+       });
   return admin;
-};
+  })();
 
-const getUsersPage = async () => {
-  let checkAdmin = await checkAdmin();
-  if(checkAdmin){
-     document.querySelector('.wrapperAdmin').style.display = 'none';
-  }
-}
+  (async function checkUserId() {
+    let userId;
+    await fetch("/api/getUserId")
+      .then((res) => res.json())
+      .then((data) => {
+        /* if (data.admin) {
+          admin = true;
+        } else {
+          admin = false;
+         } */
+        console.log(data)
+         });
+    return userId;
+    })();
 
- 
-//-----RENDER ROOMS PAGE-------//
-
-getAllRooms = async (rooms) => {
-  let display = "";
+(getAllRooms = async (rooms) => {
+  
   await fetch("/api/allrooms")
     .then((r) => r.json())
     .then((data) => {
       console.log(data);
       setRoomsOnPage(data.rooms);
     });
-};
+})();
+
+
 
 setRoomsOnPage =  (rooms) => {
 
@@ -334,5 +354,5 @@ handleDeleteTask = (e) => {
     });
 };
 
-document.addEventListener("DOMContentLoaded", getAllRooms());
+/* document.addEventListener("DOMContentLoaded", getAllRooms()); */
 
