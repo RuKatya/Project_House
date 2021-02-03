@@ -137,14 +137,13 @@
         width: 25%;
         margin: 0;
         top: 1.5vh;
-        left: 5px;
         text-shadow: 0px 0px 5px rgb(145, 141, 140);
         border: solid chocolate;
     }
 
     .gridHeadline>button {
         bottom: 3vh;
-        left: 25vw;
+        left: 37vw;
     }
 
     .formTask {
@@ -158,6 +157,7 @@
     }
 
     .newTask {
+        margin-top: 200px;
         width: 70px;
         background-color: rgb(231, 212, 248);
     }

@@ -134,11 +134,12 @@ setRoomsOnPage = async (rooms) => {
 
           
         </div>
+        <div class="listTask">${listTasks}</div>
         <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
             <input class="newTask" type='text' placeholder="add task" name='newTask' required>
             <input type="submit" class="addTask" value="Add task">
         </form>
-        <div class="listTask">${listTasks}</div>
+        
     </div>`;
 
     return roomData;
