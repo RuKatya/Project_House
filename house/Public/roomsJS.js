@@ -93,9 +93,6 @@ getAllRooms = async (rooms) => {
 };
 
 
-
-
-
 setRoomsOnPage = async (rooms) => {
   console.log(isAdmin)
   console.log(userId)
@@ -137,7 +134,7 @@ setRoomsOnPage = async (rooms) => {
         <div class="listTask">${listTasks}</div>
         <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
             <input class="newTask" type='text' placeholder="add task" name='newTask' required>
-            <input type="submit" class="addTask" value="Add task">
+            <button type="submit" class="addTask" value="Add task">Add task</button>
         </form>
         
     </div>`;
@@ -147,9 +144,29 @@ setRoomsOnPage = async (rooms) => {
 
   document.getElementById("putRoom").innerHTML = data;
   getAllUsers();
-
+  
+    if (isAdmin == false){
+      const wrapperAdmin = document.getElementById('wrapperAdmin')
+      console.log(wrapperAdmin)
+      wrapperAdmin.style.display = 'none';
+      
+    }
+  
  
 };
+
+
+getUsersPage = () => {
+  console.log(isAdmin)
+  if (isAdmin = false){
+    const wrapperAdmin = document.getElementsByClassName('wrapperAdmin')
+    console.log(wrapperAdmin)
+    wrapperAdmin.style.display = 'none';
+    
+  }
+}
+
+
 
 const getAllUsers = (e) => {
   fetch("/api/users")
@@ -264,6 +281,7 @@ handleDeleteRoom = (e) => {
 hendleCreateRoom = (e) => {
   e.preventDefault();
   const roomName = e.target.children.roomName.value;
+  console.log(roomName)
   const room = document.getElementById("putRoom");
   fetch("/api/room", {
       method: "POST",
