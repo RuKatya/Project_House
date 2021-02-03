@@ -112,9 +112,9 @@ const isAdmin = (req, res, next) => {
 const getUserId = (req, res, next) => {
     jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
      req.user = decodedToken;
-     console.log('decodedToken:', decodedToken)
+     console.log('decodedToken!!!!!!!!!!!!!!!!!!!!!!:', decodedToken)
      const userId = decodedToken.id
-     console.log( 'userId:' , userId)
+     console.log( 'userId!!!!!!!!!!!!!!!!!!!!!!!!!!!:' , userId)
      if (userId) {
         next()
  
@@ -132,21 +132,22 @@ app.get("/api/checkadmin", isAdmin, async (req, res) => {
   });
 
   app.get("/api/getUserId",  getUserId, async (req, res) => {
-    res.send(userId);
+      console.log('UUUUUUUUUUUUUUUUUSSSSSSSSSSEEEEEEEEEEEEEEEEERRRRRRRRRRR', userId)
+    res.send({userId});
   });
 
 // Get all users
 app.get("/api/users", async(req, res) => {
-    try {
+   /*  try { */
         const users = await User.find();
         res.status(200).send({
             users
         });
-    } catch (err) {
+    /* } catch (err) {
         res.status(404).send({
             err
-        });
-    }
+        }); */
+   /*  } */
 });
 
 // Get user by id
@@ -178,7 +179,7 @@ app.delete("/api/users/:id", async(req, res) => {
 });
 
 // update user by id
-app.put("/api/users", async(req, res) => {
+app.put("/api/addusers", async(req, res) => {
     try {
         const {roomID, userId, nameUser} = req.body
         console.log(roomID, userId, nameUser)
@@ -186,15 +187,15 @@ app.put("/api/users", async(req, res) => {
         await User.findByIdAndUpdate(userId, { $push: { assignRooms: roomID}})
         await Room.findByIdAndUpdate(roomID, { $push: { assignUsers: {nameUser, userId} }})
 
-        res.status(201).send({
-            updateUser
-        }); 
-    } catch (err) {
+        res.status(201).send(
+            { message: 'user added successfully' }
+        ); 
+   } catch (err) {
         res.status(400).send({
             err
         });
     }
-});
+    })
 
 //----------LOGIN-------------//
 app.post("/api/login", async(req, res) => {

@@ -99,7 +99,7 @@ setRoomsOnPage = async (rooms) => {
   const data = rooms.map(room => {
     const listTasks = room.notes
       .map(
-        (task) => `<div>${task}
+        (task) => `<div class='tasks'>${task}
         <button id="${room._id}" name="${task}" class="deleteTask"
             onclick="handleDeleteTask(event)">Done</button>
     </div>`
@@ -120,27 +120,27 @@ setRoomsOnPage = async (rooms) => {
             <h3>${room.roomName}</h3> 
 
             <select id="${room._id}" class="usersSelector"> </select>
-           
+            <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
         
         
         <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">X</button>
-
-        <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
         <div class="listUsers">${listUsers}</div>
+     
+       
        
 
           
         </div>
-        <div class="listTask">${listTasks}</div>
+        
         <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
             <input class="newTask" type='text' placeholder="add task" name='newTask' required>
             <button type="submit" class="addTask" value="Add task">Add task</button>
         </form>
-        
+        <div class="listTask">${listTasks}</div>
     </div>`;
 
     return roomData;
-  });
+  }).join(' ');
 
   document.getElementById("putRoom").innerHTML = data;
   getAllUsers();
@@ -208,7 +208,7 @@ const addUserToRoom = (e) => {
   console.log(nameUser)
   console.log(selectedIndex)
   console.log(userId, roomID);
-  fetch("/api/users", {
+  fetch("/api/addusers", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
