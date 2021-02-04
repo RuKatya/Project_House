@@ -109,14 +109,13 @@
          .then(data => {
              console.log(data)
 
-             if ((data.weather.main.temp - 273.15) < 0) {
-                 document.getElementById('mainWeather').style.backgroundColor =
-                     "rgba(rgba(52, 52, 53, 0.507)"
+             if (data.weather.main.temp - 273.15 < 0) {
+                 document.getElementById('mainWeather').style.backgroundColor = "rgba(52, 52, 53, 0.507)"
                  document.getElementById('weather').innerHTML = `<p class="img"><img src="icons/cold.svg" class="sizeOfIcons"></p>
          <p>The temperature is ${Math.round(data.weather.main.temp-273.15)} &#8451 </p>
          <p>It's feels like ${Math.round(data.weather.main.feels_like-273.15)} &#8451</p>
          <p>The wind speed is ${data.weather.wind.speed}</p>`;
-             } else if (0 < (data.weather.main.temp - 273.15) < 20) {
+             } else if (data.weather.main.temp - 273.15 < 25) {
                  document.getElementById('mainWeather').style.backgroundColor = "rgba(15, 178, 219, 0.507)"
                  document.getElementById('weather').innerHTML = `<p class="img"><img src="icons/cool.svg" class="sizeOfIcons"></p>
          <p>The temperature is ${Math.round(data.weather.main.temp-273.15)} &#8451 </p>
