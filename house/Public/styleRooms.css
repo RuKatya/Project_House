@@ -71,23 +71,7 @@
 
     /* Delete room */
     
-    .deleteRoom {
-        padding: 1%;
-       /*  width: 40px;
-        height: 40px;
-        position: relative;
-        top: -70px;
-        margin-left: 279px; */
-     
-        border: none;
-        border-radius: 15px;
-        /* border-radius: 50%; */
-        outline: none;
-       /*  background-color: darkgoldenrod;
-        font-size: 2rem;
-        box-shadow: 5px 5px 9px rgb(85, 85, 85); */
 
-    }
     
 
     .deleteRoom:hover {
@@ -146,7 +130,8 @@
         margin: 0 0 0 20%;
         padding: 2%;
         width: 65%;
-        display: grid;
+        max-width: 1000px;
+       /*  display: grid; */
         background-color: rgba(221, 221, 223, 0.246);
         border-radius: 20px;
         /* width: 92%;
@@ -167,15 +152,21 @@
        /*  background: white;
         box-shadow: 5px 5px 9px rgb(85, 85, 85); */
         border-radius: 15px;
+        max-width: 994px; 
+        padding-bottom: 3%;
+      
     }
     
 
     .roomsAndTask>form>input {
         padding: 1%;
-        border-radius: 5px;
+        border-radius: 5px 0 0 5px;
         border: none;
         outline: none;
         margin-left: 5%;
+        background-color: rgba(255, 255, 255, 0);
+        border: 1px solid white;
+        height: 17px;
         
     }
     
@@ -190,9 +181,7 @@
     
 
     .gridHeadline {
-        padding: 0;
-        margin: 0;
-        height: 10vh;
+     height: auto;
     }
     
 
@@ -212,16 +201,18 @@
 
     .gridHeadline>button {
         position: relative;
-        bottom: 3vh;
-        left: 37vw;
+        bottom: 8vh;
+        left: 55vw;
     }
     
 
-    .formTask {
-        position: absolute;
-        margin: -5% 1% 20% 60%;
-        height: 10px;
-       /*  border: solid black; */
+    .roomsAndTask>form {
+      
+        margin: -80px 1px 20px 60px;
+        height: 10%;
+        width: 70%;
+        padding: 0;
+        float: right;
     }
 
   
@@ -235,21 +226,43 @@
     }
     
     .addTask{
-     margin-left: -1%;
-     color: black;
+     margin-left: -10px;
+     color: rgb(255, 255, 255);
+     height: 29px;
+     background-color: rgba(255, 255, 255, 0);
+     border: 1px solid white;
+     border-radius: 0 5px 5px 0;
+     
+     
+
+
     }
     .addTask:hover {
         background-color: rgb(137, 197, 137);
         transition: 0.3s;
     }
     
+    ::-webkit-scrollbar {
+    width: 9px;
+    background-color: rgba(255, 255, 255, 0.411);
+    }
+
+    ::-webkit-scrollbar-thumb{
+        background-color: #fff;
+        border-radius: 5px;
+    }
 
     .listTask {
+        overflow: auto;
         font-size: 0.6em;
-        width: 50%;
+        width: 150px;
+        height: 80px;
         min-width: 333px;
         margin-left: 50%;
-        padding-bottom: 5%;
+        position: relative;
+        margin-bottom: 20px;
+        
+        
        /*  position: relative; */
         /* left: 6%; */
     }
@@ -277,14 +290,52 @@
         font-weight: bold;
     }
     
-    .listUsers{
+
+    .usersSelector{
         margin-left: 5%;
-        width: 20%;
+        background-color: rgba(255, 255, 255, 0);
+        color: white;
+        font-size: 0.5em;
+        border-radius: 5px 0 0 5px;
+        border: 1px solid white;
+
+    }
+    .usersSelector option{
+        color: rgba(0, 0, 0, 0.548);
     }
 
+
+    .listUsers{
+        overflow: auto;
+        margin-left: 5%;
+        width: 20%;
+        height: 80px;
+        min-width: 153px;
+        font-size: 0.8em;
+        position: absolute;
+    }
+
+    .add__btn{
+    position: relative;
+    right: 10px;
+    bottom: 1px;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    border: 1px solid white;
+    height: 21px;
+    border-radius: 0 5px 5px 0;
+    outline: none;
+
+
+
+    }
     .deleteUser{
         float: right;
         margin-top: 5%;
+    }
+    .addUser__wrapper{
+        width: 30%;
+        margin-bottom: 1%;
     }
 
     footer {

@@ -118,14 +118,14 @@ setRoomsOnPage = async (rooms) => {
     const roomData = `<div class="roomsAndTask">
         <div class="gridHeadline">
             <h3>${room.roomName}</h3> 
-
+            <div class='addUser__wrapper'>
             <select id="${room._id}" class="usersSelector"> </select>
-            <button id="${room._id}" onclick="addUserToRoom(event)" >add user to this room</button>
+            <button class="add__btn" id="${room._id}" onclick="addUserToRoom(event)" >add</button>
+            <div class="listUsers">${listUsers}</div>
+            </div>
         
+        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete room</button>
         
-        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">X</button>
-        <div class="listUsers">${listUsers}</div>
-     
        
        
 
