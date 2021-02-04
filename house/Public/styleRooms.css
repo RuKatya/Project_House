@@ -1,7 +1,7 @@
     body {
         margin: 0;
         padding: 0;
-        background: linear-gradient( to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)50%), url('img/house.jpg');
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)50%), url('img/house.jpg');
         background-size: cover;
         background-attachment: fixed;
         background-position: top;
@@ -9,42 +9,50 @@
         background-position: center;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
-    
+
     a {
         text-decoration: none;
-        
+
     }
-    
-/* 
+
+    h3 {
+        color: white;
+    }
+
+    /* SCROLL */
+
+    ::-webkit-scrollbar {
+        width: 9px;
+        background-color: rgba(255, 255, 255, 0.411);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #fff;
+        border-radius: 5px;
+    }
+
+    /* HEADER */
     .back {
         height: 12.5vh;
         background-color: rgba(173, 173, 173, 0.377);
         margin-bottom: 2%;
     }
-     */
 
     .back>a>img {
         margin: 1.3% 0 0% 2%;
         width: 4%;
     }
-    /* form of creating room */
-    
+
+    /* CREATING ROOM & TIME & DATE */
 
     .createRoom_form {
         width: 16%;
-       /*  width: 95%;
-        height: 280px; */
         padding: 0.5%;
-       /*  margin: auto; */
         text-align: center;
         background-color: rgba(173, 173, 173, 0.377);
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
-       /*  background-color: rgb(255, 255, 255);
-        border-radius: 20px;
-        box-shadow: 5px 5px 9px rgb(85, 85, 85); */
     }
-    
 
     .createRoom_form>input {
         outline: none;
@@ -52,236 +60,136 @@
         border-radius: 15px;
         border: none;
     }
-    
-   
 
     .createRoom_form__btn {
         margin-left: 2%;
-     /*    margin-left: 1%; */
     }
-    
 
     .createRoom_form__btn:hover {
         background-color: rgb(137, 197, 137);
         transition: 0.15s;
         font-weight: bold;
-    }
-
-    
-
-    /* Delete room */
-    
-
-    
-
-    .deleteRoom:hover {
-        border: 1px solid rgba(255, 0, 0, 0.548);
-        transition: 0.15s;
-        color: rgba(255, 0, 0, 0.548);
-        font-weight: bold;
-    }
-    /* correct time and date */
-    
-    h3 {
         color: white;
     }
-    
 
-    .h3_correct {
-       /*  margin-right: 50%; */
-        margin-right: 40%;
+    .createRoom_form__h3--correct {
+        margin-right: 50%;
     }
-    
 
-    .createRoom_form__h3 {
+    .createRoom_form--h3 {
         font-size: 1.5em;
         margin-top: 2%;
         margin-bottom: 5%;
         text-shadow: 0px 0px 5px black;
     }
-  /*   .timeAndDate{
-        border: solid gold;
-        width: 40%;
-        margin: auto;
-        text-align: center;
-    }
-    
-    .timeDateFlex{
-        display: flex;
-        flex-direction: row;
-
-    } */
 
     #correctTime,
     #correctDate {
-        font-size: 1.5rem;
+        font-size: 2.5rem;
         color: white;
         text-shadow: 0px 0px 5px black;
-       /*  border: solid darkred; */
-
     }
 
-    /* show the rooms tasks*/
-    
+    /* PUTROOMS AND TASKS */
 
     #putRoom {
         position: relative;
-        bottom: 20vh;
+        bottom: 32vh;
         margin: 0 0 0 20%;
         padding: 2%;
-        width: 65%;
-        max-width: 1000px;
-       /*  display: grid; */
+        width: 73%;
         background-color: rgba(221, 221, 223, 0.246);
         border-radius: 20px;
-        /* width: 92%;
-        display: flex;
-        flex-direction: column;
-        border: solid rgba(24, 8, 255, 0.527);
-        text-align: center;
-        margin: auto; */
     }
-    
 
     .roomsAndTask {
         position: relative;
         color: white;
         font-size: 2em;
-        background: linear-gradient(180deg, rgba(7, 21, 68, 0.548) 8%, rgba(119, 125, 136, 0.8) 55%, rgba(20, 20, 56, 0.7) 100%);
-        /* box-shadow: rgb(129, 129, 129) 5px 5px 3px; */
-       /*  background: white;
-        box-shadow: 5px 5px 9px rgb(85, 85, 85); */
+        background: linear-gradient(180deg, rgba(59, 12, 31, 0.815) 8%, rgba(121, 2, 51, 0.815) 55%, rgba(121, 2, 51, 0.815) 100%);
         border-radius: 15px;
-        max-width: 994px; 
+        margin-bottom: 3%;
         padding-bottom: 3%;
-      
     }
-    
-
-    .roomsAndTask>form>input {
-        padding: 1%;
-        border-radius: 5px 0 0 5px;
-        border: none;
-        outline: none;
-        margin-left: 5%;
-        background-color: rgba(255, 255, 255, 0);
-        border: 1px solid white;
-        height: 17px;
-        
-    }
-    
-
-    form {
-        padding-bottom: 5%;
-       
-    }
-    /* select{
-        color: chartreuse;
-    } */
-    
-
-    .gridHeadline {
-     height: auto;
-    }
-    
 
     .gridHeadline>h3 {
-        width: 50%;
-       /*  width: 25%; */
+        width: 25%;
         margin: 0;
         position: relative;
         top: 1.5vh;
         left: 2vw;
-        text-shadow: 0px 0px 5px rgb(107, 45, 16);
-       /*  left: 5px;
-        text-shadow: 0px 0px 5px rgb(145, 141, 140);
-        border: solid chocolate; */
     }
-    
 
-    .gridHeadline>button {
-        position: relative;
-        bottom: 8vh;
-        left: 55vw;
-    }
-    
+    /* NEW TASK AND ADD TASK*/
 
-    .roomsAndTask>form {
-      
-        margin: -80px 1px 20px 60px;
-        height: 10%;
+    .formTask {
+        position: absolute;
+        left: 30%;
+        bottom: 55%;
         width: 70%;
-        padding: 0;
-        float: right;
+        padding-bottom: 5%;
     }
-
-  
 
     .newTask {
-        width: 60%;
-        margin-left: 50px;
-        background-color: rgb(231, 212, 248);
-        
-        
+        width: 80%;
+        padding: 0.5%;
+        border-radius: 10px 0 0 10px;
+        outline: none;
+        border: 1px solid white;
+        background-color: rgba(207, 160, 179, 0.5);
+        font-size: 1rem;
+        color: rgb(250, 250, 250);
     }
-    
-    .addTask{
-     margin-left: -10px;
-     color: rgb(255, 255, 255);
-     height: 29px;
-     background-color: rgba(255, 255, 255, 0);
-     border: 1px solid white;
-     border-radius: 0 5px 5px 0;
-     
-     
 
-
+    input.newTask::placeholder {
+        color: rgba(255, 255, 255, 0.650);
     }
+
+    .newTask:hover {
+        box-shadow: 0px 0px 5px rgb(223, 221, 221);
+    }
+
+    .addTask {
+        position: relative;
+        right: 1%;
+        color: rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0);
+        border: 1px solid white;
+        border-radius: 0 5px 5px 0;
+        font-size: 1rem;
+        padding: 0.5%;
+    }
+
     .addTask:hover {
         background-color: rgb(137, 197, 137);
         transition: 0.3s;
     }
-    
-    ::-webkit-scrollbar {
-    width: 9px;
-    background-color: rgba(255, 255, 255, 0.411);
-    }
 
-    ::-webkit-scrollbar-thumb{
-        background-color: #fff;
-        border-radius: 5px;
-    }
+    /* TASK LIST */
 
     .listTask {
         overflow: auto;
         font-size: 0.6em;
-        width: 150px;
-        height: 80px;
-        min-width: 333px;
-        margin-left: 50%;
+        width: 70%;
+        height: 21vh;
         position: relative;
         margin-bottom: 20px;
-        
-        
-       /*  position: relative; */
-        /* left: 6%; */
+        left: 27%;
     }
-    
 
-.tasks{
-    width: 80%;
-    border-bottom: 1px solid white;
-    min-width: 268px;
-}
+    .tasks {
+        border-bottom: 1px solid white;
+        padding: 1%;
+    }
+
+ /* DELETE TASK */
 
     .deleteTask {
-        position: relative; 
         float: right;
-        padding: 1%;
+        padding: 0.5%;
         border-radius: 15px;
         border: none;
     }
-    
 
     .deleteTask:hover {
         background-color: rgb(137, 197, 137);
@@ -289,74 +197,108 @@
         color: white;
         font-weight: bold;
     }
-    
 
-    .usersSelector{
-        margin-left: 5%;
+
+    /* DELETE ROOM BUTTON */
+
+    .deleteRoom {
+        position: relative;
+        bottom: 8vh;
+        left: 66vw;
+        padding: 0.5%;
+        font-size: 0.9rem;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+    }
+
+    .deleteRoom:hover {
+        border: 1px solid rgba(255, 0, 0, 0.548);
+        transition: 0.15s;
+        color: rgba(255, 0, 0, 0.548);
+        font-weight: bold;
+    }
+
+/* USERS SELECTOR */ 
+
+    .usersSelector {
+        position: relative;
+        top: 1vh;
+        left: 2vw;
+        font-size: 1rem;
         background-color: rgba(255, 255, 255, 0);
         color: white;
-        font-size: 0.5em;
         border-radius: 5px 0 0 5px;
         border: 1px solid white;
-
     }
-    .usersSelector option{
+
+    .usersSelector option {
         color: rgba(0, 0, 0, 0.548);
     }
 
+    .add__btn {
+        position: relative;
+        left: 1.5vw;
+        top: 1vh;
+        background-color: rgba(255, 255, 255, 0);
+        color: white;
+        border: 1px solid white;
+        border-radius: 0 5px 5px 0;
+        outline: none;
+        font-size: 0.95rem;
+    }
 
-    .listUsers{
-        overflow: auto;
-        margin-left: 5%;
-        width: 20%;
-        height: 80px;
-        min-width: 153px;
-        font-size: 0.8em;
+    .add__btn:hover {
+        background-color: rgb(137, 197, 137);
+        transition: 0.3s;
+    }
+
+    .listUsers {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
         position: absolute;
+        margin-top: 2%;
+        margin-left: 3%;
+        overflow: auto;
+        width: 20%;
+        height: 20vh;
+        font-size: 1.3rem;
     }
 
-    .add__btn{
-    position: relative;
-    right: 10px;
-    bottom: 1px;
-    background-color: rgba(255, 255, 255, 0);
-    color: white;
-    border: 1px solid white;
-    height: 21px;
-    border-radius: 0 5px 5px 0;
-    outline: none;
-
-
-
-    }
-    .deleteUser{
+    .deleteUser {
         float: right;
-        margin-top: 5%;
     }
-    .addUser__wrapper{
-        width: 30%;
+
+    .deleteUser:hover {
+        border: 1px solid rgba(255, 0, 0, 0.548);
+        transition: 0.15s;
+        color: rgba(255, 0, 0, 0.548);
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .addUser__wrapper {
         margin-bottom: 1%;
     }
 
     footer {
         padding: 2%;
         color: white;
-
         text-align: center;
         font-size: 1.2rem;
     }
 
     /* singel room css */
-    
 
-    h1 {
+
+    /* h1 {
         text-align: center;
         width: 40%;
 
         color: white;
         text-shadow: 1px 1px 10px black;
     }
-    
+
 
     .notes {
         width: 80%;
@@ -364,7 +306,8 @@
 
         color: white;
         text-shadow: 1px 1px 7px black;
-    }
+    } */
+
     /* #singelRoom {
     position: absolute;
     width: 80%;
@@ -373,8 +316,8 @@
     border-radius: 20px;
 
 } */
+
     
-   /* @media only screen and (max-width: 1030px) {
     /* @media only screen and (max-width: 1030px) {
         .back>a>img {
             margin: 4% 0 0% 3%;
@@ -387,7 +330,7 @@
             bottom: 1.5vh;
             left: 40vw;
         }
-@ -298,11 +279,10 @@
+
             grid-template-columns: repeat(1, 1fr);
         }
         .gridHeadline>button {

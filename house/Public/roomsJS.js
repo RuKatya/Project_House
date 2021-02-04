@@ -110,7 +110,7 @@ setRoomsOnPage = async (rooms) => {
       .map(
         (user) => `<div>${user.nameUser}
         <button id="${room._id}" name="${user.userId}" value="${user.nameUser}" class="deleteUser"
-            onclick="handleDeleteUser(event)">delete</button>
+            onclick="handleDeleteUser(event)">X</button>
     </div>`
       )
       .join(" ");
@@ -120,7 +120,7 @@ setRoomsOnPage = async (rooms) => {
             <h3>${room.roomName}</h3> 
             <div class='addUser__wrapper'>
             <select id="${room._id}" class="usersSelector"> </select>
-            <button class="add__btn" id="${room._id}" onclick="addUserToRoom(event)" >add</button>
+            <button class="add__btn" id="${room._id}" onclick="addUserToRoom(event)" >Add</button>
             <div class="listUsers">${listUsers}</div>
             </div>
         
@@ -133,7 +133,7 @@ setRoomsOnPage = async (rooms) => {
         </div>
         
         <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
-            <input class="newTask" type='text' placeholder="add task" name='newTask' required>
+            <input class="newTask" type='text' placeholder="Add task" name='newTask' required>
             <button type="submit" class="addTask" value="Add task">Add task</button>
         </form>
         <div class="listTask">${listTasks}</div>
