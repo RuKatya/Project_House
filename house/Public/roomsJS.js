@@ -119,8 +119,9 @@ setRoomsOnPage = async (rooms) => {
         <div class="gridHeadline">
             <h3>${room.roomName}</h3> 
             <div class='addUser__wrapper'>
-            <select id="${room._id}" class="usersSelector"> </select>
-            <button class="add__btn" id="${room._id}" onclick="addUserToRoom(event)" >Add</button>
+            <div class='addUser__btns'><select id="${room._id}" class="usersSelector"> </select>
+            <button class="add__btn" id="${room._id}" onclick="addUserToRoom(event)" >Add</button></div>
+            
             <div class="listUsers">${listUsers}</div>
             </div>
         
@@ -146,10 +147,35 @@ setRoomsOnPage = async (rooms) => {
   getAllUsers();
   
     if (isAdmin == false){
-      const wrapperAdmin = document.getElementById('wrapperAdmin')
-      console.log(wrapperAdmin)
-      wrapperAdmin.style.display = 'none';
-      
+      document.getElementById('titleCreateRoom').style.display = 'none';
+      document.getElementById('roomName').style.display = 'none';
+      document.getElementById('btnCreateRoom').style.display = 'none';
+     
+      const addUser__btns = document.getElementsByClassName("addUser__btns");
+      for (let wrapperBtns of addUser__btns) {
+          console.log(wrapperBtns);
+          wrapperBtns.style.display='none'
+      }
+     
+      const btnDeleteRoom = document.getElementsByClassName("deleteRoom");
+      for (let btnDelete of btnDeleteRoom) {
+          console.log(btnDelete);
+          btnDelete.style.display='none'
+      }
+
+      const btnDeleteUser = document.getElementsByClassName("deleteUser");
+      for (let btnDelete of btnDeleteUser) {
+          console.log(btnDelete);
+          btnDelete.style.display='none'
+      }
+
+      const listTask = document.getElementsByClassName("listTask");
+      console.log(listTask)
+      for (let listTasksUsers of listTask) {
+          listTasksUsers.style.cssText=`height: 15vh;
+          margin: 40px 0px 20px 0px`
+         
+      }
     }
   
  

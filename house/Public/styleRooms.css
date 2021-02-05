@@ -281,6 +281,10 @@
         margin-bottom: 1%;
     }
 
+    .addUser__wrapper active{
+        display: none;
+    }
+
     footer {
         padding: 2%;
         color: white;
