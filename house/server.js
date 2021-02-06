@@ -329,8 +329,6 @@ app.post('/api/allrooms', async(req, res) => {
     
             })
         }else{
-            // const usersRooms = await Room.find({"assignUsers":{"userId":userId}});
-            // const usersRooms = await Room.find({"roomName":"Kitchen"});
             const rooms = await Room.find().elemMatch("assignUsers",{"userId":userId});
             console.log(rooms)
             res.status(200).send({
