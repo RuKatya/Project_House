@@ -318,13 +318,27 @@ app.get("/api/room/:id", async(req, res) => {
     }
 });
 //-------------GET ALL ROOMS--------------//
-app.get('/api/allrooms', async(req, res) => {
+app.post('/api/allrooms', async(req, res) => {
     try {
-        const rooms = await Room.find({});
-        res.status(200).send({
-            rooms,
-
-        });
+        const {isAdmin, userId} = req.body
+        console.log(req.body)
+        if(isAdmin == true){
+            const rooms = await Room.find({});
+            res.status(200).send({
+                rooms,
+    
+            })
+        }else{
+            // const usersRooms = await Room.find({"assignUsers":{"userId":userId}});
+            // const usersRooms = await Room.find({"roomName":"Kitchen"});
+            const rooms = await Room.find().elemMatch("assignUsers",{"userId":userId});
+            console.log(rooms)
+            res.status(200).send({
+                rooms,
+    
+            })
+        }
+       
     } catch (error) {
         res.status(404).send({ error });
     }

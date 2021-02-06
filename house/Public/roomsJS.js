@@ -83,10 +83,20 @@ async function checkAdmin() {
 
 getAllRooms = async (rooms) => {
   console.log('3')
-  await fetch("/api/allrooms")
+  await fetch("/api/allrooms", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId,
+      isAdmin
+    }),
+  })
     .then((r) => r.json())
     .then((data) => {
-      console.log(data);
+    console.log(data)
+      
       setRoomsOnPage(data.rooms);
     
     });
