@@ -223,7 +223,7 @@
         float: right;
         border: none;
         background-color: transparent;
-        
+        outline: none;
     }
 
    
@@ -313,6 +313,7 @@
         color: white;
         border-radius: 5px 0 0 5px;
         border: 1px solid white;
+        outline: none;
     }
 
     .usersSelector option {
@@ -368,6 +369,7 @@
         background-color: inherit;
         color: white;
         margin-top: 6px;
+        outline: none;
        
     }
 
