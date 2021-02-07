@@ -101,7 +101,8 @@ input {
 }
 
 #message__login,
-#message__signIn {
+#message__signIn,
+#message__reset {
     text-align: center;
     margin-bottom: 1%;
     font-size: 1.1rem;

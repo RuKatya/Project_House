@@ -3,6 +3,7 @@
  let signInPage = document.getElementById("signInPage")
  let loginButton = document.getElementById("login__btn")
  let signInButton = document.getElementById("signIn__btn")
+ let resetPage = document.getElementById('resetPage')
 
  hendleLoginPage = (e) => {
      e.preventDefault();
@@ -10,6 +11,7 @@
      signInPage.style.display = "none"
      signInButton.classList.remove("active");
      loginButton.classList.add("active");
+     resetPage.style.display = "none"
 
 
  }
@@ -19,7 +21,14 @@
      signInPage.style.display = "block"
      signInButton.classList.add("active");
      loginButton.classList.remove("active");
+     resetPage.style.display = "none"
 
+ }
+
+ showPageReset = (e) =>{
+    loginPage.style.display = "none"
+    signInPage.style.display = "none"
+    resetPage.style.display = "block"
  }
 
  //---------LOGIN---------//

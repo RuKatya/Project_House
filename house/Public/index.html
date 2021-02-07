@@ -31,7 +31,7 @@
                     <input class="input" type="password" name="password" placeholder="Password">
                     <input class="btn" type="submit" value="Sign In">
                     <a href="#">
-                        <p class="forgot">Forgot password?</p>
+                        <a href="#" id="reset"class="forgot" onclick="showPageReset(event)">Forgot password?</a>
                     </a>
                 </form>
             </div>
@@ -47,8 +47,13 @@
                 </form>
             </div>
         </div>
-
-
+        <div class="mainForm wrapperResetForm" id="resetPage" style="display: none;">
+        <form onsubmit="hendleResetPassword(event)" class= "mainLogin__form resetPassword">
+            <div id="message__reset">message</div>
+            <input class="input" type="text" name="email" placeholder="Email">
+            <input class="btn" type="submit" value="Reset password">
+        </form>
+    </div>
         <div id="mainWeather">
             <div id="weather"></div>
             <form onsubmit="hendleSubmitWeater(event)" class="mainWeather__form">
