@@ -46,7 +46,7 @@ const User = mongoose.model('User', {
     },
     role: {
         type: String,
-        default: "admin",
+        default: "user",
     },
     assignRooms: {
         type: [String],

@@ -106,59 +106,67 @@ getAllRooms = async (rooms) => {
 setRoomsOnPage = async (rooms) => {
   console.log(isAdmin)
   console.log(userId)
-  const data = rooms.map(room => {
-    const listTasks = room.notes
-      .map(
-        (task) => `<div class='tasks' id='${task}'>${task}
-        <button id="${room._id}" name="${task}" class="deleteTask"
-            onclick="handleDeleteTask(event)"></button>
-        <button class='mark__btn' id='mark${task}' name='${task}' onclick="handleMarkTask(event)"></button>
-        <button class='unmark__btn' id='unmark${task}' name='${task}' style="display: none;" onclick="handleUnmarkTask(event)"></button>
-        
-    </div>`
-      )
-      .join(" ");
-
-    const listUsers = room.assignUsers
-  
-      .map(
-        (user) => `<div class="userName">${user.nameUser}
-        <button id="${room._id}" name="${user.userId}" value="${user.nameUser}" class="deleteUser"
-            onclick="handleDeleteUser(event)"></button>
-    </div>`
-      )
-      .join(" ");
-
-    const roomData = `<div class="roomsAndTask">
-        <div class="gridHeadline">
-            <h3>${room.roomName}</h3> 
-            <div class='addUser__wrapper'>
-            <div class='addUser__btns'><select id="${room._id}" class="usersSelector"> </select>
-            <button class="add__btn" id="${room._id}" onclick="addUserToRoom(event)" >Add</button></div>
-            
-            <div class="listUsers">${listUsers}</div>
-            </div>
-        
-        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete</br>room</button>
-        
-       
-       
-
+  console.log(rooms.length)
+  if(rooms.length != 0) {
+    
+    const data = rooms.map(room => {
+      const listTasks = room.notes
+        .map(
+          (task) => `<div class='tasks' id='${task}'>${task}
+          <button id="${room._id}" name="${task}" class="deleteTask"
+              onclick="handleDeleteTask(event)"></button>
+          <button class='mark__btn' id='mark${task}' name='${task}' onclick="handleMarkTask(event)"></button>
+          <button class='unmark__btn' id='unmark${task}' name='${task}' style="display: none;" onclick="handleUnmarkTask(event)"></button>
           
-        </div>
-        
-        <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
-            <input class="newTask" type='text' placeholder="Add task" name='newTask' required>
-            <button type="submit" class="addTask" value="Add task">Add task</button>
-        </form>
-        <div class="listTask">${listTasks}</div>
-    </div>`;
-   
-    return roomData;
-  }).join(' ');
-
-  document.getElementById("putRoom").innerHTML = data;
-  getAllUsers();
+      </div>`
+        )
+        .join(" ");
+  
+      const listUsers = room.assignUsers
+    
+        .map(
+          (user) => `<div class="userName">${user.nameUser}
+          <button id="${room._id}" name="${user.userId}" value="${user.nameUser}" class="deleteUser"
+              onclick="handleDeleteUser(event)"></button>
+      </div>`
+        )
+        .join(" ");
+  
+      const roomData = `<div class="roomsAndTask">
+          <div class="gridHeadline">
+              <h3>${room.roomName}</h3> 
+              <div class='addUser__wrapper'>
+              <div class='addUser__btns'><select id="${room._id}" class="usersSelector"> </select>
+              <button class="add__btn" id="${room._id}" onclick="addUserToRoom(event)" >Add</button></div>
+              
+              <div class="listUsers">${listUsers}</div>
+              </div>
+          
+          <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete</br>room</button>
+          
+         
+         
+  
+            
+          </div>
+          
+          <form id="${room._id}" class="formTask" onsubmit='handleAddTask(event)'>
+              <input class="newTask" type='text' placeholder="Add task" name='newTask' required>
+              <button type="submit" class="addTask" value="Add task">Add task</button>
+          </form>
+          <div class="listTask">${listTasks}</div>
+      </div>`;
+     
+      return roomData;
+    }).join(' ');
+  
+    document.getElementById("putRoom").innerHTML = data;
+    getAllUsers();
+    
+  }else{
+    const data = `<div id='emptyListTask' style='text-align: center; font-size: 40px; color: white;'>Hi, there are no tasks for you yet</div>`
+    document.getElementById("putRoom").innerHTML = data;
+  }
   
     if (isAdmin == false){
       document.getElementById('titleCreateRoom').style.display = 'none';
