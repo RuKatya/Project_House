@@ -16,15 +16,17 @@ body {
 
 input {
     text-align: center;
-    border: 1px solid #e9eaea;
+    border: 2px solid #e9eaea;
 }
 
 .input:hover {
-    border: 1px solid rgb(114, 113, 113);
+    border: 2px solid rgb(196, 196, 196);
 }
 
 ::-webkit-input-placeholder {
     color: #bebebe;
+    font-size: 16px;
+
 }
 
 
@@ -53,11 +55,11 @@ input {
     flex-direction: row;
     justify-content: space-around;
     /*background-color: rgba(223, 221, 221, 0.246);*/
-    background-color: rgba(39, 14, 14, 0.479);
+    background-color: rgba(187, 187, 187, 0.274);
     width: 40%;
     padding: 1%;
     margin: 0 0 5% 29%;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 #login__btn,
@@ -88,6 +90,21 @@ input {
     border-radius: 5px;
 }
 
+#login__btn::before{
+    content: '\f090';
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 24px;
+    margin-right: 11px;
+    font-weight: normal;
+}
+#signIn__btn::before{
+    content: '\f234';
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 24px;
+    margin-right: 11px;
+    font-weight: normal;
+}
+
 #message__login,
 #message__signIn {
     text-align: center;
@@ -102,8 +119,8 @@ input {
     margin: auto;
     margin-top: -4%;
     /*background-color: rgba(223, 221, 221, 0.246);*/
-    background-color: rgba(39, 14, 14, 0.479);
-    border-radius: 20px;
+    background-color: rgba(187, 187, 187, 0.274);
+    border-radius: 10px;
 }
 
 .mainLogin__form {
@@ -121,11 +138,12 @@ input {
 
 .btn {
     border: none;
-    background-color: rgb(184, 130, 148);
+    background-color: rgb(156, 73, 101);
+    color: white;
 }
 
 .btn:hover {
-    background-color: rgb(145, 94, 111);
+    background-color: rgb(121, 57, 78);
     transition: 0.3s;
 }
 
@@ -144,8 +162,8 @@ input {
     width: 50%;
     /*border: 1px dashed rgba(255, 255, 255, 0.192);*/
     /*background-color: rgba(223, 221, 221, 0.246);*/
-    background-color: rgba(39, 14, 14, 0.479);
-    border-radius: 20px;
+    background-color: rgba(187, 187, 187, 0.274);
+    border-radius: 10px;
     color: white;
     text-shadow: 0px 0px 7px black;
     text-align: center;
@@ -194,7 +212,7 @@ img {
 }
 
 .mainWeather__form--input:hover {
-    border: 1px solid rgb(63, 63, 63);
+    border: 2px solid rgb(196, 196, 196);
 }
 
 .mainWeather__form--input.btn {
