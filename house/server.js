@@ -17,7 +17,7 @@ const saltRounds = 7;
 
 //-----------mongoose----------//
 const mongoose = require('mongoose'); //npm i mongoose
-const url = 'mongodb+srv://KatyaRu:cytSjCbnf9PqLVaZ@cluster0.mfqlq.mongodb.net/test'
+const url = 'mongodb+srv://KatyaRu:ZX2hNfwMksy10h4u@cluster0.mfqlq.mongodb.net/test'
 
 mongoose.connect(url, {
     useNewUrlParser: true,
