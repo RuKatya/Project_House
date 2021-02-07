@@ -182,7 +182,7 @@
 
     .addTask {
         position: relative;
-        right: 2%;
+        right: 1%;
         color: rgb(255, 255, 255);
         background-color: rgba(255, 255, 255, 0);
         border: 1px solid white;
@@ -321,7 +321,7 @@
 
     .add__btn {
         position: relative;
-        left: 1.5%;
+        left: 2%;
         top: 1vh;
         background-color: rgba(255, 255, 255, 0);
         color: white;
