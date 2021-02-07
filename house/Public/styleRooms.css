@@ -2,20 +2,18 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.89), rgba(58, 57, 57, 0.3)40%), url('img/house.jpg');
-    /* background:  url('img/house.jpg'); */
     background-size: cover;
     background-attachment: fixed;
     background-position: top;
     background-repeat: no-repeat;
     background-position: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
-
 }
 
 a {
     text-decoration: none;
-
+    margin: 2.8% 0 0 4%;
+    position: absolute;
 }
 
 h3 {
@@ -41,11 +39,6 @@ h3 {
     margin-bottom: 2%;
 }
 
-a {
-    margin: 2.8% 0 0 4%;
-    position: absolute;
-}
-
 a::before {
     content: '\f060';
     font-family: 'FontAwesome', sans-serif;
@@ -58,11 +51,10 @@ a::before {
 
 .createRoom_form {
     position: absolute;
-    width: 16%;
-    max-width: 200px;
+    width: 12%;
     padding: 1.5%;
     text-align: center;
-    background-color: rgba(173, 173, 173, 0.377);
+    background-color: rgba(173, 173, 173, 0.500);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -72,8 +64,12 @@ a::before {
     padding: 2%;
     border-radius: 10px;
     border: 1px solid white;
-    background-color: rgba(255, 255, 255, 0.438);
+    background-color: rgba(255, 255, 255, 0.350);
     width: 90%;
+}
+
+input#roomName::placeholder {
+    color: rgba(255, 255, 255)
 }
 
 #roomName:hover {
@@ -85,7 +81,7 @@ a::before {
     padding: 1% 6%;
     border-radius: 8px;
     border: 1px solid white;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.100);
     color: white;
     margin: 2% 0 5% 0;
     width: 60%;
@@ -98,21 +94,11 @@ a::before {
     transition: 0.3s;
 }
 
-/* .createRoom_form__btn {
-        margin-left: 2%;
-    } */
-
-/* .createRoom_form__btn:hover {
-        background-color: rgb(137, 197, 137);
-        transition: 0.15s;
-        font-weight: bold;
-        color: white;
-    } */
-
 .createRoom_form__h3--correct {
-    margin-right: 50%;
+    margin-right: 40%;
+    width: 100%;
     font-size: 1em;
-    margin: auto;
+    text-shadow: 0px 0px 7px black;
     font-weight: inherit;
 }
 
@@ -120,7 +106,7 @@ a::before {
     font-size: 2.2vw;
     margin-top: 2%;
     margin-bottom: 5%;
-    text-shadow: 0px 0px 5px black;
+    text-shadow: 0px 0px 7px black;
 }
 
 #correctTime,
@@ -133,11 +119,9 @@ a::before {
 /* PUTROOMS AND TASKS */
 
 #putRoom {
-    /* position: relative; */
-    /* bottom: 32vh; */
     margin: 0 0 0 16%;
     padding: 2%;
-    width: 73%;
+    width: 77%;
     background-color: rgba(255, 255, 255, 0.315);
     border-radius: 20px;
 }
@@ -150,7 +134,6 @@ a::before {
     border-radius: 15px;
     margin-bottom: 3%;
     padding-bottom: 3%;
-    /* background: linear-gradient(180deg, #4c5566 5%, rgb(116, 134, 150) 100%, rgba(101, 101, 134, 0.548) 100%); */
 }
 
 .gridHeadline>h3 {
@@ -183,8 +166,7 @@ a::before {
     color: rgb(250, 250, 250);
 }
 
-input.newTask::placeholder,
-input#roomName::placeholder {
+input.newTask::placeholder {
     color: rgba(255, 255, 255, 0.650);
 }
 
@@ -198,19 +180,17 @@ input#roomName::placeholder {
     color: rgb(255, 255, 255);
     background-color: rgba(255, 255, 255, 0);
     border: 1px solid rgb(255, 255, 255);
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 10px 10px 0;
     font-size: 1rem;
     padding: 0.5%;
 }
 
 .addTask:hover {
-
     box-shadow: 0px 0px 5px rgb(223, 221, 221);
     text-shadow: 0px 0px 5px rgb(223, 221, 221);
     background-color: rgba(190, 48, 114, 0.336);
     transition: 0.3s;
 }
-
 
 /* TASK LIST */
 
@@ -222,7 +202,6 @@ input#roomName::placeholder {
     position: relative;
     margin-bottom: 20px;
     left: 27%;
-
 }
 
 .tasks {
@@ -273,8 +252,6 @@ input#roomName::placeholder {
     margin-right: 3px;
     font-weight: normal;
     color: rgb(21, 255, 0);
-
-
 }
 
 .unmark__btn {
@@ -288,11 +265,8 @@ input#roomName::placeholder {
     content: '\f046';
     font-family: 'FontAwesome', sans-serif;
     font-size: 20px;
-
     font-weight: normal;
     color: rgb(21, 255, 0);
-
-
 }
 
 /* DELETE ROOM BUTTON */
@@ -300,17 +274,15 @@ input#roomName::placeholder {
 .deleteRoom {
     position: relative;
     bottom: 11vh;
-    left: 69vw;
+    left: 72.5vw;
     padding: 0.5%;
     font-size: 0.8vw;
     border-radius: 5px;
-    border: 1px solid rgb(255, 28, 28);
-    ;
+    border: 1px solid rgb(248, 66, 66);
     outline: none;
     background-color: transparent;
-    color: rgb(255, 28, 28);
+    color: rgb(248, 66, 66);
     line-height: 0.8vw;
-
 }
 
 .deleteRoom:hover {
@@ -350,17 +322,13 @@ input#roomName::placeholder {
 }
 
 .add__btn:hover {
-
     box-shadow: 0px 0px 5px rgb(223, 221, 221);
     text-shadow: 0px 0px 5px rgb(223, 221, 221);
     background-color: rgba(190, 48, 114, 0.336);
     transition: 0.3s;
-
 }
 
 .listUsers {
-    /* display: grid;
-        grid-template-columns: repeat(1, 1fr); */
     position: absolute;
     margin-top: 2%;
     margin-left: 3%;
@@ -368,26 +336,18 @@ input#roomName::placeholder {
     width: 18%;
     height: 15vh;
     font-size: 1.3rem;
-    min-width: 100px;
 }
 
-/* .userName{
-        display: flex;
-        align-items: flex-end;
-        
-    } */
 .userName:hover {
     text-shadow: 0px 0px 5px rgb(223, 221, 221);
 }
 
 .deleteUser {
-    /* float: right; */
     border: none;
     background-color: inherit;
     color: white;
     margin-top: 6px;
     outline: none;
-
 }
 
 .deleteUser::before {
@@ -401,7 +361,6 @@ input#roomName::placeholder {
 .deleteUser:hover {
     text-shadow: 0px 0px 5px rgb(223, 221, 221);
     font-size: 0.65em;
-
 }
 
 .addUser__wrapper {
@@ -419,97 +378,3 @@ footer {
     font-size: 1.2rem;
 }
 
-@media only screen and (max-width: 1600px) {
-    #putRoom {
-        margin: 0 0 0 20%;
-    }
-
-    .deleteRoom {
-        left: 68vw;
-        font-size: 1vw;
-        bottom: 9vh;
-    }
-}
-
-@media only screen and (max-width: 1300px) {
-
-    /* #putRoom{
-            margin: 3% 0 0 20%;
-        } */
-    .formTask {
-        bottom: 60%
-    }
-
-    #btnCreateRoom {
-        font-size: 1vw;
-    }
-}
-
-@media only screen and (max-width: 1100px) {
-    .deleteRoom {
-        left: 67vw;
-        font-size: 1.2vw;
-
-    }
-
-    .listUsers {
-        font-size: 2.2vw;
-    }
-}
-
-@media only screen and (max-width: 900px) {
-
-    /* #putRoom{
-            margin: 12% 0 0 20%;
-        } */
-    .deleteRoom {
-        font-size: 1.4vw;
-        line-height: 1.2vw;
-        left: 66vw;
-        bottom: 8vh;
-    }
-
-    #btnCreateRoom {
-        font-size: 1.2vw;
-    }
-
-    .formTask {
-        bottom: 65%;
-
-    }
-
-    .newTask {
-        width: 70%;
-    }
-
-    .listTask {
-        max-width: 60%;
-        left: 30%;
-    }
-}
-
-/* @media only screen and (max-width: 1030px) {
-        .back>a>img {
-            margin: 4% 0 0% 3%;
-            width: 8%;
-
-            grid-template-columns: repeat(1, 1fr);
-        }
-        .gridHeadline>button {
-            position: relative;
-            bottom: 1.5vh;
-            left: 40vw;
-        }
-
-            grid-template-columns: repeat(1, 1fr);
-        }
-        .gridHeadline>button {
-            position: relative;
-            bottom: 4.5vh;
-            left: 55vw;
-        }
-        .newTask {
-            width: 60%;
-        }
-    }
-    } */

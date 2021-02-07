@@ -26,9 +26,7 @@ input {
 ::-webkit-input-placeholder {
     color: #bebebe;
     font-size: 16px;
-
 }
-
 
 /* HEADER */
 
@@ -47,14 +45,12 @@ input {
     text-shadow: 1px 1px 7px black;
 }
 
-
 /* LOGIN */
 
 .loginCreate__buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    /*background-color: rgba(223, 221, 221, 0.246);*/
     background-color: rgba(187, 187, 187, 0.274);
     width: 40%;
     padding: 1%;
@@ -66,7 +62,6 @@ input {
 #signIn__btn {
     color: white;
     padding: 1.3%;
-    /* background-color: rgba(206, 29, 103, 0.815);*/
     font-size: 1.2em;
     font-weight: bold;
     width: 30%;
@@ -118,7 +113,6 @@ input {
     padding: 3% 5% 3% 5%;
     margin: auto;
     margin-top: -4%;
-    /*background-color: rgba(223, 221, 221, 0.246);*/
     background-color: rgba(187, 187, 187, 0.274);
     border-radius: 10px;
 }
@@ -154,14 +148,11 @@ input {
     margin-bottom: 0px;
 }
 
-
 /* WEATER */
 
 #mainWeather {
     margin: 1% 0% 3% 25%;
     width: 50%;
-    /*border: 1px dashed rgba(255, 255, 255, 0.192);*/
-    /*background-color: rgba(223, 221, 221, 0.246);*/
     background-color: rgba(187, 187, 187, 0.274);
     border-radius: 10px;
     color: white;
@@ -219,7 +210,6 @@ img {
     border: none;
 }
 
-
 /* FOOTER */
 
 footer {
@@ -229,65 +219,4 @@ footer {
     margin: auto;
     text-align: center;
     font-size: 1.2rem;
-}
-
-@media only screen and (max-width: 1030px) {
-    .mainHeader>h1 {
-        padding: 6% 0 0 0;
-        font-size: 2.5em;
-    }
-    .loginCreate__buttons {
-        width: 60%;
-        margin: 0 0 10% 20%;
-    }
-    #login__btn,
-    #signIn__btn {
-        font-size: 1.5em;
-        width: 40%;
-    }
-    .mainForm {
-        width: 60%;
-        margin-bottom: 7%;
-    }
-    #mainWeather {
-        margin: 1% 0% 3% 20%;
-        width: 60%;
-    }
-    #weather {
-        width: 80%;
-        margin-left: 10%;
-    }
-    img {
-        width: 50%;
-    }
-}
-
-@media only screen and (max-width: 370px) {
-    .mainHeader>h1 {
-        padding: 6% 0 0 0;
-        font-size: 1.7em;
-    }
-    .loginCreate__buttons {
-        width: 80%;
-        margin: 0 0 15% 10%;
-    }
-    #login__btn,
-    #signIn__btn {
-        font-size: 1.5em;
-        width: 40%;
-    }
-    .mainForm {
-        width: 80%;
-    }
-    #mainWeather {
-        margin: 1% 0% 3% 10%;
-        width: 80%;
-    }
-    #weather {
-        width: 90%;
-        margin-left: 5%;
-    }
-    img {
-        width: 60%;
-    }
 }
