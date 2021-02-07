@@ -109,16 +109,20 @@ setRoomsOnPage = async (rooms) => {
   const data = rooms.map(room => {
     const listTasks = room.notes
       .map(
-        (task) => `<div class='tasks'>${task}
+        (task) => `<div class='tasks' id='${task}'>${task}
         <button id="${room._id}" name="${task}" class="deleteTask"
-            onclick="handleDeleteTask(event)">Done</button>
+            onclick="handleDeleteTask(event)"></button>
+        <button class='mark__btn' id='mark${task}' name='${task}' onclick="handleMarkTask(event)"></button>
+        <button class='unmark__btn' id='unmark${task}' name='${task}' style="display: none;" onclick="handleUnmarkTask(event)"></button>
+        
     </div>`
       )
       .join(" ");
 
     const listUsers = room.assignUsers
+  
       .map(
-        (user) => `<div>${user.nameUser}
+        (user) => `<div class="userName">${user.nameUser}
         <button id="${room._id}" name="${user.userId}" value="${user.nameUser}" class="deleteUser"
             onclick="handleDeleteUser(event)">X</button>
     </div>`
@@ -149,7 +153,7 @@ setRoomsOnPage = async (rooms) => {
         </form>
         <div class="listTask">${listTasks}</div>
     </div>`;
-
+   
     return roomData;
   }).join(' ');
 
@@ -241,9 +245,8 @@ const addUserToRoom = (e) => {
   const selectedIndex = document.getElementById(`${roomID}`).options.selectedIndex
   const userId = document.getElementById(`${roomID}`).options[selectedIndex].value
   const nameUser = document.getElementById(`${roomID}`).options[selectedIndex].text
-  console.log(nameUser)
-  console.log(selectedIndex)
-  console.log(userId, roomID);
+ 
+ 
   fetch("/api/addusers", {
       method: "PUT",
       headers: {
@@ -380,7 +383,31 @@ handleDeleteTask = (e) => {
     });
 };
 
+function handleMarkTask(e) {
 
+  const textTask = e.target.name
+  console.log(textTask)
+  document.getElementById(`mark${textTask}`).style.display='none'
+  
+  document.getElementById(`unmark${textTask}`).style.display='inline'
+
+  let task = document.getElementById(`${textTask}`);
+  console.log(task)
+  task.style.textDecoration = 'line-through';
+}
+
+function handleUnmarkTask(e) {
+
+  const textTask = e.target.name
+  console.log(textTask)
+  document.getElementById(`mark${textTask}`).style.display='inline'
+  
+  document.getElementById(`unmark${textTask}`).style.display='none'
+
+  let task = document.getElementById(`${textTask}`);
+  console.log(task)
+  task.style.textDecoration = 'none';
+}
 
 document.addEventListener('DOMContentLoaded', async (event) => {
   await checkAdmin().then((localIsAdmin) => {isAdmin = localIsAdmin}),  await checkUserId().then((localUserId) => {userId = localUserId}), await getAllRooms();
