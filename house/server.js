@@ -46,7 +46,7 @@ const User = mongoose.model('User', {
     },
     role: {
         type: String,
-        default: "admin",
+        default: "user",
     },
     assignRooms: {
         type: [String],
@@ -183,13 +183,22 @@ app.put("/api/addusers", async(req, res) => {
     try {
         const {roomID, userId, nameUser} = req.body
         console.log(roomID, userId, nameUser)
-        
+        const rooms = await Room.findById(roomID).elemMatch("assignUsers",{"userId":userId});
+        console.log('rooooooooooooooms:', rooms)
+        if(rooms == null){
         await User.findByIdAndUpdate(userId, { $push: { assignRooms: roomID}})
         await Room.findByIdAndUpdate(roomID, { $push: { assignUsers: {nameUser, userId} }})
-
-        res.status(201).send(
+        return res.status(201).send(
             { message: 'user added successfully' }
         ); 
+        } else {
+            return res.status(400).json({
+                message: 'This user has already been added'
+            })
+        }
+
+
+        
    } catch (err) {
         res.status(400).send({
             err
