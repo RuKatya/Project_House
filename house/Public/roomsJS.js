@@ -124,7 +124,7 @@ setRoomsOnPage = async (rooms) => {
       .map(
         (user) => `<div class="userName">${user.nameUser}
         <button id="${room._id}" name="${user.userId}" value="${user.nameUser}" class="deleteUser"
-            onclick="handleDeleteUser(event)">X</button>
+            onclick="handleDeleteUser(event)"></button>
     </div>`
       )
       .join(" ");
@@ -139,7 +139,7 @@ setRoomsOnPage = async (rooms) => {
             <div class="listUsers">${listUsers}</div>
             </div>
         
-        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete room</button>
+        <button id="${room._id}" onclick="handleDeleteRoom(event)" class="deleteRoom">Delete</br>room</button>
         
        
        

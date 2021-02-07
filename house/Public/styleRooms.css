@@ -1,7 +1,8 @@
     body {
         margin: 0;
         padding: 0;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)50%), url('img/house.jpg');
+        /* background: linear-gradient(to bottom, rgba(8, 0, 119, 0.89), rgba(241, 180, 180, 0.3)50%), url('img/house.jpg'); */
+        background:  url('img/house.jpg');
         background-size: cover;
         background-attachment: fixed;
         background-position: top;
@@ -38,10 +39,26 @@
         margin-bottom: 2%;
     }
 
-    .back>a>img {
-        margin: 1.3% 0 0% 2%;
-        width: 4%;
+      
+
+    a{
+        margin: 2.8% 0 0 4%;
+        position: absolute;
     }
+
+a::before {
+    content: '\f060';
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 2vw;
+    color: white;
+    font-weight: inherit;
+    
+    
+    
+    
+    }
+
+
 
     /* CREATING ROOM & TIME & DATE */
 
@@ -128,7 +145,7 @@
         margin: 0 0 0 16%;
         padding: 2%;
         width: 73%;
-        background-color: rgba(221, 221, 223, 0.246);
+        background-color: rgba(255, 255, 255, 0.315);
         border-radius: 20px;
         
     }
@@ -137,10 +154,11 @@
         position: relative;
         color: white;
         font-size: 2em;
-        background: linear-gradient(180deg, rgba(59, 12, 31, 0.815) 8%, rgba(121, 2, 51, 0.815) 55%, rgba(121, 2, 51, 0.815) 100%);
+        /* background: linear-gradient(180deg, rgba(59, 12, 31, 0.815) 8%, rgba(121, 2, 51, 0.815) 55%, rgba(121, 2, 51, 0.815) 100%); */
         border-radius: 15px;
         margin-bottom: 3%;
         padding-bottom: 3%;
+        background: linear-gradient(180deg, rgb(66, 66, 95) 5%, rgba(116, 64, 184, 0.774) 100%, rgba(113, 56, 160, 0.548) 100%);
     }
 
     .gridHeadline>h3 {
@@ -168,7 +186,7 @@
         border-radius: 10px 0 0 10px;
         outline: none;
         border: 1px solid white;
-        background-color: rgba(207, 160, 179, 0.5);
+        background-color: rgba(158, 91, 152, 0.5);
         font-size: 1rem;
         color: rgb(250, 250, 250);
     }
@@ -186,7 +204,7 @@
         right: 1%;
         color: rgb(255, 255, 255);
         background-color: rgba(255, 255, 255, 0);
-        border: 1px solid white;
+        border: 1px solid rgb(255, 255, 255);
         border-radius: 0 5px 5px 0;
         font-size: 1rem;
         padding: 0.5%;
@@ -211,11 +229,16 @@
         position: relative;
         margin-bottom: 20px;
         left: 27%;
+        
     }
 
     .tasks {
         border-bottom: 1px solid white;
         padding: 1%;
+    }
+
+    .tasks:hover{
+        background-color: rgba(75, 36, 139, 0.534);
     }
 
  /* DELETE TASK */
@@ -235,7 +258,7 @@
         font-size: 18px;
         margin-right: 11px;
         font-weight: normal;
-        color: white;
+        color: rgb(255, 0, 0);
         
         
         
@@ -258,7 +281,7 @@
         font-size: 20px;
         margin-right: 3px;
         font-weight: normal;
-        color: white;
+        color: rgb(21, 255, 0);
         
        
         }
@@ -275,7 +298,7 @@
             font-size: 20px;
             
             font-weight: normal;
-            color: white;
+            color: rgb(21, 255, 0);
             
            
             }
@@ -284,22 +307,22 @@
 
     .deleteRoom {
         position: relative;
-        bottom: 8vh;
-        left: 66vw;
+        bottom: 11vh;
+        left: 69vw;
         padding: 0.5%;
-        font-size: 1vw;
+        font-size: 0.8vw;
         border-radius: 5px;
-        border: 1px solid white;
+        border: 1px solid rgb(255, 28, 28);;
         outline: none;
         background-color: transparent;
-        color: white;
+        color: rgb(255, 28, 28);
+        line-height: 0.8vw;
         
     }
 
     .deleteRoom:hover {
         box-shadow: 0px 0px 5px rgb(223, 221, 221);
         text-shadow: 0px 0px 5px rgb(223, 221, 221);
-        background-color: rgba(190, 48, 114, 0.336);
         transition: 0.3s;
     }
 
@@ -343,8 +366,8 @@
     }
 
     .listUsers {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        /* display: grid;
+        grid-template-columns: repeat(1, 1fr); */
         position: absolute;
         margin-top: 2%;
         margin-left: 3%;
@@ -365,14 +388,21 @@
     }
 
     .deleteUser {
-        float: right;
+        /* float: right; */
         border: none;
         background-color: inherit;
         color: white;
-        margin-top: 6px;
         outline: none;
        
     }
+
+    .deleteUser::before {
+        content: '\f235';
+        font-family: 'FontAwesome', sans-serif;
+        font-size: 15px;
+        font-weight: normal;
+        color: rgb(255, 0, 0);
+        }
 
     .deleteUser:hover {
         text-shadow: 0px 0px 5px rgb(223, 221, 221);
@@ -400,7 +430,9 @@
             margin: 0 0 0 20%;
         }
         .deleteRoom{
-            left: 64vw;
+            left: 68vw;
+            font-size: 1vw;
+            bottom: 9vh;
         }
     }
     @media only screen and (max-width: 1300px){
@@ -416,9 +448,11 @@
     }
 
     @media only screen and (max-width: 1100px){
-        /* #putRoom{
-            margin: 7% 0 0 20%;
-        } */
+        .deleteRoom{
+            left: 67vw;
+            font-size: 1.2vw;
+           
+        }
         .listUsers{
             font-size: 2.2vw;
         }
@@ -429,7 +463,10 @@
             margin: 12% 0 0 20%;
         } */
         .deleteRoom{
-            font-size: 1.2vw;
+            font-size: 1.4vw;
+            line-height: 1.2vw;
+            left: 66vw;
+            bottom: 8vh;
         }
         #btnCreateRoom{
             font-size: 1.2vw;
@@ -441,10 +478,7 @@
         .newTask{
             width: 70%; 
         }
-        .addTask{
-            right: 2%;
-            
-        }
+        
         .listTask{
             max-width: 60%;
             left: 30%;
