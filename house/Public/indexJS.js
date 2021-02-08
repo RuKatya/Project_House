@@ -98,6 +98,54 @@
          })
  };
 
+ //-------RESET PASSWORD------//
+
+ handleResetPassword = (e) => {
+    e.preventDefault();
+  
+    const userEmail = e.target.email.value
+    console.log(userEmail)
+  
+    fetch("/reset", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+          userEmail 
+        }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+          console.log(data)
+        // try {
+        //   if (data.email == "success") {
+        //     await Swal.fire({
+        //       position: "top-center",
+        //       icon: "success",
+        //       title: "אימייל עם קישור לשחזור הסיסמה נשלח אלייך.",
+        //       showConfirmButton: false,
+        //       timer: 1500,
+        //     });
+        //     window.location.href = "/";
+        //   } else {
+        //     Swal.fire({
+        //       icon: "error",
+        //       title: "אופס...",
+        //       text: "כנראה שקרתה שגיאה, לא הצלחנו לאתר את המייל שלך, נסה שוב..",
+        //       confirmButtonColor: "red",
+        //       confirmButtonText: "אישור",
+        //     });
+        //     const btn = document
+        //       .getElementById("hideBtn")
+        //       .setAttribute("style", "display:inherit");
+        //   }
+        // } catch (e) {
+        //   console.log(e);
+        // }
+      });
+  }
+
  //-----WEATHER------//
  function hendleSubmitWeater(e) {
      e.preventDefault();

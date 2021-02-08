@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const { check } = require('express-validator')
 const { validationResult } = require('express-validator')
 const secret = 'SECRET_KEY_RANDOM'
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const app = express(); ///server;
 app.use(cookieParser());
@@ -73,27 +75,6 @@ const Room = mongoose.model("Room", {
 });
 
 // ---------ADMIN-----------//
-/* const isAdmin = (req, res, next) => {
-    res.authorized = false;
-    const { role } = req.cookies;
-
-    if ({ role } === 'admin') {
-        res.authorized = true;
-        console.log(res.authorized)
-    }
-
-    next()
-} */
-
-
-
-/*  const getUserAuthMiddle = (req, res, next) => {
-    jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
-        req.user = decodedToken;
-        next()
-    })
-}  */
-
 
 const isAdmin = (req, res, next) => {
        jwt.verify(req.cookies['token'], secret, (err, decodedToken) => {
@@ -138,16 +119,16 @@ app.get("/api/checkadmin", isAdmin, async (req, res) => {
 
 // Get all users
 app.get("/api/users", async(req, res) => {
-   /*  try { */
+    try {
         const users = await User.find();
         res.status(200).send({
             users
         });
-    /* } catch (err) {
+    } catch (err) {
         res.status(404).send({
             err
-        }); */
-   /*  } */
+        });
+    }
 });
 
 // Get user by id
@@ -278,6 +259,55 @@ app.post("/api/register", [
     encryptionGenerator(newUser, res);
 })
 
+//-------------RESET PASSWORD--------------//
+app.post("/reset", async(req, res) => {
+    try {
+        const {userEmail} = req.body
+        console.log(userEmail)
+        const serchEmail = await User.findOne({ email: userEmail });
+        console.log(serchEmail)
+         if (serchEmail) {
+          const userId = serchEmail._id;
+          console.log(userId)
+          const encodId = jwt.sign({userId}, secret, {expiresIn: '20m'});
+          console.log('OOOOOOOOOOOOOOOOOO:', encodId)
+          const sendData = nodemailer.createTransport({
+                    service: "gmail",
+                    auth: {
+                      user: process.env.EMAIL,
+                      pass: process.env.PASSWORD,
+                    },
+                  });
+                  const mailDetails = {
+              from: 'opan1601@gmail.com',
+              to: serchEmail,
+              subject: 'Account Activation Link',
+              html: `<h2>Hi, ${serchEmail.username}<br>Please click to given link to reset your password</h2>
+              <p>${process.env.CLIENT_URL}/resetpassword/${encodId}</p>`
+          }
+
+          sendData.sendMail(mailDetails, function (e, info) {
+                if (e) {
+                  res.send({ email: "failed" });
+                } else {
+                  res.send({ email: "success" });
+                }
+              });
+            } else {
+              res.send({ email: "failed" });
+            }
+          } catch (e) {
+            console.log(e.message);
+            res.send({ status: "unauthorized" });
+          }
+        
+    
+    }
+
+)
+
+
+
 //-----------------------------ROOM FUNCTIONS------------------------------------//
 //-------------CREATE ROOM--------------//
 app.post("/api/room", async(req, res) => {
@@ -376,7 +406,7 @@ app.delete("/api/deletenotes", async(req, res) => {
 });
 
 app.delete("/api/deleteuser", async(req, res) => {
- /*    try { */
+    try {
         const { userId, roomId, nameUser } = req.body
         console.log(req.body)
         console.log(roomId, userId, nameUser)
@@ -384,9 +414,9 @@ app.delete("/api/deleteuser", async(req, res) => {
         await Room.findByIdAndUpdate(roomId, { $pull: { assignUsers: {nameUser, userId} } })
         
         res.status(200).send({ status: "deleted" });
-   /*  } catch (error) {
+    } catch (error) {
         res.status(404).send({ error });
-    } */
+    }
 });
 
 //---------ONLOAD-------------//
