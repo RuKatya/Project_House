@@ -1,0 +1,190 @@
+@media only screen and (max-width: 1030px) {
+
+    /* HEADER */
+    a {
+        margin: 2.4% 0 0 4%;
+    }
+
+    a::before {
+        font-size: 3vw;
+    }
+
+
+    /* CREATING ROOM & TIME & DATE */
+    .createRoom_form {
+        width: 17%;
+    }
+
+    #btnCreateRoom {
+        margin: 4% 0 5% 0;
+        width: 70%;
+        font-size: 1.2vw;
+    }
+
+    .createRoom_form__h3--correct {
+        margin-right: 50%;
+        width: 80%;
+    }
+
+    #correctTime,
+    #correctDate {
+        font-size: 3vw;
+    }
+
+    /* PUTROOMS AND TASKS */
+
+    #putRoom {
+        margin: 0 0 0 22%;
+        padding: 3%;
+        width: 70%;
+    }
+
+    /* NEW TASK AND ADD TASK*/
+
+    .formTask {
+        left: 28%;
+        bottom: 70%;
+        width: 70%;
+
+    }
+
+    .newTask {
+        padding: 1%;
+    }
+
+    .addTask {
+        right: 2%;
+        padding: 1%;
+    }
+
+    /* DELETE ROOM BUTTON */
+    .deleteRoom {
+        bottom: 5vh;
+        left: 63vw;
+        font-size: 1.2vw;
+        line-height: 1.2vw;
+    }
+
+    /* USERS SELECTOR */
+
+    .add__btn {
+        left: 1.15%;
+    }
+
+    .listUsers {
+        margin-top: 5%;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    a {
+        margin: 4.5% 0 0 4%;
+    }
+
+    /* HEADER */
+
+    .back {
+        height: 17vw;
+        background-color: rgba(173, 173, 173, 0.377);
+        margin-bottom: 2%;
+    }
+
+    a::before {
+        font-size: 8vw;
+    }
+
+    /* CREATING ROOM & TIME & DATE */
+    .createRoom_form {
+        width: 91%;
+    }
+
+    #btnCreateRoom {
+        padding: 2% 6%;
+        border-radius: 8px;
+        margin: 2% 0 5% 0;
+        font-size: 4vw;
+    }
+
+    .createRoom_form__h3--correct {
+        margin-right: 50%;
+        width: 50%;
+    }
+
+    .createRoom_form--h3 {
+        font-size: 8vw;
+    }
+
+    #correctTime,
+    #correctDate {
+        font-size: 9vw;
+    }
+
+    /* PUTROOMS AND TASKS */
+
+    #putRoom {
+        margin: 100% 0 0 3%;
+        padding: 3%;
+        width: 87%;
+    }
+
+    .gridHeadline>h3 {
+        width: 50%;
+        top: 3vh;
+        left: 3vw;
+        font-size: 7vw;
+    }
+
+    /* NEW TASK AND ADD TASK*/
+
+    .formTask {
+
+        left: 4%;
+        bottom: 5%;
+        width: 95%;
+        padding-bottom: 5%;
+    }
+
+    .newTask {
+        width: 70%;
+        padding: 1%;
+        font-size: 1rem;
+    }
+
+    .addTask {
+        right: 3.5%;
+
+    }
+
+
+    /* TASK LIST */
+
+    .listTask {
+        font-size: 0.6em;
+        width: 70%;
+        top: -8vh;
+    }
+
+    /* DELETE ROOM BUTTON */
+    .deleteRoom {
+        bottom: 10vh;
+        left: 70vw;
+        padding: 1%;
+        font-size: 4vw;
+        line-height: 7vw;
+    }
+
+    /* USERS SELECTOR */
+    .listUsers {
+        position: absolute;
+        margin-top: 5%;
+        margin-left: 3%;
+        overflow: auto;
+        height: 15vh;
+        font-size: 0.9rem;
+
+    }
+
+    .add__btn {
+        left: -1%;
+    }
+}
